@@ -1,0 +1,203 @@
+
+/* 
+ * The Gradle task dependencies 
+ */
+buildscript {
+	repositories {
+	  mavenLocal()
+    mavenCentral()
+	}
+	dependencies {
+		classpath 'io.opencaesar.adapters:oml2owl-gradle:+'
+    classpath 'io.opencaesar.oml:oml-merge-gradle:+'
+		classpath 'io.opencaesar.owl:owl-load-gradle:+'
+		classpath 'io.opencaesar.owl:owl-reason-gradle:+'
+		classpath 'io.opencaesar.owl:owl-fuseki:+'
+		classpath 'io.opencaesar.owl:owl-fuseki-gradle:+'
+		classpath 'io.opencaesar.owl:owl-query-gradle:+'
+		classpath 'io.opencaesar.oml:oml-bikeshed-gradle:+'
+	}
+}
+
+plugins {
+  id 'com.palantir.git-version' version '0.12.3'
+}
+
+ext.title="Metrology Vocabularies"
+description='Metrology from iupac.org, iso/iec 80000 and NIST Special publication 811'
+group='io.opencaesar.ontologies'
+version gitVersion()
+
+def fusekiDataset = 'provenance-vocabularies' 
+
+apply from: "${rootDir}/gradle/maven-deployment.gradle"
+
+/*
+ * Dependency versions
+ */
+ext.coreVersion = '3.+'
+
+/*
+ * The configuration of OML dependencies
+ */
+configurations {
+	oml
+}
+
+/*
+ * The repositories to look up OML dependencies in
+ */
+repositories {
+	mavenLocal()
+  mavenCentral()
+}
+
+/*
+ * The OML dependencies
+ */
+dependencies {
+	oml "io.opencaesar.ontologies:core-vocabularies:$coreVersion@zip"
+}
+
+/*
+ * A task to extract and merge the OML dependencies
+ */
+task downloadDependencies(type:io.opencaesar.oml.merge.OmlMergeTask) {
+    inputZipPaths = configurations.oml.files
+    outputCatalogFolder = file('build/oml')
+}
+
+/*
+ * A task to convert the OML catalog to OWL catalog
+ */
+task omlToOwl(type:io.opencaesar.oml2owl.Oml2OwlTask, dependsOn: downloadDependencies) {
+  // OML catalog
+  inputCatalogPath = file('catalog.xml')
+  // OWL catalog
+  outputCatalogPath = file('build/ttl/catalog.xml')
+  outputFileExtension = 'ttl'
+}
+
+/*
+ * A task to run the Openllet reasoner on the OWL catalog
+ */
+task owlReasonProvenance(type:io.opencaesar.owl.reason.OwlReasonTask, dependsOn: omlToOwl) {
+	// OWL catalog
+	catalogPath = file('build/ttl/catalog.xml')
+	// Input ontology IRI to reason on
+	inputOntologyIri = 'http://www.w3.org/ns/prov-bundle'
+  inputFileExtensions = ['ttl']
+	outputFileExtension = 'ttl'
+	// Entailment statements to generate and the ontologies to persist them in
+	specs = [
+		'http://www.w3.org/ns/prov-bundle/classes = ALL_SUBCLASS',
+		'http://www.w3.org/ns/prov-bundle/properties = INVERSE_PROPERTY | ALL_SUBPROPERTY',
+		'http://www.w3.org/ns/prov-bundle/individuals = ALL_INSTANCE | DATA_PROPERTY_VALUE | OBJECT_PROPERTY_VALUE | SAME_AS'
+	]
+	// Junit error report
+	reportPath = file('build/reports/provenance-bundle/reasoning.xml')
+}
+
+task owlReasonExamples(type:io.opencaesar.owl.reason.OwlReasonTask, dependsOn: omlToOwl) {
+	// OWL catalog
+	catalogPath = file('build/ttl/catalog.xml')
+	// Input ontology IRI to reason on
+	inputOntologyIri = 'http://example.org/examples-bundle'
+  inputFileExtensions = ['ttl']
+	outputFileExtension = 'ttl'
+	// Entailment statements to generate and the ontologies to persist them in
+	specs = [
+		'http://example.org/examples-bundle/classes = ALL_SUBCLASS',
+		'http://example.org/examples-bundle/properties = INVERSE_PROPERTY | ALL_SUBPROPERTY',
+		'http://example.org/examples-bundle/individuals = ALL_INSTANCE | DATA_PROPERTY_VALUE | OBJECT_PROPERTY_VALUE | SAME_AS'
+	]
+	// Junit error report
+	reportPath = file('build/reports/examples-bundle/reasoning.xml')
+}
+
+/*
+ * A task to load an OWL catalog to a Fuseki dataset endpoint
+ */
+task owlLoad(type:io.opencaesar.owl.load.OwlLoadTask, dependsOn: [owlReasonProvenance]) {
+	catalogPath = file('build/ttl/catalog.xml')
+	endpointURL = "http://localhost:3030/$fusekiDataset"
+  fileExtensions = ['ttl']
+	iris = [
+		'http://www.w3.org/ns/prov-bundle/classes',
+		'http://www.w3.org/ns/prov-bundle/properties',
+		'http://www.w3.org/ns/prov-bundle/individuals',
+		'http://example.org/examples-bundle/classes',
+		'http://example.org/examples-bundle/properties',
+		'http://example.org/examples-bundle/individuals'
+	]
+}
+
+/*
+ * Start and stop the Fuseki server
+ */
+task startFuseki(type: io.opencaesar.owl.fuseki.StartFusekiTask, group: 'fuseki') {
+	configurationPath = file('.fuseki.ttl')
+	outputFolderPath = file('.fuseki')
+}
+
+task stopFuseki(type: io.opencaesar.owl.fuseki.StopFusekiTask, group: 'fuseki') {
+	outputFolderPath = file('.fuseki')
+}
+
+/*
+ * A task to generate Bikeshed specification for the OML catalog
+ */
+task omlToBikeshed(type: io.opencaesar.oml.bikeshed.Oml2BikeshedTask) {
+  // OML catalog
+  inputCatalogPath = file('catalog.xml')
+  // OWL folder
+  outputFolderPath = file('build/bikeshed')
+  // Publish URL
+  publishUrl = 'https://opencaesar.github.io/provenance-vocabularies/'
+}
+
+/*
+ * A task to generate the Bikeshed documentations in HTML
+ */
+import org.gradle.internal.os.OperatingSystem
+task generateDocs(dependsOn: omlToBikeshed) {
+  doLast {
+    if (OperatingSystem.current().isWindows()) {
+        exec { commandLine 'build/bikeshed/publish.bat' }
+    } else {
+        exec { commandLine 'chmod', '+x', 'build/bikeshed/publish.sh' }
+        exec { commandLine 'build/bikeshed/publish.sh' }
+    }
+  }
+}
+
+/*
+ * A task to build the project, which executes several tasks together
+ */
+tasks.named('build') {
+  dependsOn owlReasonProvenance
+	dependsOn owlReasonExamples
+}
+
+/*
+ * A task to delete the build artifacts
+ */
+tasks.named('build') {
+	delete 'build'
+}
+
+/*
+ * Publish to Maven spec
+ */
+apply plugin: 'maven-publish'
+
+task omlZip(type: Zip, dependsOn: build, group: 'publishing') {
+	from file('src/main/oml')
+	include "**/*.oml"
+	destinationDirectory = file('build/libs')
+	archiveBaseName = project.name
+	archiveVersion = project.version
+	archiveExtension = 'zip'
+}
+
+publishing.publications.maven.artifact omlZip

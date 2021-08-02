@@ -1,0 +1,7 @@
+@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#narrative-example-qualified-6"
+description <http://example.org/example11> with # as example11 {
+
+  extends <http://example.org/example10>
+
+  // pro:qualifiedGeneration is inferred.
+}

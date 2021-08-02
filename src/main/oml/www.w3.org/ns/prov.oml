@@ -1,0 +1,916 @@
+@rdfs:comment '''
+The qualification pattern is converted into an equivalent reification pattern.
+The following specialized qualification patterns are not modeled in OML in this version 
+but could be easily added if needed:
+- Revision, qualifiedRevision, wasRevisionOf
+- PrimarySource, qualifiedPrimarySource, hadPrimarySource
+- Quotation, qualifiedQuotation, wasQuotedFrom
+'''
+@rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-primer-20130430/#intuitive-overview-of-prov"
+@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/"
+vocabulary <http://www.w3.org/ns/prov> with # as prov {
+
+	extends <http://www.w3.org/2001/XMLSchema>
+
+	extends <http://www.w3.org/2000/01/rdf-schema>
+
+	@rdfs:comment "The domain of prov:atLocation"
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#atLocation"
+	aspect ActivityOrAgentOrEntityOrInstantaneousEvent
+
+	@rdfs:comment "The domain and range of prov:influenced"
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#influenced"
+	aspect ActivityOrAgentOrEntity :> ActivityOrAgentOrEntityOrInstantaneousEvent
+
+	@rdfs:comment "The domain of prov:hadRole"
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadRole"
+	aspect AssociationOrInfluenceOrInstantaneousEvent
+
+	@rdfs:comment "The domain of prov:hadAvtivity"
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadAvtivity"
+	aspect InfluenceOrDelegationOrDerivationOrEndOrStart
+
+	// 4.1 Starting Point Terms
+	// https://www.w3.org/TR/2013/REC-prov-o-20130430/#cross-reference-starting-point-terms
+	
+	// 4.1 concepts
+
+	// 4.1 (1) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Entity
+
+	@rdfs:comment "An entity is a physical, digital, conceptual, or other kind of thing with some fixed aspects; entities may be real or imaginary."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Entity"
+	@rdfs:seeAlso "http://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-entity"
+	concept Entity :> ActivityOrAgentOrEntity
+
+	// 4.1 (2) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Activity
+
+	@rdfs:comment "An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Activity"
+	@rdfs:seeAlso "http://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-Activity"
+	concept Activity :> ActivityOrAgentOrEntity
+
+	// 4.1 (3) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Agent
+
+	@rdfs:comment "An agent is something that bears some form of responsibility for an activity taking place, for the existence of an entity, or for another agent's activity."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Agent"
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-agent"
+	concept Agent :> ActivityOrAgentOrEntity
+
+	// 4.1 relations
+
+	// 4.1 (4) https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasGeneratedBy
+	// see also 4.2 (35)
+	// see also 4.3 (46)
+
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Generation"
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-Generation"
+	@rdfs:comment "Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation."
+	relation entity Generation :> ActivityInfluence, InstantaneousEvent [
+		from Entity
+		to Activity
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasGeneratedBy"
+		forward wasGeneratedBy
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#generated"
+		reverse generated
+		functional
+	]
+
+	// 4.1 (5) https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasDerivedFrom
+	// see also 4.3 (41)
+
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Derivation"
+	@rdfs:seeAlso "http://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-Derivation"
+	@rdfs:comment '''A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity.'''
+	relation entity Derivation :> EntityInfluence, InstantaneousEvent, InfluenceOrDelegationOrDerivationOrEndOrStart [
+		from Entity
+		to Entity
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasDerivedFrom"
+		forward wasDerivedFrom
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse hadDerivation
+		asymmetric
+		irreflexive
+	]
+
+	rule wasDerivedFromIndirectly [
+		wasDerivedFrom(x,y) ^ wasDerivedFrom(y,z) -> wasDerivedFrom(x,z)
+	]
+
+	// 4.1 (6) https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasAttributedTo
+	// see also 4.3 (50)
+	
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Attribution"
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-attribution"
+	@rdfs:comment '''Attribution is the ascribing of an entity to an agent.'''
+	relation entity Attribution :> AgentInfluence [
+		from Entity 
+		to Agent
+	  @rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasAttributedTo"
+		forward wasAttributedTo
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse contributed
+	]
+
+	// 4.1 (7) https://www.w3.org/TR/2013/REC-prov-o-20130430/#startedAtTime
+
+	@rdfs:comment "Start is when an activity is deemed to have been started by an entity, known as trigger. The activity did not exist before its start. Any usage, generation, or invalidation involving an activity follows the activity's start. A start may refer to a trigger entity that set off the activity, or to an activity, known as starter, that generated the trigger."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#startedAtTime"
+	scalar property startedAtTime [
+		domain Activity
+		range xsd:dateTime
+	]
+
+	// 4.1 (8) https://www.w3.org/TR/2013/REC-prov-o-20130430/#used
+	// see also 4.3 (38)
+
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Usage"
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-Usage"
+	@rdfs:comment '''Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity.
+	'''
+	relation entity Usage :> Influence [
+		from Activity
+		to Entity
+	  @rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#used"
+		forward used
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse wasUsedBy
+	]
+
+	// 4.1 (9) https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasInformedBy
+	// see also 4.3 (47)
+
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Communication"
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-Communication"
+	relation entity Communication :> ActivityInfluence [
+		from Activity
+		to Activity
+		@rdfs:comment '''Communication is the exchange of some unspecified entity by two activities, one activity using some entity generated by the other.'''
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasInformedBy"
+		forward wasInformedBy
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse informed
+		irreflexive
+	]
+
+	// 4.1 (10) https://www.w3.org/TR/2013/REC-prov-o-20130430/#endedAtTime
+
+	@rdfs:comment "End is when an activity is deemed to have been ended by an entity, known as trigger. The activity no longer exists after its end. Any usage, generation, or invalidation involving an activity precedes the activity's end. An end may refer to a trigger entity that terminated the activity, or to an activity, known as ender that generated the trigger."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#endedAtTime"
+	scalar property endedAtTime [
+		domain Activity
+		range xsd:dateTime
+	]
+
+	// 4.1 (11) https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasAssociatedWith
+	// see also 4.3 (51)
+
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Association"
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-Association"
+	relation entity Association :> AgentInfluence, AssociationOrInfluenceOrInstantaneousEvent [
+		from Activity 
+		to Agent
+		@rdfs:comment '''An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity.
+	  '''
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasAssociatedWith"
+		forward wasAssociatedWith
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse wasAssociateFor
+	]
+
+	// 4.1 (12) https://www.w3.org/TR/2013/REC-prov-o-20130430/#actedOnBehalfOf
+	// see also 4.3 (53)
+
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Delegation"
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-delegation"
+	relation entity Delegation :> AgentInfluence, InfluenceOrDelegationOrDerivationOrEndOrStart [
+		from Agent
+		to Agent
+		@rdfs:comment '''Delegation is the assignment of authority and responsibility to an agent (by itself or by another agent) to carry out a specific activity as a delegate or representative, while the agent it acts on behalf of retains some responsibility for the outcome of the delegated work. For example, a student acted on behalf of his supervisor, who acted on behalf of the department chair, who acted on behalf of the university; all those agents are responsible in some way for the activity that took place but we do not say explicitly who bears responsibility and to what degree.
+	  '''
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#actedOnBehalfOf"
+		forward actedOnBehalfOf
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse hadDelegate
+		irreflexive
+		asymmetric
+	]
+
+	// 4.2 Expanded Terms
+	// https://www.w3.org/TR/2013/REC-prov-o-20130430/#cross-reference-expanded-terms
+
+	// 4.2 Concepts
+
+	// 4.2 (13) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Collection
+
+	@rdfs:comment "A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Collection"
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-collection"
+	concept Collection :> Entity
+
+	// 4.2 (14) https://www.w3.org/TR/2013/REC-prov-o-20130430/#EmptyCollection
+
+	@rdfs:comment "An empty collection is a collection without members."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#EmptyCollection"
+	concept EmptyCollection :> Collection [
+		restricts relation hadMember to max 0
+	]
+ 
+	// 4.2 (15) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Bundle
+
+	@rdfs:comment "A bundle is a named set of provenance descriptions, and is itself an Entity, so allowing provenance of provenance to be expressed."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Bundle"
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-bundle-entity"
+	concept Bundle :> Entity
+
+	// 4.2 (16) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Person
+
+	@rdfs:comment "Person agents are people."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Person"
+	concept Person :> Agent
+
+	// 4.2 (17) https://www.w3.org/TR/2013/REC-prov-o-20130430/#SoftwareAgent
+
+	@rdfs:comment "A software agent is running software."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#SoftwareAgent"
+	concept SoftwareAgent :> Agent
+
+	// 4.2 (18) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Organization
+
+	@rdfs:comment "An organization is a social or legal institution such as a company, society, etc."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Organization"
+	concept Organization :> Agent
+
+	// 4.2 (19) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Location
+
+	@rdfs:comment "A location can be an identifiable geographic place (ISO 19112), but it can also be a non-geographic place such as a directory, row, or column. As such, there are numerous ways in which location can be expressed, such as by a coordinate, address, landmark, and so forth."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Location"
+	concept Location
+
+	// 4.2 relations
+
+	// 4.2 (20) https://www.w3.org/TR/2013/REC-prov-o-20130430/#alternateOf
+
+	@rdfs:seeAlso "http://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-alternate"
+	relation entity Alternate [
+		from Entity
+		to Entity
+		@rdfs:comment """Two alternate entities present aspects of the same thing. These aspects may be the same or different, and the alternate entities may or may not overlap in time.
+		OML: This is a symmetric relation because prov-o uses the same property for its inverse.
+		"""
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#alternateOf"
+		forward alternateOf
+		irreflexive
+		symmetric
+	]
+
+	// 4.2 (21) https://www.w3.org/TR/2013/REC-prov-o-20130430/#specializationOf
+
+	@rdfs:seeAlso "http://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-specialization"
+	relation entity Specialization :> Alternate [
+		from Entity
+		to Entity
+		@rdfs:comment "An entity that is a specialization of another shares all aspects of the latter, and additionally presents more specific aspects of the same thing as the latter. In particular, the lifetime of the entity being specialized contains that of any specialization. Examples of aspects include a time period, an abstraction, and a context associated with the entity."
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#specializationOf"
+		forward specializationOf
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse generalizationOf
+		irreflexive
+		asymmetric
+	]
+
+	// 4.2 (22) https://www.w3.org/TR/2013/REC-prov-o-20130430/#generatedAtTime
+
+	@rdfs:comment "The time at which an entity was completely created and is available for use. Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#generatedAtTime"
+	scalar property generatedAtTime [
+		domain Entity
+		range xsd:dateTime
+	]
+
+	// 4.2 (23) https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadPrimarySource
+	// see also 4.3 (42)
+
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#PrimarySource"
+	relation entity PrimarySource :> Derivation [
+		from Entity
+		to Entity
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadPrimarySource"
+		forward hadPrimarySource
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse wasPrimarySourceOf
+		irreflexive
+		asymmetric
+	]
+
+	// 4.2 (24) https://www.w3.org/TR/2013/REC-prov-o-20130430/#value
+	// The provenance ontology does not specify the range of this property.
+	// So instead, we leave it to domain-specific uses of this vocabulary to provide suitable means to represent the value of an entity.
+
+	// 4.2 (25) https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasQuotedFrom
+	// see also 4.3 (43)
+
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Quotation"
+	relation entity Quotation :> Derivation [
+		from Entity
+		to Entity
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasQuotedFrom"
+		forward wasQuotedFrom
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse quotedAs
+		asymmetric
+		irreflexive
+	]
+
+	// 4.2 (26) https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasRevisionOf
+	// see also 4.3 (44)
+
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Revision"
+	relation entity Revision :> Derivation [
+		from Entity
+		to Entity
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasRevisionOf"
+		forward wasRevisionOf
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse hadRevision
+		asymmetric
+		irreflexive
+	]
+
+	// 4.2 (27) https://www.w3.org/TR/2013/REC-prov-o-20130430/#invalidatedAtTime
+	@rdfs:comment "Invalidation is the start of the destruction, cessation, or expiry of an existing entity by an activity. The entity is no longer available for use (or further invalidation) after invalidation. Any generation or usage of an entity precedes its invalidation."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#invalidatedAtTime"
+	scalar property invalidatedAtTime [
+		domain Entity
+		range xsd:dateTime
+	]
+
+	// 4.2 (28) https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasInvalidatedBy
+	// see also 4.2 (32)
+	// see also 4.3 (48)
+	
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Invalidation"
+	@rdfs:seeAlso "http://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-Invalidation"
+	relation entity Invalidation :> EntityInfluence, InstantaneousEvent [
+		from Entity
+		to Activity
+		@rdfs:comment '''Invalidation is the start of the destruction, cessation, or expiry of an existing entity by an activity. The entity is no longer available for use (or further invalidation) after invalidation. Any generation or usage of an entity precedes its invalidation.
+    '''
+  	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasInvalidatedBy"
+		forward wasInvalidatedBy
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#invalidated"
+		reverse invalidated
+		functional
+		asymmetric
+		irreflexive
+	]
+
+	// 4.2 (29) https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadMember
+	
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadMember"
+	relation entity Member [
+		from Collection
+		to Entity
+		@rdfs:comment "A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections."
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadMember"
+		forward hadMember
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse wasMemberOf
+		asymmetric
+		irreflexive
+	]
+
+	// 4.2 (30) https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasStartedBy
+	// see also 4.3 (39)
+
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Start"
+	@rdfs:seeAlso "http://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-Start"
+	relation entity Start :> Influence, InstantaneousEvent, InfluenceOrDelegationOrDerivationOrEndOrStart [
+		from Activity
+		to Entity
+		@rdfs:comment '''Start is when an activity is deemed to have been started by an entity, known as trigger. 
+		The activity did not exist before its start. 
+		Any usage, generation, or invalidation involving an activity follows the activity start. 
+		A start may refer to a trigger entity that set off the activity, or to an activity, known as starter, that generated the trigger.'''
+	  @rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasStartedBy"
+		forward wasStartedBy
+	]
+
+	// 4.2 (31) https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasEndedBy
+	// see also 4.3 (40)
+	
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#End"
+	@rdfs:seeAlso "http://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-End"
+	relation entity End :> Influence, InstantaneousEvent, InfluenceOrDelegationOrDerivationOrEndOrStart [
+		from Activity
+		to Entity
+		@rdfs:comment '''End is when an activity is deemed to have been ended by an entity, known as trigger. The activity no longer exists after its end. Any usage, generation, or invalidation involving an activity precedes the activity end. 
+		An end may refer to a trigger entity that terminated the activity, or to an activity, known as ender that generated the trigger.
+		'''
+	  @rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasEndedBy"
+		forward wasEndedBy
+	]
+
+	// 4.2 (32) https://www.w3.org/TR/2013/REC-prov-o-20130430/#invalidated
+	// see also 4.2 (28)
+	// see also 4.3 (48)
+
+	// 4.2 (33) https://www.w3.org/TR/2013/REC-prov-o-20130430/#influenced
+	// see also 4.3 (36)
+	// see also 4.3 (56)
+	
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Influence"
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-dm-20130430/Overview.html#term-influence"
+	@rdfs:comment "The names of the forward/reverse properties for the specializations follow the names of the forward/reverse properties defined here."
+  relation entity Influence :> AssociationOrInfluenceOrInstantaneousEvent, InfluenceOrDelegationOrDerivationOrEndOrStart [
+		from ActivityOrAgentOrEntity
+		to ActivityOrAgentOrEntity
+		
+		@rdfs:comment '''Influence is the capacity of an entity, activity, or agent to have an effect on the character, development, or behavior of another by means of usage, start, end, generation, invalidation, communication, derivation, attribution, association, or delegation.'''
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasInfluencedBy"
+		forward wasInfluencedBy 
+		
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#influenced"
+		reverse influenced
+		asymmetric
+		irreflexive
+	]
+
+	// 4.2 (34) https://www.w3.org/TR/2013/REC-prov-o-20130430/#atLocation
+
+	relation entity AtLocation [
+		from ActivityOrAgentOrEntityOrInstantaneousEvent
+		to Location
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#atLocation"
+		@rdfs:comment "A location can be an identifiable geographic place (ISO 19112), but it can also be a non-geographic place such as a directory, row, or column. As such, there are numerous ways in which location can be expressed, such as by a coordinate, address, landmark, and so forth."
+		forward atLocation
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse locationOf
+	]
+
+	// 4.2 (35) https://www.w3.org/TR/2013/REC-prov-o-20130430/#generated
+	// see also 4.1 (4)
+	// see also 4.3 (46)
+
+	// 4.3 Qualified Terms 
+	// https://www.w3.org/TR/2013/REC-prov-o-20130430/#cross-reference-qualified-terms
+
+	// 4.3 concepts
+
+	// 4.3 (36) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Influence
+	// see also 4.2 (33)
+	// see also 4.3 (56)
+
+	// 4.3 (37) https://www.w3.org/TR/2013/REC-prov-o-20130430/#EntityInfluence
+
+	@rdfs:comment "The names of the properties follow the naming convention for the Influence properties."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#EntityInfluence"
+	relation entity EntityInfluence :> Influence [
+		from Entity
+		to ActivityOrAgentOrEntity
+		@rdfs:comment '''EntityInfluence is the capacity of an entity to have an effect on the character, development, or behavior of another by means of usage, start, end, derivation, or other.
+		EntityInfluence provides additional descriptions of an Entity binary influence upon any other kind of resource. Instances of EntityInfluence use the prov:entity property to cite the influencing Entity.'''
+		forward entityInfluenced
+		reverse wasInfluencedByEntity
+		asymmetric
+		irreflexive
+	]
+
+	// 4.3 (38) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Usage
+	// see also 4.1 (8)
+
+	// 4.3 (39) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Start
+	// see also 4.2 (30)
+
+	// 4.3 (40) https://www.w3.org/TR/2013/REC-prov-o-20130430/#End
+	// see also 4.2 (31) 
+
+	// 4.3 (41) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Derivation
+	// see also 4.1 (5)
+
+	// 4.3 (42) https://www.w3.org/TR/2013/REC-prov-o-20130430/#PrimarySource
+	// see also 4.2 (23)
+
+	// 4.3 (43) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Quotation
+	// see also 4.2 (25)
+
+	// 4.3 (44) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Revision
+	// see also 4.2 (26)
+
+	// 4.3 (45) https://www.w3.org/TR/2013/REC-prov-o-20130430/#ActivityInfluence
+
+
+	@rdfs:comment "The names of the properties follow the naming convention for the Influence properties."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#ActivityInfluence"
+	relation entity ActivityInfluence :> Influence [
+		from ActivityOrAgentOrEntity 
+		to Activity
+
+		@rdfs:comment '''ActivitiyInfluence is the capacity of an activity to have an effect on the character, development, or behavior of another by means of generation, invalidation, communication, or other.
+	 ActivityInfluence provides additional descriptions of an Activity binary influence upon any other kind of resource. Instances of ActivityInfluence use the prov:activity property to cite the influencing Activity.'''
+		forward wasInfluencedByActivity 
+		reverse activityInfluenced
+		asymmetric
+		irreflexive
+	]
+
+	// 4.3 (46) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Generation
+	// see also 4.2 (35) 
+	// see also 4.1 (4)
+
+	// 4.3 (47) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Communication
+	// see also 4.1 (9)
+
+	// 4.3 (48) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Invalidation
+	// see also 4.2 (28)
+	// see also 4.2 (32)
+
+	// 4.3 (49) https://www.w3.org/TR/2013/REC-prov-o-20130430/#AgentInfluence
+
+	@rdfs:comment "The names of the properties follow the naming convention for the Influence properties."
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#AgentInfluence"
+	relation entity AgentInfluence :> Influence [
+		from ActivityOrAgentOrEntity
+		to Agent
+		@rdfs:comment '''AgentInfluence is the capacity of an agent to have an effect on the character, development, or behavior of another by means of attribution, association, delegation, or other.
+	  AgentInfluence provides additional descriptions of an Agent binary influence upon any other kind of resource. Instances of AgentInfluence use the prov:agent property to cite the influencing Agent.'''
+		forward wasInfluencedByAgent
+		reverse agentInfluenced
+		asymmetric
+		irreflexive
+	]
+
+	// 4.3 (50) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Attribution
+	// see also 4.1 (6)
+
+	// 4.3 (51) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Association
+	// see also 4.1 (11)
+
+	// 4.3 (52) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Plan
+
+	@rdfs:comment """A plan is an entity that represents a set of actions or steps intended by one or more agents to achieve some goals.
+	There exist no prescriptive requirement on the nature of plans, their representation, the actions or steps they consist of, or their intended goals. 
+	Since plans may evolve over time, it may become necessary to track their provenance, so plans themselves are entities. 
+	Representing the plan explicitly in the provenance can be useful for various tasks: 
+	for example, to validate the execution as represented in the provenance record, to manage expectation failures, or to provide explanations."""
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Plan"
+	concept Plan :> Entity
+
+	// 4.3 (53) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Delegation
+	// see also 4.1 (12)
+
+	// 4.3 (54) https://www.w3.org/TR/2013/REC-prov-o-20130430/#InstantaneousEvent
+
+	@rdfs:comment """The PROV data model is implicitly based on a notion of instantaneous events (or just events), 
+	that mark transitions in the world. Events include generation, usage, or invalidation of entities, as well as starting or ending of activities.
+	This notion of event is not first-class in the data model, but it is useful for explaining its other concepts and its semantics.
+	An instantaneous event, or event for short, happens in the world and marks a change in the world, in its activities and in its entities.
+	The term 'event' is commonly used in process algebra with a similar meaning. 
+	Events represent communications or interactions; they are assumed to be atomic and instantaneous."""
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#InstantaneousEvent"
+	aspect InstantaneousEvent :> AssociationOrInfluenceOrInstantaneousEvent, ActivityOrAgentOrEntityOrInstantaneousEvent
+
+	// 4.3 (55) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Role
+
+	@rdfs:comment """A role is the function of an entity or agent with respect to an activity, in the context of a usage, generation, invalidation, association, start, and end."""
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#Role"
+	concept Role
+
+  // 4.3 (56) https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasInfluencedBy
+	// see also 4.2 (33)
+	// see also 4.2 (36)
+
+	// 4.3 (57) https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedInfluence
+
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedInfluence"
+	@rdfs:comment """Influence is the capacity of an entity, activity, or agent to have an effect on the character, development, or behavior of another by means of usage, start, end, generation, invalidation, communication, derivation, attribution, association, or delegation.
+	Because prov:qualifiedInfluence is a broad relation, the more specific relations (qualifiedCommunication, qualifiedDelegation, qualifiedEnd, etc.) should be used when applicable."""
+	relation entity QualifiedInfluence [
+		from ActivityOrAgentOrEntity
+		to Influence
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedInfluence"
+		forward qualifiedInfluence
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse qualifiedInfluenceOf
+	]
+
+	// 4.3 (58) https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedGeneration
+
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedGeneration"
+	@rdfs:comment """Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+  If this Activity prov:generated Entity :e, then it can qualify how it performed the Generation using prov:qualifiedGeneration [ a prov:Generation; prov:entity :e; :foo :bar ]."""
+	relation entity QualifiedGeneration :> QualifiedInfluence [
+		from Entity
+		to Generation
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedGeneration"
+		forward qualifiedGeneration
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse qualifiedGenerationOf
+	]
+
+	// 4.3 (59) https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedDerivation
+
+	@rdfs:comment """A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity.
+	If this Entity prov:wasDerivedFrom Entity :e, then it can qualify how it was derived using prov:qualifiedDerivation [ a prov:Derivation; prov:entity :e; :foo :bar ]."""
+	relation entity QualifiedDerivation :> QualifiedInfluence [
+		from Entity
+		to Derivation
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedDerivation"
+		forward qualifiedDerivation
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse qualifiedDerivationOf
+	]
+
+	// 4.3 (60) https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedPrimarySource
+
+	// 4.3 (61) https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedQuotation
+
+	// 4.3 (62) https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedRevision
+	
+	@rdfs:comment """A revision is a derivation for which the resulting entity is a revised version of some original. The implication here is that the resulting entity contains substantial content from the original. Revision is a particular case of derivation.
+	If this Entity prov:wasRevisionOf Entity :e, then it can qualify how it was revised using prov:qualifiedRevision [ a prov:Revision; prov:entity :e; :foo :bar ]."""
+	relation entity QualifiedRevision :> QualifiedInfluence [
+		from Entity
+		to Revision
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedRevision"
+		forward qualifiedRevision
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse revisedEntity
+	]
+
+	// 4.3 (63) https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedAttribution
+
+	@rdfs:comment """Attribution is the ascribing of an entity to an agent. When an entity e is attributed to agent ag, entity e was generated by some unspecified activity that in turn was associated to agent ag. Thus, this relation is useful when the activity is not known, or irrelevant.
+	If this Entity prov:wasAttributedTo Agent :ag, then it can qualify how it was influenced using prov:qualifiedAttribution [ a prov:Attribution; prov:agent :ag; :foo :bar ]."""
+	relation entity QualifiedAttribution :> QualifiedInfluence [
+		from Entity
+		to Attribution
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedAttribution"
+		forward qualifiedAttribution
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse qualifiedAttributionOf
+	]
+
+	// 4.3 (64) https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedInvalidation
+
+	@rdfs:comment """Invalidation is the start of the destruction, cessation, or expiry of an existing entity by an activity. The entity is no longer available for use (or further invalidation) after invalidation. Any generation or usage of an entity precedes its invalidation.
+	If this Entity prov:wasInvalidatedBy Activity :a, then it can qualify how it was invalidated using prov:qualifiedInvalidation [ a prov:Invalidation; prov:activity :a; :foo :bar ]."""
+	relation entity QualifiedInvalidation :> QualifiedInfluence [
+		from Activity
+		to Invalidation
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedInvalidation"
+		forward qualifiedInvalidation
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse qualifiedInvalidationOf
+	]
+
+	// 4.3 (65) https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedStart
+
+	@rdfs:comment """Start is when an activity is deemed to have been started by an entity, known as trigger. The activity did not exist before its start. Any usage, generation, or invalidation involving an activity follows the activity's start. A start may refer to a trigger entity that set off the activity, or to an activity, known as starter, that generated the trigger.
+	If this Activity prov:wasStartedBy Entity :e1, then it can qualify how it was started using prov:qualifiedStart [ a prov:Start; prov:entity :e1; :foo :bar ]."""
+	relation entity QualifiedStart :> QualifiedInfluence [
+		from Entity
+		to Start
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedStart"
+		forward qualifiedStart
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse qualifiedStartOf
+	]
+
+	// 4.3 (66) https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedUsage
+
+	@rdfs:comment """Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity.
+	If this Activity prov:used Entity :e, then it can qualify how it used it using prov:qualifiedUsage [ a prov:Usage; prov:entity :e; :foo :bar ]."""
+	relation entity QualifiedUsage :> QualifiedInfluence [
+		from Activity
+		to Usage
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedUsage"
+		forward qualifiedUsage
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse qualifiedUsingActivity
+	]
+
+	// 4.3 (67) https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedCommunication
+
+	relation entity QualifiedCommunication :> QualifiedInfluence [
+		from Activity
+		to Communication
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedCommunication"
+		forward qualifiedCommunication
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse qualifiedCommunicationOf
+	]
+
+	// 4.3 (68) https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedAssociation
+
+	relation entity QualifiedAssociation :> QualifiedInfluence [
+		from Activity
+		to Association
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedAssociation"
+		forward qualifiedAssociation
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse qualifiedAssociationOf
+	]
+
+	// 4.3 (69) https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedEnd
+
+	relation entity QualifiedEnd :> QualifiedInfluence [
+		from Entity
+		to End
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedEnd"
+		forward qualifiedEnd
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse qualifiedEndOf
+	]
+
+	// 4.3 (70) https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedDelegation
+
+	relation entity QualifiedDelegation :> QualifiedInfluence [
+		from Agent
+		to Delegation
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualifiedDelegation"
+		forward qualifiedDelegation
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse qualifiedDelegationOf
+	]
+
+	// 4.3 (71) https://www.w3.org/TR/2013/REC-prov-o-20130430/#influencer
+
+	relation entity Influencer [
+		from Influence
+		to ActivityOrAgentOrEntity
+		@rdfs:comment "This property is used as part of the qualified influence pattern. Subclasses of prov:Influence use these subproperties to reference the resource (Entity, Agent, or Activity) whose influence is being qualified."
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#influencer"
+		forward influencer
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse hadInfluence
+	]
+
+	// 4.3 (72) https://www.w3.org/TR/2013/REC-prov-o-20130430/#p_entity
+
+	relation entity InfluencerEntity :> Influencer [
+		from EntityInfluence
+		to Entity
+		@rdfs:comment "The prov:entity property references an prov:Entity which influenced a resource. This property applies to an prov:EntityInfluence, which is given by a subproperty of prov:qualifiedInfluence from the influenced prov:Entity, prov:Activity or prov:Agent."
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#p_entity"
+		forward ^entity
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse entityOfInfluence
+	]
+
+	// 4.3 (73) https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadUsage
+
+	relation entity HadUsage [
+		from Derivation
+		to Usage
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadUsage"
+		forward hadUsage
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse wasUsedInDerivation
+	]
+
+	// 4.3 (74) https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadGeneration
+
+	 relation entity HadGeneration [
+	 	from Derivation
+	 	to Generation
+	 	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadGeneration"
+	 	forward hasGeneration
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse generatedAsDerivation
+	 ]
+ 
+	// 4.3 (75) https://www.w3.org/TR/2013/REC-prov-o-20130430/#p_activity
+
+	relation entity InfluencerActivity :> Influencer [
+		from ActivityInfluence
+		to Activity
+		@rdfs:comment "The prov:activity property references an prov:Activity which influenced a resource. This property applies to an prov:ActivityInfluence, which is given by a subproperty of prov:qualifiedInfluence from the influenced prov:Entity, prov:Activity or prov:Agent."
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#p_activity"
+		forward activity
+		reverse activityOfInfluence
+	]
+
+	// 4.3 (76) https://www.w3.org/TR/2013/REC-prov-o-20130430/#p_agent
+
+	relation entity InfluencerAgent :> Influencer [
+		from AgentInfluence
+		to Agent
+		@rdfs:comment "The prov:agent property references an prov:Agent which influenced a resource. This property applies to an prov:AgentInfluence, which is given by a subproperty of prov:qualifiedInfluence from the influenced prov:Entity, prov:Activity or prov:Agent."
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#p_agent"
+		forward agent
+		reverse agentOfInfluence
+	]
+
+	// 4.3 (77) https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadPlan
+
+	@rdfs:comment """The _optional_ Plan adopted by an Agent in Association with some Activity. Plan specifications are out of the scope of this specification.
+	A plan is an entity that represents a set of actions or steps intended by one or more agents to achieve some goals."""
+	relation entity HadPlan [
+		from Association
+		to Plan
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadPlan"
+		forward hadPlan
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse wasPlanOf
+	]
+
+	// 4.3 (78) https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadActivity
+
+	@rdfs:comment """The _optional_ Activity of an Influence, which used, generated, invalidated, or was the responsibility of some Entity. This property is _not_ used by ActivityInfluence (use prov:activity instead).
+	An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities. """
+	relation entity HadActivity [
+		from InfluenceOrDelegationOrDerivationOrEndOrStart
+		to Activity
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadActivity"
+		forward hadActivity
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse wasActivityOfInfluence
+	]
+
+	// 4.3 (79) https://www.w3.org/TR/2013/REC-prov-o-20130430/#atTime
+
+	@rdfs:comment """The time at which an InstantaneousEvent occurred, in the form of xsd:dateTime.
+	The PROV data model is implicitly based on a notion of instantaneous events (or just events), that mark transitions in the world. Events include generation, usage, or invalidation of entities, as well as starting or ending of activities. 
+	This notion of event is not first-class in the data model, but it is useful for explaining its other concepts and its semantics."""
+	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#atTime"
+	scalar property atTime [
+		domain InstantaneousEvent
+		range xsd:dateTime
+	]
+
+	// 4.3 (80) https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadRole
+
+	@rdfs:comment """A role is the function of an entity or agent with respect to an activity, in the context of a usage, generation, invalidation, association, start, and end.
+	The _optional_ Role that an Entity assumed in the context of an Activity. For example, :baking prov:used :spoon; prov:qualified [ a prov:Usage; prov:entity :spoon; prov:hadRole roles:mixing_implement ]."""
+	relation entity HadRole [
+		from AssociationOrInfluenceOrInstantaneousEvent
+		to Role
+		@rdfs:comment "A role is the function of an entity or agent with respect to an activity, in the context of a usage, generation, invalidation, association, start, and end."
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#hadRole"
+		forward hadRole
+		@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#inverse-names-table"
+		reverse wasRoleIn
+	]
+
+	rule activity_of_ActivityInfluence [
+		ActivityInfluence(ae, i, a) -> activity(i, a)
+	]
+
+	rule agent_of_AgentInfluence [
+		AgentInfluence(aae, r, ag) -> agent(r, ag)
+	]
+
+	rule entity_of_EntityInfluence [
+		EntityInfluence(e, r, ae) -> ^entity(r, e)
+	]
+
+	rule influencer_of_Influence [
+		Influence(aae1, r, aae2) -> influencer(r, aae1)
+	]
+
+	rule qualifiedAssociation_associated [
+		Association(act, r, ag) -> qualifiedAssociation(act, r)
+	]
+
+	rule qualifiedAttribution_attributed [
+		Attribution(e, r, a) -> qualifiedAttribution(a, r)
+	]
+
+	rule qualifiedCommunication_informed [
+		Communication(a1, r, a2) -> qualifiedCommunication(a1, r)
+	]
+
+	rule qualifiedDelegation_delegated [
+		Delegation(a1, r, a2) -> qualifiedDelegation(a1, r)
+	]
+
+	rule qualifiedDerivation_derived [
+		Derivation(e1, r, e2) -> qualifiedDerivation(e1, r)
+	]
+
+	rule qualifiedEnd_ended [
+		End(a, r, e) -> qualifiedEnd(e, r)
+	]
+
+	rule qualifiedGeneration_generated [
+		Generation(e, g, a) -> qualifiedGeneration(e, g)
+	]
+
+	rule qualifiedInfluence_influenced [
+		Influence(aae1, i, aae2) -> qualifiedInfluence(aae1, i)
+	]
+
+	rule qualifiedInvalidation_invalidated [
+		Invalidation(e, r, a) -> qualifiedInvalidation(a, r)
+	]
+
+	rule qualifiedStart_started [
+		Start(a, r, e) -> qualifiedStart(e, r)
+	]
+
+	rule qualifiedUsage_usage [
+		Usage(a, r, e) -> qualifiedUsage(a, r)
+	]
+
+
+}

@@ -1,0 +1,8 @@
+@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#narrative-example-qualified-5"
+description <http://example.org/example10> with # as example10 {
+
+  extends <http://example.org/example9>
+
+  // prov:qualifiedAssociation is inferred from example9.
+
+}

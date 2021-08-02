@@ -1,0 +1,5 @@
+vocabulary bundle <http://www.w3.org/ns/prov-bundle> with # as prov-bundle {
+
+  includes <http://www.w3.org/ns/prov>
+  
+}

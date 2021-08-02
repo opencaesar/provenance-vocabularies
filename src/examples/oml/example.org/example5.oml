@@ -1,0 +1,14 @@
+@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#narrative-example-expanded-4"
+description <http://example.org/example5> with # as example5 {
+
+  extends <http://example.org/example4>
+
+  ci post19201 : prov:Entity [
+    prov:invalidatedAtTime      "2012-09-02T01:31:00Z"^^xsd:dateTime
+    prov:wasInvalidatedBy       hard_disk_failure
+  ]
+
+  ci hard_disk_failure : prov:Activity [
+    prov:endedAtTime            "2012-09-02T01:31:00Z"^^xsd:dateTime
+  ]
+}

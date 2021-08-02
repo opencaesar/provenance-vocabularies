@@ -1,0 +1,16 @@
+@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#narrative-example-qualified-4"
+description <http://example.org/example9> with # as example9 {
+
+  extends <http://example.org/example8>
+
+  ri illustrationActivityAssociation : prov:Association [
+    from example8:illustrationActivity
+    to example1:derek
+    prov:hadRole illustrationist
+    prov:hadPlan tutorial_blog
+  ]
+
+  ci illustrationist : prov:Role
+
+  ci tutorial_blog : prov:Plan
+}

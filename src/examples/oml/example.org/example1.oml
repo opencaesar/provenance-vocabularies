@@ -1,0 +1,49 @@
+@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#narrative-example-simple-1"
+description <http://example.org/example1> with # as example1 {
+
+  uses <http://www.w3.org/ns/prov-bundle>
+
+  ci bar_chart : prov:Entity [
+    prov:wasGeneratedBy     illustrationActivity
+    prov:wasDerivedFrom     aggregatedByRegions
+    prov:wasAttributedTo    derek
+  ]
+
+  ci derek : prov:Agent [
+    prov:actedOnBehalfOf    national_newspaper_inc
+  ]
+
+  ci national_newspaper_inc : prov:Agent
+
+  ci illustrationActivity : prov:Activity [
+    prov:used               aggregatedByRegions
+    prov:wasAssociatedWith  derek
+    prov:wasInformedBy      aggregationActivity
+  ]
+
+  ci aggregatedByRegions : prov:Entity [
+    prov:wasGeneratedBy     aggregationActivity
+    prov:wasAttributedTo    derek
+  ]
+
+  ci aggregationActivity : prov:Activity [
+    prov:startedAtTime      "2011-07-14T01:01:01Z"^^xsd:dateTime
+    prov:startedAtTime      "2011-07-14T01:01:01Z"^^xsd:dateTime
+    prov:endedAtTime        "2011-07-14T02:02:02Z"^^xsd:dateTime
+    prov:wasAssociatedWith  derek
+    prov:used               crimeData
+    prov:used               nationalRegionsList
+  ]
+
+  ci crimeData : prov:Entity [
+    prov:wasAttributedTo government
+  ]
+
+  ci government : prov:Agent
+  
+  ci nationalRegionsList : prov:Entity [
+    prov:wasAttributedTo civil_action_group
+  ]
+
+  ci civil_action_group : prov:Agent
+}

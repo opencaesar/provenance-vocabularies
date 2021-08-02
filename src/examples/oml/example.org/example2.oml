@@ -1,0 +1,50 @@
+@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#narrative-example-expanded-1"
+description <http://example.org/example2> with # as example2 {
+
+  extends <http://example.org/example1>
+
+  ci derek-bundle : prov:Bundle [
+    prov:generatedAtTime    "2011-07-16T02:52:02Z"^^xsd:dateTime
+    prov:wasAttributedTo    postEditor
+  ]
+
+  ci postEditor : prov:SoftwareAgent
+
+  ci more-crime-happens-in-cities : prov:Entity
+
+  ci post9821v1 : prov:Entity [
+    prov:generatedAtTime    "2011-07-16T01:52:02Z"^^xsd:dateTime
+    prov:invalidatedAtTime  "2011-07-16T02:02:02Z"^^xsd:dateTime
+    prov:specializationOf   more-crime-happens-in-cities
+    prov:wasGeneratedBy     publicationActivity1123
+    prov:wasInfluencedBy    example1:aggregatedByRegions
+    prov:hadPrimarySource   example1:crimeData
+  ]
+
+  ci publicationActivity1123 : prov:Activity [
+    prov:startedAtTime      "2011-07-16T01:01:01Z"^^xsd:dateTime
+    prov:endedAtTime        "2011-07-16T01:52:02Z"^^xsd:dateTime
+    prov:wasAssociatedWith  postEditor
+    prov:generated          post9821v1
+
+    // The example in the spec seems incorrect because the range of
+    // prov:wasStartedBy and prov:wasEndedBy is prov:Agent, not prov:Entity
+    // OML bundle closure makes prov:Agent, prov:Activity and prov:Entity disjoint
+    // from each other so the reasoner detects this as an inconsistency.
+    // prov:wasStartedBy       derek
+    // prov:wasEndedBy         derek
+  ]
+  
+  ref ci example1:aggregatedByRegions [
+    prov:atLocation         aggr.txt
+  ]
+
+  ci aggr.txt : prov:Location
+
+  ci post9821v2 : prov:Entity [
+    prov:generatedAtTime    "2011-07-16T02:02:02Z"^^xsd:dateTime
+    prov:specializationOf   more-crime-happens-in-cities
+    prov:wasRevisionOf      post9821v1
+    prov:alternateOf        post9821v1
+  ]
+}
