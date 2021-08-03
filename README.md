@@ -4,6 +4,11 @@
 
 A set of vocabularies to describe provenance according to https://www.w3.org/TR/2013/REC-prov-o-20130430/.
 
+![](diagrams/Provenance.png)
+
+<details>
+<summary>Details</summary>
+
 The W3C Prov-O ontology defines binary unqualfied properties (e.g. `prov:wasGeneratedBy`) that can be qualified using a class (e.g. `prov:Generation`).
 
 in OML, the qualfied class (e.g. `prov:Generation`) becomes an OML relation entity class whose 'forward' property corresponds precisely to the Prov-O unqualified property (e.g. `prov:wasGeneratedBy`).
@@ -137,9 +142,16 @@ In Turtle syntax, the above corresponds to the following:
  ] .
 ```
 
+</details>
+
 ## [PROV-Dictionary](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/)
 
 Compared with the [prov-dictionary overview](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#prov-dictionary-owl-terms-at-a-glance), the OML vocabulary uses the OML entity relation pattern instead of the RDF qualification pattern.
+
+![](diagrams/Prov-Dictionary.png)
+
+<details>
+<summary>Details</summary>
 
 Specifically:
 
@@ -152,9 +164,14 @@ Specifically:
   - [prov:Removal](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#Removal); it effectively corresponds to the OML relation entity class reifying [prov:derivedByRemovalFrom](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#derivedByRemovalFrom).
   - [prov:qualifiedRemoval](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#qualifiedRemoval); it effectively corresponds to the source and class of the OML relation entity [prov:derivedByRemovalFrom](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#derivedByRemovalFrom).
 
+</details>
+
 ## Examples
 
 The OML Prov-O vocabulary includes the 11 examples from the specification.
+
+<details>
+<summary>Details</summary>
 
 In OML, vocabularies are typically closed before using them for modeling instances in OML descriptions. Closing a vocabulary is a decision made at the level of a group of ontologies, in OML terminology, a vocabulary bundle. This closure applies a policy whereby any pair of classes that have no common specialization are asserted to be disjoint from each other. The resulting set of disjointness axioms computed over the taxonomy of all vocabularies in scope of a vocabulary bundle turns out to be very useful and powerful for OWL2-DL+SWRL reasoners to verify instances in OML description ontologies against the semantics of vocabularies in OML vocabulary bundles.
 
@@ -188,3 +205,4 @@ Since [prov:Entity](https://www.w3.org/TR/2013/REC-prov-o-20130430/#Entity) and 
 
 Although the OML Provenance ontology does not have disjointness explicitly asserted, with OML bundle closure, this example becomes inconsistent unless the assertions about `:john` and `:postEditor` are removed as is done in the OML [example4.oml](src/examples/oml/example.org/example4.oml).
 
+</details.>
