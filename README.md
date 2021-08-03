@@ -2,7 +2,11 @@
 
 ## [PROV-O](https://www.w3.org/TR/2013/REC-prov-o-20130430/)
 
-A set of vocabularies to describe provenance according to https://www.w3.org/TR/2013/REC-prov-o-20130430/.
+The OML vocabulary uses the OML relation entity reification pattern instead of the RDF qualification pattern.
+Surprisingly, the 'Unqualified Influence' properties and 'Qualified Influence' classes listed in 
+[Table 2](https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualified-forms-starting-point) and 
+[Table 3](https://www.w3.org/TR/2013/REC-prov-o-20130430/#qualified-forms-expanded) correspond 1-1 to, respectively,
+the 'forward property' and reified relation class in the OML relation entity reification pattern.
 
 ![](diagrams/Provenance.png)
 
