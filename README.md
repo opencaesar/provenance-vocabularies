@@ -1,5 +1,7 @@
 # provenance-vocabularies
 
+## [PROV-O](https://www.w3.org/TR/2013/REC-prov-o-20130430/)
+
 A set of vocabularies to describe provenance according to https://www.w3.org/TR/2013/REC-prov-o-20130430/.
 
 The W3C Prov-O ontology defines binary unqualfied properties (e.g. `prov:wasGeneratedBy`) that can be qualified using a class (e.g. `prov:Generation`).
@@ -135,58 +137,30 @@ In Turtle syntax, the above corresponds to the following:
  ] .
 ```
 
+## [PROV-Dictionary](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/)
+
+Compared with the [prov-dictionary overview](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#prov-dictionary-owl-terms-at-a-glance), the OML vocabulary uses the OML entity relation pattern instead of the RDF qualification pattern.
+
+Specifically:
+
+- The OML relation entity reification of [prov:derivedByInsertionFrom](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#derivedByInsertionFrom) 
+  combined with the OML relation entity reification of [prov:insertedKeyEntryPair](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#insertedKeyEntityPair)
+  obliviates the need for the original vocabulary: 
+  - [prov:dictionary](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#dictionary); it effectively corresponds to the target of the OML relation entity [prov:derivedByInsertionFrom](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#derivedByInsertionFrom) or [prov:derivedByRemovalFrom](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#derivedByRemovalFrom).
+  - [prov:Insertion](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#Insertion); it effectively corresponds to the OML relation entity class reifying [prov:derivedByInsertionFrom](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#derivedByInsertionFrom).
+  - [prov:qualifiedInsertion](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#qualifiedInsertion); it effectively corresponds to the source and class of the OML relation entity [prov:derivedByInsertionFrom](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#derivedByInsertionFrom).
+  - [prov:Removal](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#Removal); it effectively corresponds to the OML relation entity class reifying [prov:derivedByRemovalFrom](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#derivedByRemovalFrom).
+  - [prov:qualifiedRemoval](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#qualifiedRemoval); it effectively corresponds to the source and class of the OML relation entity [prov:derivedByRemovalFrom](https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#derivedByRemovalFrom).
+
 ## Examples
 
 The OML Prov-O vocabulary includes the 11 examples from the specification.
 
 In OML, vocabularies are typically closed before using them for modeling instances in OML descriptions. Closing a vocabulary is a decision made at the level of a group of ontologies, in OML terminology, a vocabulary bundle. This closure applies a policy whereby any pair of classes that have no common specialization are asserted to be disjoint from each other. The resulting set of disjointness axioms computed over the taxonomy of all vocabularies in scope of a vocabulary bundle turns out to be very useful and powerful for OWL2-DL+SWRL reasoners to verify instances in OML description ontologies against the semantics of vocabularies in OML vocabulary bundles.
 
-This technique pointed out problems in the examples from the Prov-O ontology.
-### [Example 2](https://www.w3.org/TR/prov-o/#narrative-example-expanded-1)
+This technique pointed out problems with the OML Bundle Closure algorithm that generates disjointness constraints that are too strong.
+See https://github.com/opencaesar/oml/issues/80
 
-This example includes the following axioms:
-
-```turtle
-:derek
-  a prov:Person, prov:Agent
-.
-
-:publicationActivity1123 
-  a prov:Activity;
-  prov:wasStartedBy      :derek;
-  prov:wasEndedBy        :derek
-.
-```
-
-Note that the range of [prov:wasStartedBy](https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasStartedBy) and of [prov:wasEndedBy](https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasEndedBy) is [prov:Entity](https://www.w3.org/TR/2013/REC-prov-o-20130430/#Entity), not [prov:Agent](https://www.w3.org/TR/2013/REC-prov-o-20130430/#Agent) as used in the example.
-
-Under the open-world assumption, the example is fine; a reasoner will conclude that `:derek` is classified as both `prov:Agent` (as asserted) and `prov:Entity` (as inferred).
-
-With the OML bundle closure, the disjointness policy generates several sets of disjointness axioms including the following in Turtle syntax:
-
-```turtle
-[ rdf:type owl:AllDisjointClasses ;
-owl:members ( <http://www.w3.org/ns/prov#Activity>
-              <http://www.w3.org/ns/prov#Agent>
-              <http://www.w3.org/ns/prov#Alternate>
-              <http://www.w3.org/ns/prov#AtLocation>
-              <http://www.w3.org/ns/prov#Entity>
-              <http://www.w3.org/ns/prov#HadActivity>
-              <http://www.w3.org/ns/prov#HadGeneration>
-              <http://www.w3.org/ns/prov#HadPlan>
-              <http://www.w3.org/ns/prov#HadRole>
-              <http://www.w3.org/ns/prov#HadUsage>
-              <http://www.w3.org/ns/prov#Influence>
-              <http://www.w3.org/ns/prov#Influencer>
-              <http://www.w3.org/ns/prov#Location>
-              <http://www.w3.org/ns/prov#Member>
-              <http://www.w3.org/ns/prov#QualifiedInfluence>
-              <http://www.w3.org/ns/prov#Role>
-            )
-] .
-```
-
-With the OML bundle closure, this example becomes inconsistent unless the assertions about `:derek` are removed as is done in the OML [example2.oml](src/examples/oml/example.org/example2.oml).
 
 ### [Example 4](https://www.w3.org/TR/prov-o/#narrative-example-expanded-3)
 
@@ -208,33 +182,9 @@ This example includes the following axioms:
 .   
 ```
 
-Note that the domain of [prov:wasAttributedTo](https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasAttributedTo) is [prov:Entity](https://www.w3.org/TR/2013/REC-prov-o-20130430/#Entity), not [prov:Agent](https://www.w3.org/TR/2013/REC-prov-o-20130430/#Agent) as used in the example.
+Note that the domain of [prov:wasAttributedTo](https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasAttributedTo) is [prov:Entity](https://www.w3.org/TR/2013/REC-prov-o-20130430/#Entity), not [prov:Activity](https://www.w3.org/TR/2013/REC-prov-o-20130430/#Activity) as used in the example.
 
-Under the open-world assumption, the example is fine; a reasoner will conclude that `:john` and `:postEditor` are classified as both `prov:Agent` (as asserted) and `prov:Entity` (as inferred).
+Since [prov:Entity](https://www.w3.org/TR/2013/REC-prov-o-20130430/#Entity) and [prov:Activity](https://www.w3.org/TR/2013/REC-prov-o-20130430/#Activity) are disjoint, this example leads to an inconsistency.
 
-With the OML bundle closure, the disjointness policy generates several sets of disjointness axioms including the following in Turtle syntax:
-
-```turtle
-[ rdf:type owl:AllDisjointClasses ;
-owl:members ( <http://www.w3.org/ns/prov#Activity>
-              <http://www.w3.org/ns/prov#Agent>
-              <http://www.w3.org/ns/prov#Alternate>
-              <http://www.w3.org/ns/prov#AtLocation>
-              <http://www.w3.org/ns/prov#Entity>
-              <http://www.w3.org/ns/prov#HadActivity>
-              <http://www.w3.org/ns/prov#HadGeneration>
-              <http://www.w3.org/ns/prov#HadPlan>
-              <http://www.w3.org/ns/prov#HadRole>
-              <http://www.w3.org/ns/prov#HadUsage>
-              <http://www.w3.org/ns/prov#Influence>
-              <http://www.w3.org/ns/prov#Influencer>
-              <http://www.w3.org/ns/prov#Location>
-              <http://www.w3.org/ns/prov#Member>
-              <http://www.w3.org/ns/prov#QualifiedInfluence>
-              <http://www.w3.org/ns/prov#Role>
-            )
-] .
-```
-
-With OML bundle closure, this example becomes inconsistent unless the assertions about `:john` and `:postEditor` are removed as is done in the OML [example4.oml](src/examples/oml/example.org/example4.oml).
+Although the OML Provenance ontology does not have disjointness explicitly asserted, with OML bundle closure, this example becomes inconsistent unless the assertions about `:john` and `:postEditor` are removed as is done in the OML [example4.oml](src/examples/oml/example.org/example4.oml).
 

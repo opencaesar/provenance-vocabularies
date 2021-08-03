@@ -27,12 +27,8 @@ description <http://example.org/example2> with # as example2 {
     prov:wasAssociatedWith  postEditor
     prov:generated          post9821v1
 
-    // The example in the spec seems incorrect because the range of
-    // prov:wasStartedBy and prov:wasEndedBy is prov:Agent, not prov:Entity
-    // OML bundle closure makes prov:Agent, prov:Activity and prov:Entity disjoint
-    // from each other so the reasoner detects this as an inconsistency.
-    // prov:wasStartedBy       derek
-    // prov:wasEndedBy         derek
+    prov:wasStartedBy       example1:derek
+    prov:wasEndedBy         example1:derek
   ]
   
   ref ci example1:aggregatedByRegions [

@@ -74,8 +74,8 @@ task omlToOwl(type:io.opencaesar.oml2owl.Oml2OwlTask, dependsOn: downloadDepende
   // OML catalog
   inputCatalogPath = file('catalog.xml')
   // OWL catalog
-  outputCatalogPath = file('build/ttl/catalog.xml')
-  outputFileExtension = 'ttl'
+  outputCatalogPath = file('build/trig/catalog.xml')
+  outputFileExtension = 'trig'
 }
 
 /*
@@ -83,11 +83,11 @@ task omlToOwl(type:io.opencaesar.oml2owl.Oml2OwlTask, dependsOn: downloadDepende
  */
 task owlReasonProvenance(type:io.opencaesar.owl.reason.OwlReasonTask, dependsOn: omlToOwl) {
 	// OWL catalog
-	catalogPath = file('build/ttl/catalog.xml')
+	catalogPath = file('build/trig/catalog.xml')
 	// Input ontology IRI to reason on
 	inputOntologyIri = 'http://www.w3.org/ns/prov-bundle'
-  inputFileExtensions = ['ttl']
-	outputFileExtension = 'ttl'
+  inputFileExtensions = ['trig']
+	outputFileExtension = 'trig'
 	// Entailment statements to generate and the ontologies to persist them in
 	specs = [
 		'http://www.w3.org/ns/prov-bundle/classes = ALL_SUBCLASS',
@@ -100,11 +100,11 @@ task owlReasonProvenance(type:io.opencaesar.owl.reason.OwlReasonTask, dependsOn:
 
 task owlReasonExamples(type:io.opencaesar.owl.reason.OwlReasonTask, dependsOn: omlToOwl) {
 	// OWL catalog
-	catalogPath = file('build/ttl/catalog.xml')
+	catalogPath = file('build/trig/catalog.xml')
 	// Input ontology IRI to reason on
 	inputOntologyIri = 'http://example.org/examples-bundle'
-  inputFileExtensions = ['ttl']
-	outputFileExtension = 'ttl'
+  inputFileExtensions = ['trig']
+	outputFileExtension = 'trig'
 	// Entailment statements to generate and the ontologies to persist them in
 	specs = [
 		'http://example.org/examples-bundle/classes = ALL_SUBCLASS',
@@ -119,9 +119,9 @@ task owlReasonExamples(type:io.opencaesar.owl.reason.OwlReasonTask, dependsOn: o
  * A task to load an OWL catalog to a Fuseki dataset endpoint
  */
 task owlLoad(type:io.opencaesar.owl.load.OwlLoadTask, dependsOn: [owlReasonProvenance]) {
-	catalogPath = file('build/ttl/catalog.xml')
+	catalogPath = file('build/trig/catalog.xml')
 	endpointURL = "http://localhost:3030/$fusekiDataset"
-  fileExtensions = ['ttl']
+  fileExtensions = ['trig']
 	iris = [
 		'http://www.w3.org/ns/prov-bundle/classes',
 		'http://www.w3.org/ns/prov-bundle/properties',

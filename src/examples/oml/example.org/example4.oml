@@ -14,8 +14,7 @@ description <http://example.org/example4> with # as example4 {
     
     // The example in the spec seems incorrect because the domain of
     // prov:wasAttributedTo is prov:Entity, not prov:Activity
-    // OML bundle closure makes prov:Agent, prov:Activity and prov:Entity disjoint
-    // from each other so the reasoner detects this as an inconsistency.
+    // Since prov:Entity and prov:Activity are disjoint, these statements would lead to an inconsistency.
     //prov:wasAttributedTo    example2:postEditor
     //prov:wasAttributedTo    john
 

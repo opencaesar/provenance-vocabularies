@@ -912,5 +912,10 @@ vocabulary <http://www.w3.org/ns/prov> with # as prov {
 		Usage(a, r, e) -> qualifiedUsage(a, r)
 	]
 
+	@rdfs:seeAlso "https://lists.w3.org/Archives/Public/public-prov-comments/2021Aug/0001.html"
+  concept EntityAndAgent :> Entity, Agent
+  
+	@rdfs:seeAlso "https://lists.w3.org/Archives/Public/public-prov-comments/2021Aug/0001.html"
+  concept ActivityAndAgent :> Activity, Agent
 
 }
