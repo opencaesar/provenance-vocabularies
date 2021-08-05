@@ -209,7 +209,7 @@ Since [prov:Entity](https://www.w3.org/TR/2013/REC-prov-o-20130430/#Entity) and 
 
 Although the OML Provenance ontology does not have disjointness explicitly asserted, with OML bundle closure, this example becomes inconsistent unless the assertions about `:john` and `:postEditor` are removed as is done in the OML [example4.oml](src/examples/oml/example.org/example4.oml).
 
-</details.>
+</details>
 
 ## Important note about this repository
 
