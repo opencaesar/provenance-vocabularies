@@ -210,3 +210,10 @@ Since [prov:Entity](https://www.w3.org/TR/2013/REC-prov-o-20130430/#Entity) and 
 Although the OML Provenance ontology does not have disjointness explicitly asserted, with OML bundle closure, this example becomes inconsistent unless the assertions about `:john` and `:postEditor` are removed as is done in the OML [example4.oml](src/examples/oml/example.org/example4.oml).
 
 </details.>
+
+## Important note about this repository
+
+This repository depends on the branch `trig-format` of this fork: https://github.com/NicolasRouquette/core-vocabularies
+until this PR is merged: https://github.com/opencaesar/core-vocabularies/pull/26
+
+The [build.gradle](build.gradle) is configured to resolve the `core-vocabularies` from https://jitpack.io/#NicolasRouquette/core-vocabularies/

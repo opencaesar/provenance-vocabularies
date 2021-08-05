@@ -41,6 +41,8 @@ publishing {
                             dependency.appendNode('version', it.moduleVersion.id.version)
                             if (it.classifier != null) {
                                 dependency.appendNode('classifier', it.classifier)
+                            }
+                            if (it.extension != null) {
                                 dependency.appendNode('type', it.extension)
                             }
                         }
