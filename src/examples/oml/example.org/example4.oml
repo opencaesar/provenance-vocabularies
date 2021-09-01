@@ -1,46 +1,54 @@
 @rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#narrative-example-expanded-3"
 description <http://example.org/example4> with # as example4 {
 
-  extends <http://example.org/example3>
+	uses <http://www.w3.org/2001/XMLSchema> as xsd
 
-  ci john-bundle : prov:Bundle [
-    prov:generatedAtTime    "2012-08-08T08:08:08Z"^^xsd:dateTime
-    prov:wasAttributedTo    example2:postEditor
-    prov:wasDerivedFrom     example2:derek-bundle
-    prov:wasDerivedFrom     example3:monica-bundle
-  ]
+	uses <http://www.w3.org/2000/01/rdf-schema> as rdfs
 
-  ci publicationActivity1124 : prov:Activity [
-    
-    // The example in the spec seems incorrect because the domain of
-    // prov:wasAttributedTo is prov:Entity, not prov:Activity
-    // Since prov:Entity and prov:Activity are disjoint, these statements would lead to an inconsistency.
-    //prov:wasAttributedTo    example2:postEditor
-    //prov:wasAttributedTo    john
+	uses <http://www.w3.org/ns/prov> as prov
 
-    // It seems the example should use use prov:wasAssociatedWith instead of prov:wasAttributedTo
-    prov:wasAssociatedWith  example2:postEditor
-    prov:wasAssociatedWith  john
-    prov:generated          post19201
-  ]
+	extends <http://example.org/example1> as example1
 
-  ci post19201 : prov:Entity [
-    prov:wasAttributedTo    john
-    prov:wasDerivedFrom     quote_from_derek
-    prov:wasDerivedFrom     quote_from_monica
-    prov:wasDerivedFrom     example1:aggregatedByRegions
-    prov:wasGeneratedBy     publicationActivity1124
-  ]
+	extends <http://example.org/example2> as example2
 
-  ci john : prov:Agent
+	extends <http://example.org/example3> as example3
 
-  ci quote_from_derek : prov:Entity [
-    prov:generatedAtTime    "2012-08-08T01:01:01Z"^^xsd:dateTime
-    prov:wasQuotedFrom      example2:more-crime-happens-in-cities
-  ]
+	ci john-bundle : prov:Bundle [
+		prov:generatedAtTime "2012-08-08T08:08:08Z"^^xsd:dateTime
+		prov:wasAttributedTo example2:postEditor
+		prov:wasDerivedFrom example2:derek-bundle
+		prov:wasDerivedFrom example3:monica-bundle
+	]
 
-  ci quote_from_monica : prov:Entity [
-    prov:generatedAtTime    "2012-08-08T02:02:02Z"^^xsd:dateTime
-    prov:wasQuotedFrom      example3:post9822
-  ]
+	ci publicationActivity1124 : prov:Activity [
+		// The example in the spec seems incorrect because the domain of
+		// prov:wasAttributedTo is prov:Entity, not prov:Activity
+		// Since prov:Entity and prov:Activity are disjoint, these statements would lead to an inconsistency.
+		// prov:wasAttributedTo    example2:postEditor
+		// prov:wasAttributedTo    john
+		// It seems the example should use use prov:wasAssociatedWith instead of prov:wasAttributedTo
+		prov:wasAssociatedWith example2:postEditor
+		prov:wasAssociatedWith john
+		prov:generated post19201
+	]
+
+	ci post19201 : prov:Entity [
+		prov:wasAttributedTo john
+		prov:wasDerivedFrom quote_from_derek
+		prov:wasDerivedFrom quote_from_monica
+		prov:wasDerivedFrom example1:aggregatedByRegions
+		prov:wasGeneratedBy publicationActivity1124
+	]
+
+	ci john : prov:Agent
+
+	ci quote_from_derek : prov:Entity [
+		prov:generatedAtTime "2012-08-08T01:01:01Z"^^xsd:dateTime
+		prov:wasQuotedFrom example2:more-crime-happens-in-cities
+	]
+
+	ci quote_from_monica : prov:Entity [
+		prov:generatedAtTime "2012-08-08T02:02:02Z"^^xsd:dateTime
+		prov:wasQuotedFrom example3:post9822
+	]
 }

@@ -1,6 +1,16 @@
+@dc:creator "W3C"
+@dc:rights "Copyright 2013 W3C."
+@dc:source "http://www.w3.org/ns/prov"
+@rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-primer-20130430/#intuitive-overview-of-prov"
+@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/"
+@dc:description "This is the provenance vocabulary bundle."
+@dc:title "Prov Bundle"
 vocabulary bundle <http://www.w3.org/ns/prov-bundle> with # as prov-bundle {
 
-  includes <http://www.w3.org/ns/prov>
-  includes <http://www.w3.org/ns/prov-dictionary>
+	includes <http://purl.org/dc/elements/1.1> with / as dc
   
+	includes <http://www.w3.org/2000/01/rdf-schema> as rdfs
+
+  includes <http://www.w3.org/ns/prov-dictionary>
+
 }

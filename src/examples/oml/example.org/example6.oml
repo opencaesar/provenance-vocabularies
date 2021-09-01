@@ -1,11 +1,13 @@
 @rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#narrative-example-qualified-1"
 description <http://example.org/example6> with # as example6 {
 
-  uses <http://www.w3.org/ns/prov-bundle>
+	uses <http://www.w3.org/2000/01/rdf-schema> as rdfs
 
-  ci e1 : prov:Entity [
-    prov:wasGeneratedBy   a1
-  ]
+	uses <http://www.w3.org/ns/prov> as prov
 
-  ci a1 : prov:Activity
+	ci e1 : prov:Entity [
+		prov:wasGeneratedBy a1
+	]
+
+	ci a1 : prov:Activity
 }

@@ -1,18 +1,23 @@
-@rdfs:comment '''
+@dc:creator "W3C"
+@dc:rights "Copyright 2013 W3C."
+@dc:source "http://www.w3.org/ns/prov"
+@rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-primer-20130430/#intuitive-overview-of-prov"
+@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/"
+@dc:description "
 The qualification pattern is converted into an equivalent reification pattern.
 The following specialized qualification patterns are not modeled in OML in this version 
 but could be easily added if needed:
 - Revision, qualifiedRevision, wasRevisionOf
 - PrimarySource, qualifiedPrimarySource, hadPrimarySource
-- Quotation, qualifiedQuotation, wasQuotedFrom
-'''
-@rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-primer-20130430/#intuitive-overview-of-prov"
-@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/"
+- Quotation, qualifiedQuotation, wasQuotedFrom"
+@dc:title "Prov"
 vocabulary <http://www.w3.org/ns/prov> with # as prov {
 
-	extends <http://www.w3.org/2001/XMLSchema>
+	extends <http://purl.org/dc/elements/1.1> with / as dc
 
-	extends <http://www.w3.org/2000/01/rdf-schema>
+	extends <http://www.w3.org/2001/XMLSchema> as xsd
+
+	extends <http://www.w3.org/2000/01/rdf-schema> as rdfs
 
 	@rdfs:comment "The domain of prov:atLocation"
 	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#atLocation"
