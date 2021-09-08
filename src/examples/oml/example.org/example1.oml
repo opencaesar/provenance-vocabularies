@@ -1,11 +1,11 @@
 @rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#narrative-example-simple-1"
-description <http://example.org/example1> with # as example1 {
+description <http://example.org/example1#> as example1 {
 
-	uses <http://www.w3.org/2001/XMLSchema> as xsd
+	uses <http://www.w3.org/2001/XMLSchema#> as xsd
 
-	uses <http://www.w3.org/2000/01/rdf-schema> as rdfs
+	uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
-	uses <http://www.w3.org/ns/prov> as prov
+	uses <http://www.w3.org/ns/prov#> as prov
 
 	ci bar_chart : prov:Entity [
 		prov:wasGeneratedBy illustrationActivity

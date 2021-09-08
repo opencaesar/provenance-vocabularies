@@ -1,9 +1,9 @@
 @rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#narrative-example-qualified-2"
-description <http://example.org/example7> with # as example7 {
+description <http://example.org/example7#> as example7 {
 
-	uses <http://www.w3.org/2000/01/rdf-schema> as rdfs
+	uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
-	uses <http://www.w3.org/ns/prov> as prov
+	uses <http://www.w3.org/ns/prov#> as prov
 
 	ci e1 : prov:Entity [
 		prov:qualifiedGeneration e1Gen // inferred from e1Gen; could be omitted.

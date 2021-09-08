@@ -1,17 +1,17 @@
 @rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#narrative-example-expanded-3"
-description <http://example.org/example4> with # as example4 {
+description <http://example.org/example4#> as example4 {
 
-	uses <http://www.w3.org/2001/XMLSchema> as xsd
+	uses <http://www.w3.org/2001/XMLSchema#> as xsd
 
-	uses <http://www.w3.org/2000/01/rdf-schema> as rdfs
+	uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
-	uses <http://www.w3.org/ns/prov> as prov
+	uses <http://www.w3.org/ns/prov#> as prov
 
-	extends <http://example.org/example1> as example1
+	extends <http://example.org/example1#> as example1
 
-	extends <http://example.org/example2> as example2
+	extends <http://example.org/example2#> as example2
 
-	extends <http://example.org/example3> as example3
+	extends <http://example.org/example3#> as example3
 
 	ci john-bundle : prov:Bundle [
 		prov:generatedAtTime "2012-08-08T08:08:08Z"^^xsd:dateTime

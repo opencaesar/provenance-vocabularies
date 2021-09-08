@@ -1,13 +1,13 @@
 @rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#narrative-example-expanded-2"
-description <http://example.org/example3> with # as example3 {
+description <http://example.org/example3#> as example3 {
 
-	uses <http://www.w3.org/2001/XMLSchema> as xsd
+	uses <http://www.w3.org/2001/XMLSchema#> as xsd
 
-	uses <http://www.w3.org/2000/01/rdf-schema> as rdfs
+	uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
-	uses <http://www.w3.org/ns/prov> as prov
+	uses <http://www.w3.org/ns/prov#> as prov
 
-	extends <http://example.org/example2> as example2
+	extends <http://example.org/example2#> as example2
 
 	ci monica-bundle : prov:Bundle [
 		prov:generatedAtTime "2011-07-16T03:03:03Z"^^xsd:dateTime

@@ -1,5 +1,9 @@
 # provenance-vocabularies
 
+[![Build Status](https://app.travis-ci.com/opencaesar/provenance-vocabularies.svg?branch=master)](https://app.travis-ci.com/github/opencaesar/provenance-vocabularies)
+[![Release](https://img.shields.io/github/v/tag/opencaesar/provenance-vocabularies?label=release)](https://github.com/opencaesar/provenance-vocabularies/releases/latest)
+[![Documentation](https://img.shields.io/badge/Documentation-HTML-orange)](https://opencaesar.github.io/provenance-vocabularies/) 
+
 ## [PROV-O](https://www.w3.org/TR/2013/REC-prov-o-20130430/)
 
 The OML vocabulary uses the OML relation entity reification pattern instead of the RDF qualification pattern.

@@ -1,11 +1,11 @@
 @rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#narrative-example-expanded-4"
-description <http://example.org/example5> with # as example5 {
+description <http://example.org/example5#> as example5 {
 
-	uses <http://www.w3.org/2001/XMLSchema> as xsd
+	uses <http://www.w3.org/2001/XMLSchema#> as xsd
 
-	uses <http://www.w3.org/2000/01/rdf-schema> as rdfs
+	uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
-	uses <http://www.w3.org/ns/prov> as prov
+	uses <http://www.w3.org/ns/prov#> as prov
 
 	ci post19201 : prov:Entity [
 		prov:invalidatedAtTime "2012-09-02T01:31:00Z"^^xsd:dateTime

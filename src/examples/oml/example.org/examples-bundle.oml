@@ -1,26 +1,26 @@
-description bundle <http://example.org/examples-bundle> with # as examples-bundle {
+description bundle <http://example.org/examples-bundle#> as examples-bundle {
 
-	uses <http://www.w3.org/ns/prov-bundle>
+	uses <http://www.w3.org/ns/prov-bundle#>
 
-	includes <http://example.org/example1>
+	includes <http://example.org/example1#>
 
-	includes <http://example.org/example2>
+	includes <http://example.org/example2#>
 
-	includes <http://example.org/example3>
+	includes <http://example.org/example3#>
 
-	includes <http://example.org/example4>
+	includes <http://example.org/example4#>
 
-	includes <http://example.org/example5>
+	includes <http://example.org/example5#>
 
-	includes <http://example.org/example6>
+	includes <http://example.org/example6#>
 
-	includes <http://example.org/example7>
+	includes <http://example.org/example7#>
 
-	includes <http://example.org/example8>
+	includes <http://example.org/example8#>
 
-	includes <http://example.org/example9>
+	includes <http://example.org/example9#>
 
-	includes <http://example.org/example10>
+	includes <http://example.org/example10#>
 
-	includes <http://example.org/example11>
+	includes <http://example.org/example11#>
 }

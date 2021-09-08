@@ -1,13 +1,13 @@
 @rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#narrative-example-qualified-4"
-description <http://example.org/example9> with # as example9 {
+description <http://example.org/example9#> as example9 {
 
-	uses <http://www.w3.org/2000/01/rdf-schema> as rdfs
+	uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
-	uses <http://www.w3.org/ns/prov> as prov
+	uses <http://www.w3.org/ns/prov#> as prov
 
-	extends <http://example.org/example1> as example1
+	extends <http://example.org/example1#> as example1
 
-	extends <http://example.org/example8> as example8
+	extends <http://example.org/example8#> as example8
 
 	ri illustrationActivityAssociation : prov:Association [
 		from example8:illustrationActivity

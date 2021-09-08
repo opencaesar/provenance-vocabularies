@@ -5,15 +5,15 @@
 @rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/"
 @dc:description "This is the provenance dictionary vocabulary."
 @dc:title "Prov Dictionary"
-vocabulary <http://www.w3.org/ns/prov-dictionary> with # as prov-dictionary {
+vocabulary <http://www.w3.org/ns/prov-dictionary#> as prov-dictionary {
 
-	extends <http://purl.org/dc/elements/1.1> with / as dc
+	extends <http://purl.org/dc/elements/1.1/> as dc
 
-	extends <http://www.w3.org/2000/01/rdf-schema> as rdfs
+	extends <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
-  extends <http://www.w3.org/1999/02/22-rdf-syntax-ns> as rdf
+  extends <http://www.w3.org/1999/02/22-rdf-syntax-ns#> as rdf
 
-  extends <http://www.w3.org/ns/prov> as prov
+  extends <http://www.w3.org/ns/prov#> as prov
 
   @rdfs:label 'Dictionary'
   @rdfs:comment """
