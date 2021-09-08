@@ -1,0 +1,8 @@
+<?xml version='1.0'?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public">
+	<rewriteURI uriStartString="http://www.w3.org/ns/" rewritePrefix="src/main/oml/www.w3.org/ns/" />
+	<rewriteURI uriStartString="http://example.org/" rewritePrefix="src/examples/oml/example.org/" />
+	<rewriteURI uriStartString="http://opencaesar.io/" rewritePrefix="build/oml/opencaesar.io/" />
+	<rewriteURI uriStartString="http://purl.org/" rewritePrefix="build/oml/purl.org/" />
+	<rewriteURI uriStartString="http://www.w3.org/" rewritePrefix="build/oml/www.w3.org/" />
+</catalog>
