@@ -1,33 +1,43 @@
-/* 
- * Dataset maven coordinates
- */
-ext.title = 'Provenance Vocabularies'
-description = 'Provenance vocabularies from http://www.w3.org/ns/prov'
-group ='io.opencaesar.ontologies'
-version = '2.0.2'
- 
-apply from: "${rootDir}/gradle/maven-deployment.gradle"
 
 /* 
  * The Gradle task dependencies 
  */
 buildscript {
 	repositories {
-	  	mavenLocal()
-    	mavenCentral()
+	  mavenLocal()
+    mavenCentral()
 	}
 	dependencies {
+		// https://github.com/opencaesar/owl-adapter/tags
+		classpath 'io.opencaesar.adapters:oml2owl-gradle:1.0.+'
+		
+		// https://github.com/opencaesar/oml-tools/tags
+    classpath 'io.opencaesar.oml:oml-merge-gradle:1.0.+'
+		classpath 'io.opencaesar.oml:oml-bikeshed-gradle:1.0.+'
+		
+		// https://github.com/opencaesar/owl-tools/tags
 		classpath 'io.opencaesar.owl:owl-load-gradle:+'
 		classpath 'io.opencaesar.owl:owl-reason-gradle:+'
 		classpath 'io.opencaesar.owl:owl-fuseki:+'
 		classpath 'io.opencaesar.owl:owl-fuseki-gradle:+'
 		classpath 'io.opencaesar.owl:owl-query-gradle:+'
-		classpath 'io.opencaesar.oml:oml-bikeshed-gradle:1.0.+'
-    	classpath 'io.opencaesar.oml:oml-merge-gradle:1.0.+'
-		classpath 'io.opencaesar.adapters:oml2owl-gradle:1.0.+'
 	}
 }
 
+plugins {
+  id 'com.palantir.git-version' version '0.12.3'
+}
+
+apply from: "${rootDir}/gradle/maven-deployment.gradle"
+
+/* 
+ * Dataset maven coordinates
+ */
+ext.title = 'Provenance Vocabularies'
+description = 'Provenance vocabularies from http://www.w3.org/ns/prov'
+group ='io.opencaesar.ontologies'
+version = gitVersion()
+ 
 // Dataset-specific variables
 ext.dataset = [
     // Name of dataset (matches one used in .fuseki.ttl file)
