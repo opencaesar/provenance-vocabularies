@@ -1,3 +1,10 @@
+/* 
+ * Dataset maven coordinates
+ */
+ext.title = 'Provenance Vocabularies'
+description = 'Provenance vocabularies from http://www.w3.org/ns/prov'
+group ='io.opencaesar.ontologies'
+version = '2.0.4'
 
 /* 
  * The Gradle task dependencies 
@@ -12,8 +19,8 @@ buildscript {
 		classpath 'io.opencaesar.adapters:oml2owl-gradle:1.0.+'
 		
 		// https://github.com/opencaesar/oml-tools/tags
-    classpath 'io.opencaesar.oml:oml-merge-gradle:1.0.+'
-		classpath 'io.opencaesar.oml:oml-bikeshed-gradle:1.0.+'
+        classpath 'io.opencaesar.oml:oml-merge-gradle:1.1.+'
+		classpath 'io.opencaesar.oml:oml-bikeshed-gradle:1.1.+'
 		
 		// https://github.com/opencaesar/owl-tools/tags
 		classpath 'io.opencaesar.owl:owl-load-gradle:+'
@@ -24,26 +31,16 @@ buildscript {
 	}
 }
 
-plugins {
-  id 'com.palantir.git-version' version '0.12.3'
-}
-
 apply from: "${rootDir}/gradle/maven-deployment.gradle"
 
-/* 
- * Dataset maven coordinates
- */
-ext.title = 'Provenance Vocabularies'
-description = 'Provenance vocabularies from http://www.w3.org/ns/prov'
-group ='io.opencaesar.ontologies'
-version = gitVersion()
- 
 // Dataset-specific variables
 ext.dataset = [
     // Name of dataset (matches one used in .fuseki.ttl file)
     name: 'provenance-vocabularies',
     // URL for publishing dataset documentation
-    publishUrl: 'https://opencaesar.github.io/provenance-vocabularies'
+    publishUrl: 'https://opencaesar.github.io/provenance-vocabularies',
+    // Bikeshed build folder
+    bikeshed: 'build/bikeshed'
 ]
 
 /*
@@ -94,7 +91,7 @@ task omlToBikeshed(type: io.opencaesar.oml.bikeshed.Oml2BikeshedTask, group:"oml
      // Input Ontology Iri
     rootOntologyIri = 'http://www.w3.org/ns/prov-bundle'
    // OWL folder
-    outputFolderPath = file('build/bikeshed')
+    outputFolderPath = file("$dataset.bikeshed")
     // Publish URL
     publishUrl = "$dataset.publishUrl".toString()
 }
@@ -103,25 +100,14 @@ task omlToBikeshed(type: io.opencaesar.oml.bikeshed.Oml2BikeshedTask, group:"oml
  * A task to generate the model documentation in HTML
  */
 import org.gradle.internal.os.OperatingSystem
-task generateDocs(dependsOn: omlToBikeshed, group:"oml") {
+task generateDocs(dependsOn: omlToBikeshed) {
+	inputs.files(fileTree("$dataset.bikeshed").include('**/*.bs'))
+	outputs.files(fileTree("$dataset.bikeshed").include('**/*.html'))
     doLast {
         if (OperatingSystem.current().isWindows()) {
-            exec { 
-                if (project.hasProperty('BIKESHED')) {
-                    environment 'PATH', "${environment.PATH}:${BIKESHED}"
-                }
-                commandLine 'build/bikeshed/publish.bat' 
-            }
+            exec { commandLine "$dataset.bikeshed/publish.bat" }
         } else {
-            exec { 
-                commandLine 'chmod', '+x', 'build/bikeshed/publish.sh' 
-            }
-            exec {
-                if (project.hasProperty('BIKESHED')) {
-                    environment 'PATH', "${environment.PATH}:${BIKESHED}"
-                }
-                commandLine 'build/bikeshed/publish.sh'
-            }
+            exec { commandLine "$dataset.bikeshed/publish.sh" }
         }
     }
 }
@@ -168,58 +154,6 @@ task owlReasonExamples(type:io.opencaesar.owl.reason.OwlReasonTask, dependsOn: o
 	// Junit error report
 	reportPath = file('build/reports/examples-bundle/reasoning.xml')
 }
-
-/*
- * Start the headless Fuseki server
- */
-task startFuseki(type: io.opencaesar.owl.fuseki.StartFusekiTask, group:"oml") {
-    configurationPath = file('.fuseki.ttl')
-    outputFolderPath = file('.fuseki')
-}
-
-/*
- * Stop the headless Fuseki server
- */
-task stopFuseki(type: io.opencaesar.owl.fuseki.StopFusekiTask, group:"oml") {
-    outputFolderPath = file('.fuseki')
-}
-
-/*
- * A task to load the provenance dataset to a Fuseki dataset endpoint
- */
-task owlLoadProvenance(type:io.opencaesar.owl.load.OwlLoadTask, group:"oml", dependsOn: owlReasonProvenance) {
-    catalogPath = file('build/owl/catalog.xml')
-    endpointURL = "http://localhost:3030/$dataset.name".toString()
-    fileExtensions = ['owl', 'ttl']
-    iris = [
-		'http://www.w3.org/ns/prov-bundle/classes',
-		'http://www.w3.org/ns/prov-bundle/properties',
-		'http://www.w3.org/ns/prov-bundle/individuals'
-    ]
-}
-
-/*
- * A task to load the examples dataset to a Fuseki dataset endpoint
- */
-task owlLoadExamples(type:io.opencaesar.owl.load.OwlLoadTask, group:"oml", dependsOn: owlReasonExamples) {
-    catalogPath = file('build/owl/catalog.xml')
-    endpointURL = "http://localhost:3030/$dataset.name".toString()
-    fileExtensions = ['owl', 'ttl']
-    iris = [
-		'http://example.org/examples-bundle/classes',
-		'http://example.org/examples-bundle/properties',
-		'http://example.org/examples-bundle/individuals'
-    ]
-}
-
-/*
- * A task to run a set of SPARQL queries on a Fuseki dataset endpoint
- */
-/*task owlQuery(type:io.opencaesar.owl.query.OwlQueryTask, group:"oml", dependsOn: owlLoad) {
-    endpointURL = "http://localhost:3030/$dataset.name".toString()
-    queryPath = file('src/sparql')
-    resultPath = file('build/frames')
-}*/
 
 /*
  * A task to build the project, which executes several tasks together
