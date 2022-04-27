@@ -16,11 +16,11 @@ buildscript {
 	}
 	dependencies {
 		// https://github.com/opencaesar/owl-adapter/tags
-		classpath 'io.opencaesar.adapters:oml2owl-gradle:1.0.+'
+		classpath 'io.opencaesar.adapters:oml2owl-gradle:1.+'
 		
 		// https://github.com/opencaesar/oml-tools/tags
-        classpath 'io.opencaesar.oml:oml-merge-gradle:1.1.+'
-		classpath 'io.opencaesar.oml:oml-bikeshed-gradle:1.1.+'
+        classpath 'io.opencaesar.oml:oml-merge-gradle:1.+'
+		classpath 'io.opencaesar.oml:oml-bikeshed-gradle:1.+'
 		
 		// https://github.com/opencaesar/owl-tools/tags
 		classpath 'io.opencaesar.owl:owl-load-gradle:+'
