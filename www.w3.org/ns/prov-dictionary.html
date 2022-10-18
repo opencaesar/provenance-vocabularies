@@ -1487,9 +1487,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version fb1e763a4, updated Tue Mar 1 13:13:50 2022 -0800" name="generator">
+  <meta content="Bikeshed version b0de3432c, updated Thu Oct 13 09:16:59 2022 -0700" name="generator">
   <link href="https://opencaesar.github.io/provenance-vocabularies/www.w3.org/ns/prov-dictionary" rel="canonical">
-  <meta content="82623145f94164098efe81037e03e0d8257bddfd" name="document-revision">
+  <meta content="48ce6cfe3cf1906177f9e935e7cfc35867bef2ef" name="document-revision">
 <style>
 a[data-link-type=biblio] {
     white-space: pre-wrap;
@@ -1949,7 +1949,7 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.opencaesar.io/oml/"><img alt="OML Specification" height="48" src="https://opencaesar.github.io/oml/images/oml.svg"></a></p>
    <h1 class="p-name no-ref" id="title">Prov Dictionary</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Commit Snapshot, <time class="dt-updated" datetime="2022-04-27">27 April 2022</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Commit Snapshot, <time class="dt-updated" datetime="2022-10-18">18 October 2022</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2019,16 +2019,16 @@ dfn > a.self-link::before      { content: "#"; }
     <h2 class="heading settled" data-level="2" id="Extensions"><span class="secno">2. </span><span class="content">Imports</span><a class="self-link" href="#Extensions"></a></h2>
     <ul>
      <li data-md>
-      <p><a href="http://purl.org/dc/elements/1.html">http://purl.org/dc/elements/1.1</a> [dc]</p>
+      <p><a href="../../purl.org/dc/elements/1.1.html">http://purl.org/dc/elements/1.1</a> [dc]</p>
      <li data-md>
-      <p><a href="http://www.w3.org/2000/01/rdf-schema.html">http://www.w3.org/2000/01/rdf-schema</a> [rdfs]</p>
+      <p><a href="../../www.w3.org/2000/01/rdf-schema.html">http://www.w3.org/2000/01/rdf-schema</a> [rdfs]</p>
      <li data-md>
-      <p><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns.html">http://www.w3.org/1999/02/22-rdf-syntax-ns</a> [rdf]</p>
+      <p><a href="../../www.w3.org/1999/02/22-rdf-syntax-ns.html">http://www.w3.org/1999/02/22-rdf-syntax-ns</a> [rdf]</p>
      <li data-md>
-      <p><a href="http://www.w3.org/ns/prov.html">http://www.w3.org/ns/prov</a> [prov]</p>
+      <p><a href="../../www.w3.org/ns/prov.html">http://www.w3.org/ns/prov</a> [prov]</p>
     </ul>
     <h2 class="heading settled" data-level="3" id="concepts"><span class="secno">3. </span><span class="content">Concepts</span><a class="self-link" href="#concepts"></a></h2>
-    <h3 class="heading settled" data-level="3.1" id="Dictionary"><span class="secno">3.1. </span><span class="content"><dfn data-dfn-type="dfn" data-export id="dictionary">Dictionary<a class="self-link" href="#dictionary"></a></dfn></span><a class="self-link" href="#Dictionary"></a></h3>
+    <h3 class="heading settled" data-level="3.1" id="Dictionary"><span class="secno">3.1. </span><span class="content"><dfn data-dfn-type="dfn" data-export data-lt="dictionary" id="dictionary">Dictionary<a class="self-link" href="#dictionary"></a></dfn></span><a class="self-link" href="#Dictionary"></a></h3>
     <p>A dictionary is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the dictionary.
 	  This concept allows for the provenance of the dictionary, but also of its constituents to be expressed. Such a notion of dictionary corresponds to a wide variety of concrete data structures, such as a maps or associative arrays.
 	  A given dictionary forms a given structure for its members. A different structure (obtained either by insertion or removal of members) constitutes a different dictionary.</p>
@@ -2038,31 +2038,24 @@ dfn > a.self-link::before      { content: "#"; }
        <th>Supertypes
        <td>
         <ul>
-         <li><a data-link-type="dfn" href="prov.html#collection" id="ref-for-collection">prov:Collection</a>
+         <li> <a data-link-type="dfn" href="prov.html#collection" id="ref-for-collection">prov:Collection</a> 
         </ul>
       <tr>
        <th>Subtypes
        <td>
         <ul>
-         <li><a data-link-type="dfn" href="prov-dictionary.html#emptydictionary" id="ref-for-emptydictionary">EmptyDictionary</a>
+         <li> <a data-link-type="dfn" href="prov-dictionary.html#emptydictionary" id="ref-for-emptydictionary">EmptyDictionary</a> 
         </ul>
       <tr>
-       <th>Relations with source
+       <th>Relations
        <td>
         <ul>
-         <li>Dictionary ← <a data-link-type="dfn" href="prov-dictionary.html#derivedbyinsertionfrom" id="ref-for-derivedbyinsertionfrom">DerivedByInsertionFrom</a> → <a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary">Dictionary</a> 
-         <li>Dictionary ← <a data-link-type="dfn" href="prov-dictionary.html#derivedbyremovalfrom" id="ref-for-derivedbyremovalfrom">DerivedByRemovalFrom</a> → <a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary①">Dictionary</a> 
-         <li>Dictionary ← <a data-link-type="dfn" href="prov-dictionary.html#haddictionarymember" id="ref-for-haddictionarymember">HadDictionaryMember</a> → <a data-link-type="dfn" href="prov-dictionary.html#keyentitypair" id="ref-for-keyentitypair">KeyEntityPair</a> 
-        </ul>
-      <tr>
-       <th>Relations with target
-       <td>
-        <ul>
-         <li><a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary②">Dictionary</a> ← <a data-link-type="dfn" href="prov-dictionary.html#derivedbyinsertionfrom" id="ref-for-derivedbyinsertionfrom①">DerivedByInsertionFrom</a> → Dictionary 
-         <li><a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary③">Dictionary</a> ← <a data-link-type="dfn" href="prov-dictionary.html#derivedbyremovalfrom" id="ref-for-derivedbyremovalfrom①">DerivedByRemovalFrom</a> → Dictionary 
+         <li> <a data-link-type="dfn" href="prov-dictionary.html#derivedbyinsertionfrom_1" id="ref-for-derivedbyinsertionfrom_1">derivedByInsertionFrom</a> : <a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary">Dictionary</a> 
+         <li> <a data-link-type="dfn" href="prov-dictionary.html#derivedbyremovalfrom_1" id="ref-for-derivedbyremovalfrom_1">derivedByRemovalFrom</a> : <a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary①">Dictionary</a> 
+         <li> <a data-link-type="dfn" href="prov-dictionary.html#haddictionarymember_1" id="ref-for-haddictionarymember_1">hadDictionaryMember</a> : <a data-link-type="dfn" href="prov-dictionary.html#keyentitypair" id="ref-for-keyentitypair">KeyEntityPair</a> 
         </ul>
     </table>
-    <h3 class="heading settled" data-level="3.2" id="EmptyDictionary"><span class="secno">3.2. </span><span class="content"><dfn data-dfn-type="dfn" data-export id="emptydictionary">EmptyDictionary<a class="self-link" href="#emptydictionary"></a></dfn></span><a class="self-link" href="#EmptyDictionary"></a></h3>
+    <h3 class="heading settled" data-level="3.2" id="EmptyDictionary"><span class="secno">3.2. </span><span class="content"><dfn data-dfn-type="dfn" data-export data-lt="emptydictionary" id="emptydictionary">EmptyDictionary<a class="self-link" href="#emptydictionary"></a></dfn></span><a class="self-link" href="#EmptyDictionary"></a></h3>
     <p>An empty dictionary is a dictionary that has no members.</p>
     <table class="def">
      <tbody>
@@ -2070,17 +2063,17 @@ dfn > a.self-link::before      { content: "#"; }
        <th>Supertypes
        <td>
         <ul>
-         <li><a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary④">Dictionary</a>
-         <li><a data-link-type="dfn" href="prov.html#emptycollection" id="ref-for-emptycollection">prov:EmptyCollection</a>
+         <li> <a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary②">Dictionary</a> 
+         <li> <a data-link-type="dfn" href="prov.html#emptycollection" id="ref-for-emptycollection">prov:EmptyCollection</a> 
         </ul>
       <tr>
-       <th>Relations with source
+       <th>Relations
        <td>
         <ul>
-         <li>EmptyDictionary ← <a data-link-type="dfn" href="prov-dictionary.html#haddictionarymember" id="ref-for-haddictionarymember①">HadDictionaryMember</a> → <a data-link-type="dfn" href="prov-dictionary.html#keyentitypair" id="ref-for-keyentitypair①">KeyEntityPair</a> (cardinality restricted to exactly 0) 
+         <li> <a data-link-type="dfn" href="prov-dictionary.html#haddictionarymember_1" id="ref-for-haddictionarymember_1①">hadDictionaryMember</a> : <a data-link-type="dfn" href="prov-dictionary.html#keyentitypair" id="ref-for-keyentitypair①">KeyEntityPair</a> (cardinality restricted to exactly 0) 
         </ul>
     </table>
-    <h3 class="heading settled" data-level="3.3" id="KeyEntityPair"><span class="secno">3.3. </span><span class="content"><dfn data-dfn-type="dfn" data-export id="keyentitypair">KeyEntityPair<a class="self-link" href="#keyentitypair"></a></dfn></span><a class="self-link" href="#KeyEntityPair"></a></h3>
+    <h3 class="heading settled" data-level="3.3" id="KeyEntityPair"><span class="secno">3.3. </span><span class="content"><dfn data-dfn-type="dfn" data-export data-lt="keyentitypair" id="keyentitypair">KeyEntityPair<a class="self-link" href="#keyentitypair"></a></dfn></span><a class="self-link" href="#KeyEntityPair"></a></h3>
     <p>A key-entity pair. Part of a prov:Dictionary through prov:hadDictionaryMember. The key is any RDF Literal, the value is a prov:Entity.</p>
     <table class="def">
      <tbody>
@@ -2088,175 +2081,168 @@ dfn > a.self-link::before      { content: "#"; }
        <th>Properties
        <td>
         <ul>
-         <li><a data-link-type="dfn" href="prov-dictionary.html#pairkey" id="ref-for-pairkey">pairKey</a> (must have exactly 1)
+         <li> <a data-link-type="dfn" href="prov-dictionary.html#pairkey" id="ref-for-pairkey">pairKey</a> : <a data-link-type="dfn" href="../1999/02/22-rdf-syntax-ns.html#plainliteral" id="ref-for-plainliteral">rdf:PlainLiteral</a> (must have exactly 1) 
         </ul>
       <tr>
-       <th>Relations with source
+       <th>Relations
        <td>
         <ul>
-         <li>KeyEntityPair ← <a data-link-type="dfn" href="prov-dictionary.html#pairentity" id="ref-for-pairentity">PairEntity</a> → <a data-link-type="dfn" href="prov.html#entity" id="ref-for-entity">prov:Entity</a> (cardinality restricted to exactly 1) 
-        </ul>
-      <tr>
-       <th>Relations with target
-       <td>
-        <ul>
-         <li><a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary⑤">Dictionary</a> ← <a data-link-type="dfn" href="prov-dictionary.html#haddictionarymember" id="ref-for-haddictionarymember②">HadDictionaryMember</a> → KeyEntityPair 
-         <li><a data-link-type="dfn" href="prov-dictionary.html#derivedbyinsertionfrom" id="ref-for-derivedbyinsertionfrom②">DerivedByInsertionFrom</a> ← <a data-link-type="dfn" href="prov-dictionary.html#insertedkeyentitypair" id="ref-for-insertedkeyentitypair">InsertedKeyEntityPair</a> → KeyEntityPair 
+         <li> <a data-link-type="dfn" href="prov-dictionary.html#pairentity_1" id="ref-for-pairentity_1">pairEntity</a> : <a data-link-type="dfn" href="prov.html#entity" id="ref-for-entity">prov:Entity</a> (cardinality restricted to exactly 1) 
         </ul>
     </table>
     <h2 class="heading settled" data-level="4" id="Relations"><span class="secno">4. </span><span class="content">Relation Entities</span><a class="self-link" href="#Relations"></a></h2>
-    <h3 class="heading settled" data-level="4.1" id="DerivedByInsertionFrom"><span class="secno">4.1. </span><span class="content"><dfn data-dfn-type="dfn" data-export id="derivedbyinsertionfrom">DerivedByInsertionFrom<a class="self-link" href="#derivedbyinsertionfrom"></a></dfn></span><a class="self-link" href="#DerivedByInsertionFrom"></a></h3>
+    <h3 class="heading settled" data-level="4.1" id="DerivedByInsertionFrom"><span class="secno">4.1. </span><span class="content"><dfn data-dfn-type="dfn" data-export data-lt="derivedbyinsertionfrom" id="derivedbyinsertionfrom">DerivedByInsertionFrom<a class="self-link" href="#derivedbyinsertionfrom"></a></dfn></span><a class="self-link" href="#DerivedByInsertionFrom"></a></h3>
     <p>The source dictionary that was derived from the target dictionary by insertion of one or more key-entity pairs.</p>
     <table class="def">
      <tbody>
       <tr>
        <th>Source
-       <td><a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary⑥">Dictionary</a>
+       <td> <a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary③">Dictionary</a> 
       <tr>
        <th>Target
-       <td><a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary⑦">Dictionary</a>
+       <td> <a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary④">Dictionary</a> 
       <tr>
        <th>Supertypes
        <td>
         <ul>
-         <li><a data-link-type="dfn" href="prov.html#derivation" id="ref-for-derivation">prov:Derivation</a>
+         <li> <a data-link-type="dfn" href="prov.html#derivation" id="ref-for-derivation">prov:Derivation</a> 
         </ul>
       <tr>
-       <th>Forward Relation
-       <td><dfn class="idl-code" data-dfn-for="DerivedByInsertionFrom" data-dfn-type="attribute" data-export id="dom-derivedbyinsertionfrom-derivedbyinsertionfrom"><code>derivedByInsertionFrom</code><a class="self-link" href="#dom-derivedbyinsertionfrom-derivedbyinsertionfrom"></a></dfn> 
+       <th>Forward relation
+       <td> <dfn data-dfn-type="dfn" data-export data-lt="derivedbyinsertionfrom_1" id="derivedbyinsertionfrom_1">derivedByInsertionFrom<a class="self-link" href="#derivedbyinsertionfrom_1"></a></dfn> 
       <tr>
        <th>Attributes
        <td>
         <ul>
-         <li>InverseFunctional
-         <li>Asymmetric
-         <li>Irreflexive
+         <li> InverseFunctional 
+         <li> Asymmetric 
+         <li> Irreflexive 
         </ul>
       <tr>
-       <th>Relations with source
+       <th>Relations
        <td>
         <ul>
-         <li>DerivedByInsertionFrom ← <a data-link-type="dfn" href="prov-dictionary.html#insertedkeyentitypair" id="ref-for-insertedkeyentitypair①">InsertedKeyEntityPair</a> → <a data-link-type="dfn" href="prov-dictionary.html#keyentitypair" id="ref-for-keyentitypair②">KeyEntityPair</a> (cardinality restricted to at least 1) 
+         <li> <a data-link-type="dfn" href="prov-dictionary.html#insertedkeyentitypair_1" id="ref-for-insertedkeyentitypair_1">insertedKeyEntityPair</a> : <a data-link-type="dfn" href="prov-dictionary.html#keyentitypair" id="ref-for-keyentitypair②">KeyEntityPair</a> (cardinality restricted to at least 1) 
         </ul>
     </table>
-    <h3 class="heading settled" data-level="4.2" id="DerivedByRemovalFrom"><span class="secno">4.2. </span><span class="content"><dfn data-dfn-type="dfn" data-export id="derivedbyremovalfrom">DerivedByRemovalFrom<a class="self-link" href="#derivedbyremovalfrom"></a></dfn></span><a class="self-link" href="#DerivedByRemovalFrom"></a></h3>
+    <h3 class="heading settled" data-level="4.2" id="DerivedByRemovalFrom"><span class="secno">4.2. </span><span class="content"><dfn data-dfn-type="dfn" data-export data-lt="derivedbyremovalfrom" id="derivedbyremovalfrom">DerivedByRemovalFrom<a class="self-link" href="#derivedbyremovalfrom"></a></dfn></span><a class="self-link" href="#DerivedByRemovalFrom"></a></h3>
     <p>The source dictionary that was derived from the target dictionary by removal of one or more keys.</p>
     <table class="def">
      <tbody>
       <tr>
        <th>Source
-       <td><a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary⑧">Dictionary</a>
+       <td> <a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary⑤">Dictionary</a> 
       <tr>
        <th>Target
-       <td><a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary⑨">Dictionary</a>
+       <td> <a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary⑥">Dictionary</a> 
       <tr>
        <th>Supertypes
        <td>
         <ul>
-         <li><a data-link-type="dfn" href="prov.html#derivation" id="ref-for-derivation①">prov:Derivation</a>
+         <li> <a data-link-type="dfn" href="prov.html#derivation" id="ref-for-derivation①">prov:Derivation</a> 
         </ul>
       <tr>
-       <th>Forward Relation
-       <td><dfn class="idl-code" data-dfn-for="DerivedByRemovalFrom" data-dfn-type="attribute" data-export id="dom-derivedbyremovalfrom-derivedbyremovalfrom"><code>derivedByRemovalFrom</code><a class="self-link" href="#dom-derivedbyremovalfrom-derivedbyremovalfrom"></a></dfn> 
+       <th>Forward relation
+       <td> <dfn data-dfn-type="dfn" data-export data-lt="derivedbyremovalfrom_1" id="derivedbyremovalfrom_1">derivedByRemovalFrom<a class="self-link" href="#derivedbyremovalfrom_1"></a></dfn> 
       <tr>
        <th>Attributes
        <td>
         <ul>
-         <li>InverseFunctional
-         <li>Asymmetric
-         <li>Irreflexive
+         <li> InverseFunctional 
+         <li> Asymmetric 
+         <li> Irreflexive 
         </ul>
       <tr>
        <th>Properties
        <td>
         <ul>
-         <li><a data-link-type="dfn" href="prov-dictionary.html#removedkey" id="ref-for-removedkey">removedKey</a> (must have at least 1)
+         <li> <a data-link-type="dfn" href="prov-dictionary.html#removedkey" id="ref-for-removedkey">removedKey</a> : <a data-link-type="dfn" href="../1999/02/22-rdf-syntax-ns.html#plainliteral" id="ref-for-plainliteral①">rdf:PlainLiteral</a> (must have at least 1) 
         </ul>
     </table>
-    <h3 class="heading settled" data-level="4.3" id="HadDictionaryMember"><span class="secno">4.3. </span><span class="content"><dfn data-dfn-type="dfn" data-export id="haddictionarymember">HadDictionaryMember<a class="self-link" href="#haddictionarymember"></a></dfn></span><a class="self-link" href="#HadDictionaryMember"></a></h3>
+    <h3 class="heading settled" data-level="4.3" id="HadDictionaryMember"><span class="secno">4.3. </span><span class="content"><dfn data-dfn-type="dfn" data-export data-lt="haddictionarymember" id="haddictionarymember">HadDictionaryMember<a class="self-link" href="#haddictionarymember"></a></dfn></span><a class="self-link" href="#HadDictionaryMember"></a></h3>
     <p>Describes the key-entity pair that was member of a prov:Dictionary. A dictionary can have multiple members.</p>
     <table class="def">
      <tbody>
       <tr>
        <th>Source
-       <td><a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary①⓪">Dictionary</a>
+       <td> <a data-link-type="dfn" href="prov-dictionary.html#dictionary" id="ref-for-dictionary⑦">Dictionary</a> 
       <tr>
        <th>Target
-       <td><a data-link-type="dfn" href="prov-dictionary.html#keyentitypair" id="ref-for-keyentitypair③">KeyEntityPair</a>
+       <td> <a data-link-type="dfn" href="prov-dictionary.html#keyentitypair" id="ref-for-keyentitypair③">KeyEntityPair</a> 
       <tr>
-       <th>Forward Relation
-       <td><dfn class="idl-code" data-dfn-for="HadDictionaryMember" data-dfn-type="attribute" data-export id="dom-haddictionarymember-haddictionarymember"><code>hadDictionaryMember</code><a class="self-link" href="#dom-haddictionarymember-haddictionarymember"></a></dfn> 
+       <th>Forward relation
+       <td> <dfn data-dfn-type="dfn" data-export data-lt="haddictionarymember_1" id="haddictionarymember_1">hadDictionaryMember<a class="self-link" href="#haddictionarymember_1"></a></dfn> 
       <tr>
        <th>Attributes
        <td>
         <ul></ul>
     </table>
-    <h3 class="heading settled" data-level="4.4" id="InsertedKeyEntityPair"><span class="secno">4.4. </span><span class="content"><dfn data-dfn-type="dfn" data-export id="insertedkeyentitypair">InsertedKeyEntityPair<a class="self-link" href="#insertedkeyentitypair"></a></dfn></span><a class="self-link" href="#InsertedKeyEntityPair"></a></h3>
+    <h3 class="heading settled" data-level="4.4" id="InsertedKeyEntityPair"><span class="secno">4.4. </span><span class="content"><dfn data-dfn-type="dfn" data-export data-lt="insertedkeyentitypair" id="insertedkeyentitypair">InsertedKeyEntityPair<a class="self-link" href="#insertedkeyentitypair"></a></dfn></span><a class="self-link" href="#InsertedKeyEntityPair"></a></h3>
     <p>An object property to refer to the prov:KeyEntityPair inserted into a prov:Dictionary.</p>
     <table class="def">
      <tbody>
       <tr>
        <th>Source
-       <td><a data-link-type="dfn" href="prov-dictionary.html#derivedbyinsertionfrom" id="ref-for-derivedbyinsertionfrom③">DerivedByInsertionFrom</a>
+       <td> <a data-link-type="dfn" href="prov-dictionary.html#derivedbyinsertionfrom" id="ref-for-derivedbyinsertionfrom">DerivedByInsertionFrom</a> 
       <tr>
        <th>Target
-       <td><a data-link-type="dfn" href="prov-dictionary.html#keyentitypair" id="ref-for-keyentitypair④">KeyEntityPair</a>
+       <td> <a data-link-type="dfn" href="prov-dictionary.html#keyentitypair" id="ref-for-keyentitypair④">KeyEntityPair</a> 
       <tr>
-       <th>Forward Relation
-       <td><dfn class="idl-code" data-dfn-for="InsertedKeyEntityPair" data-dfn-type="attribute" data-export id="dom-insertedkeyentitypair-insertedkeyentitypair"><code>insertedKeyEntityPair</code><a class="self-link" href="#dom-insertedkeyentitypair-insertedkeyentitypair"></a></dfn> 
+       <th>Forward relation
+       <td> <dfn data-dfn-type="dfn" data-export data-lt="insertedkeyentitypair_1" id="insertedkeyentitypair_1">insertedKeyEntityPair<a class="self-link" href="#insertedkeyentitypair_1"></a></dfn> 
       <tr>
        <th>Attributes
        <td>
         <ul></ul>
     </table>
-    <h3 class="heading settled" data-level="4.5" id="PairEntity"><span class="secno">4.5. </span><span class="content"><dfn data-dfn-type="dfn" data-export id="pairentity">PairEntity<a class="self-link" href="#pairentity"></a></dfn></span><a class="self-link" href="#PairEntity"></a></h3>
+    <h3 class="heading settled" data-level="4.5" id="PairEntity"><span class="secno">4.5. </span><span class="content"><dfn data-dfn-type="dfn" data-export data-lt="pairentity" id="pairentity">PairEntity<a class="self-link" href="#pairentity"></a></dfn></span><a class="self-link" href="#PairEntity"></a></h3>
     <p>The entity of a prov:KeyEntityPair, which is an element of a prov:Dictionary.</p>
     <table class="def">
      <tbody>
       <tr>
        <th>Source
-       <td><a data-link-type="dfn" href="prov-dictionary.html#keyentitypair" id="ref-for-keyentitypair⑤">KeyEntityPair</a>
+       <td> <a data-link-type="dfn" href="prov-dictionary.html#keyentitypair" id="ref-for-keyentitypair⑤">KeyEntityPair</a> 
       <tr>
        <th>Target
-       <td><a data-link-type="dfn" href="prov.html#entity" id="ref-for-entity①">prov:Entity</a>
+       <td> <a data-link-type="dfn" href="prov.html#entity" id="ref-for-entity①">prov:Entity</a> 
       <tr>
-       <th>Forward Relation
-       <td><dfn class="idl-code" data-dfn-for="PairEntity" data-dfn-type="attribute" data-export id="dom-pairentity-pairentity"><code>pairEntity</code><a class="self-link" href="#dom-pairentity-pairentity"></a></dfn> 
+       <th>Forward relation
+       <td> <dfn data-dfn-type="dfn" data-export data-lt="pairentity_1" id="pairentity_1">pairEntity<a class="self-link" href="#pairentity_1"></a></dfn> 
       <tr>
        <th>Attributes
        <td>
         <ul>
-         <li>Functional
+         <li> Functional 
         </ul>
     </table>
     <h2 class="heading settled" data-level="5" id="ScalarProperties"><span class="secno">5. </span><span class="content">Scalar Properties</span><a class="self-link" href="#ScalarProperties"></a></h2>
-    <h3 class="heading settled" data-level="5.1" id="PairKey"><span class="secno">5.1. </span><span class="content"><dfn data-dfn-type="dfn" data-export id="pairkey">pairKey<a class="self-link" href="#pairkey"></a></dfn></span><a class="self-link" href="#PairKey"></a></h3>
+    <h3 class="heading settled" data-level="5.1" id="PairKey"><span class="secno">5.1. </span><span class="content"><dfn data-dfn-type="dfn" data-export data-lt="pairkey" id="pairkey">pairKey<a class="self-link" href="#pairkey"></a></dfn></span><a class="self-link" href="#PairKey"></a></h3>
     <p>The key of a prov:KeyEntityPair, which is an element of a prov:Dictionary.</p>
     <table class="def">
      <tbody>
       <tr>
        <th>Domain
-       <td><a data-link-type="dfn" href="prov-dictionary.html#keyentitypair" id="ref-for-keyentitypair⑥">KeyEntityPair</a>
+       <td> <a data-link-type="dfn" href="prov-dictionary.html#keyentitypair" id="ref-for-keyentitypair⑥">KeyEntityPair</a> 
       <tr>
        <th>Range
-       <td><a data-link-type="dfn" href="../1999/02/22-rdf-syntax-ns.html#plainliteral" id="ref-for-plainliteral">PlainLiteral</a>
+       <td> <a data-link-type="dfn" href="../1999/02/22-rdf-syntax-ns.html#plainliteral" id="ref-for-plainliteral②">PlainLiteral</a> 
       <tr>
        <th>Attributes
-       <td>Functional
+       <td> Functional 
     </table>
-    <h3 class="heading settled" data-level="5.2" id="RemovedKey"><span class="secno">5.2. </span><span class="content"><dfn data-dfn-type="dfn" data-export id="removedkey">removedKey<a class="self-link" href="#removedkey"></a></dfn></span><a class="self-link" href="#RemovedKey"></a></h3>
+    <h3 class="heading settled" data-level="5.2" id="RemovedKey"><span class="secno">5.2. </span><span class="content"><dfn data-dfn-type="dfn" data-export data-lt="removedkey" id="removedkey">removedKey<a class="self-link" href="#removedkey"></a></dfn></span><a class="self-link" href="#RemovedKey"></a></h3>
     <p>The key removed in a Removal.</p>
     <table class="def">
      <tbody>
       <tr>
        <th>Domain
-       <td><a data-link-type="dfn" href="prov-dictionary.html#derivedbyremovalfrom" id="ref-for-derivedbyremovalfrom②">DerivedByRemovalFrom</a>
+       <td> <a data-link-type="dfn" href="prov-dictionary.html#derivedbyremovalfrom" id="ref-for-derivedbyremovalfrom">DerivedByRemovalFrom</a> 
       <tr>
        <th>Range
-       <td><a data-link-type="dfn" href="../1999/02/22-rdf-syntax-ns.html#plainliteral" id="ref-for-plainliteral①">PlainLiteral</a>
+       <td> <a data-link-type="dfn" href="../1999/02/22-rdf-syntax-ns.html#plainliteral" id="ref-for-plainliteral③">PlainLiteral</a> 
       <tr>
        <th>Attributes
-       <td>Functional
+       <td> Functional 
     </table>
     <h2 class="heading settled" data-level="6" id="Rules"><span class="secno">6. </span><span class="content">Rules</span><a class="self-link" href="#Rules"></a></h2>
     <h3 class="heading settled" data-level="6.1" id="Directory-membership-collection-membership"><span class="secno">6.1. </span><span class="content"><dfn data-dfn-type="dfn" data-export id="directory-membership-collection-membership">directory-membership-collection-membership<a class="self-link" href="#directory-membership-collection-membership"></a></dfn></span><a class="self-link" href="#Directory-membership-collection-membership"></a></h3>
@@ -2405,29 +2391,31 @@ dfn > a.self-link::before      { content: "#"; }
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#derivedbyinsertionfrom">DerivedByInsertionFrom</a><span>, in § 4.1</span>
-   <li><a href="#dom-derivedbyinsertionfrom-derivedbyinsertionfrom">derivedByInsertionFrom</a><span>, in § 4.1</span>
-   <li><a href="#derivedbyremovalfrom">DerivedByRemovalFrom</a><span>, in § 4.2</span>
-   <li><a href="#dom-derivedbyremovalfrom-derivedbyremovalfrom">derivedByRemovalFrom</a><span>, in § 4.2</span>
-   <li><a href="#dictionary">Dictionary</a><span>, in § 3.1</span>
+   <li><a href="#derivedbyinsertionfrom">derivedbyinsertionfrom</a><span>, in § 4.1</span>
+   <li><a href="#derivedbyinsertionfrom_1">derivedbyinsertionfrom_1</a><span>, in § 4.1</span>
+   <li><a href="#derivedbyremovalfrom">derivedbyremovalfrom</a><span>, in § 4.2</span>
+   <li><a href="#derivedbyremovalfrom_1">derivedbyremovalfrom_1</a><span>, in § 4.2</span>
+   <li><a href="#dictionary">dictionary</a><span>, in § 3.1</span>
    <li><a href="#directory-membership-collection-membership">directory-membership-collection-membership</a><span>, in § 6.1</span>
-   <li><a href="#emptydictionary">EmptyDictionary</a><span>, in § 3.2</span>
-   <li><a href="#haddictionarymember">HadDictionaryMember</a><span>, in § 4.3</span>
-   <li><a href="#dom-haddictionarymember-haddictionarymember">hadDictionaryMember</a><span>, in § 4.3</span>
-   <li><a href="#insertedkeyentitypair">InsertedKeyEntityPair</a><span>, in § 4.4</span>
-   <li><a href="#dom-insertedkeyentitypair-insertedkeyentitypair">insertedKeyEntityPair</a><span>, in § 4.4</span>
-   <li><a href="#keyentitypair">KeyEntityPair</a><span>, in § 3.3</span>
+   <li><a href="#emptydictionary">emptydictionary</a><span>, in § 3.2</span>
+   <li><a href="#haddictionarymember">haddictionarymember</a><span>, in § 4.3</span>
+   <li><a href="#haddictionarymember_1">haddictionarymember_1</a><span>, in § 4.3</span>
+   <li><a href="#insertedkeyentitypair">insertedkeyentitypair</a><span>, in § 4.4</span>
+   <li><a href="#insertedkeyentitypair_1">insertedkeyentitypair_1</a><span>, in § 4.4</span>
+   <li><a href="#keyentitypair">keyentitypair</a><span>, in § 3.3</span>
    <li><a href="#key-single-entity">key-single-entity</a><span>, in § 6.2</span>
-   <li><a href="#pairentity">PairEntity</a><span>, in § 4.5</span>
-   <li><a href="#dom-pairentity-pairentity">pairEntity</a><span>, in § 4.5</span>
-   <li><a href="#pairkey">pairKey</a><span>, in § 5.1</span>
-   <li><a href="#removedkey">removedKey</a><span>, in § 5.2</span>
+   <li><a href="#pairentity">pairentity</a><span>, in § 4.5</span>
+   <li><a href="#pairentity_1">pairentity_1</a><span>, in § 4.5</span>
+   <li><a href="#pairkey">pairkey</a><span>, in § 5.1</span>
+   <li><a href="#removedkey">removedkey</a><span>, in § 5.2</span>
   </ul>
   <aside class="dfn-panel" data-for="term-for-plainliteral">
    <a href="../1999/02/22-rdf-syntax-ns.html#plainliteral">../1999/02/22-rdf-syntax-ns.html#plainliteral</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-plainliteral">5.1. pairKey</a>
-    <li><a href="#ref-for-plainliteral①">5.2. removedKey</a>
+    <li><a href="#ref-for-plainliteral">3.3. KeyEntityPair</a>
+    <li><a href="#ref-for-plainliteral①">4.2. DerivedByRemovalFrom</a>
+    <li><a href="#ref-for-plainliteral②">5.1. pairKey</a>
+    <li><a href="#ref-for-plainliteral③">5.2. removedKey</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-collection">
@@ -2459,27 +2447,35 @@ dfn > a.self-link::before      { content: "#"; }
   <aside class="dfn-panel" data-for="term-for-derivedbyinsertionfrom">
    <a href="prov-dictionary.html#derivedbyinsertionfrom">prov-dictionary.html#derivedbyinsertionfrom</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-derivedbyinsertionfrom">3.1. Dictionary</a> <a href="#ref-for-derivedbyinsertionfrom①">(2)</a>
-    <li><a href="#ref-for-derivedbyinsertionfrom②">3.3. KeyEntityPair</a>
-    <li><a href="#ref-for-derivedbyinsertionfrom③">4.4. InsertedKeyEntityPair</a>
+    <li><a href="#ref-for-derivedbyinsertionfrom">4.4. InsertedKeyEntityPair</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-derivedbyinsertionfrom_1">
+   <a href="prov-dictionary.html#derivedbyinsertionfrom_1">prov-dictionary.html#derivedbyinsertionfrom_1</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-derivedbyinsertionfrom_1">3.1. Dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-derivedbyremovalfrom">
    <a href="prov-dictionary.html#derivedbyremovalfrom">prov-dictionary.html#derivedbyremovalfrom</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-derivedbyremovalfrom">3.1. Dictionary</a> <a href="#ref-for-derivedbyremovalfrom①">(2)</a>
-    <li><a href="#ref-for-derivedbyremovalfrom②">5.2. removedKey</a>
+    <li><a href="#ref-for-derivedbyremovalfrom">5.2. removedKey</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-derivedbyremovalfrom_1">
+   <a href="prov-dictionary.html#derivedbyremovalfrom_1">prov-dictionary.html#derivedbyremovalfrom_1</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-derivedbyremovalfrom_1">3.1. Dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-dictionary">
    <a href="prov-dictionary.html#dictionary">prov-dictionary.html#dictionary</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictionary">3.1. Dictionary</a> <a href="#ref-for-dictionary①">(2)</a> <a href="#ref-for-dictionary②">(3)</a> <a href="#ref-for-dictionary③">(4)</a>
-    <li><a href="#ref-for-dictionary④">3.2. EmptyDictionary</a>
-    <li><a href="#ref-for-dictionary⑤">3.3. KeyEntityPair</a>
-    <li><a href="#ref-for-dictionary⑥">4.1. DerivedByInsertionFrom</a> <a href="#ref-for-dictionary⑦">(2)</a>
-    <li><a href="#ref-for-dictionary⑧">4.2. DerivedByRemovalFrom</a> <a href="#ref-for-dictionary⑨">(2)</a>
-    <li><a href="#ref-for-dictionary①⓪">4.3. HadDictionaryMember</a>
+    <li><a href="#ref-for-dictionary">3.1. Dictionary</a> <a href="#ref-for-dictionary①">(2)</a>
+    <li><a href="#ref-for-dictionary②">3.2. EmptyDictionary</a>
+    <li><a href="#ref-for-dictionary③">4.1. DerivedByInsertionFrom</a> <a href="#ref-for-dictionary④">(2)</a>
+    <li><a href="#ref-for-dictionary⑤">4.2. DerivedByRemovalFrom</a> <a href="#ref-for-dictionary⑥">(2)</a>
+    <li><a href="#ref-for-dictionary⑦">4.3. HadDictionaryMember</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-emptydictionary">
@@ -2488,19 +2484,17 @@ dfn > a.self-link::before      { content: "#"; }
     <li><a href="#ref-for-emptydictionary">3.1. Dictionary</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-haddictionarymember">
-   <a href="prov-dictionary.html#haddictionarymember">prov-dictionary.html#haddictionarymember</a><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="term-for-haddictionarymember_1">
+   <a href="prov-dictionary.html#haddictionarymember_1">prov-dictionary.html#haddictionarymember_1</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-haddictionarymember">3.1. Dictionary</a>
-    <li><a href="#ref-for-haddictionarymember①">3.2. EmptyDictionary</a>
-    <li><a href="#ref-for-haddictionarymember②">3.3. KeyEntityPair</a>
+    <li><a href="#ref-for-haddictionarymember_1">3.1. Dictionary</a>
+    <li><a href="#ref-for-haddictionarymember_1①">3.2. EmptyDictionary</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-insertedkeyentitypair">
-   <a href="prov-dictionary.html#insertedkeyentitypair">prov-dictionary.html#insertedkeyentitypair</a><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="term-for-insertedkeyentitypair_1">
+   <a href="prov-dictionary.html#insertedkeyentitypair_1">prov-dictionary.html#insertedkeyentitypair_1</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-insertedkeyentitypair">3.3. KeyEntityPair</a>
-    <li><a href="#ref-for-insertedkeyentitypair①">4.1. DerivedByInsertionFrom</a>
+    <li><a href="#ref-for-insertedkeyentitypair_1">4.1. DerivedByInsertionFrom</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-keyentitypair">
@@ -2515,10 +2509,10 @@ dfn > a.self-link::before      { content: "#"; }
     <li><a href="#ref-for-keyentitypair⑥">5.1. pairKey</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-pairentity">
-   <a href="prov-dictionary.html#pairentity">prov-dictionary.html#pairentity</a><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="term-for-pairentity_1">
+   <a href="prov-dictionary.html#pairentity_1">prov-dictionary.html#pairentity_1</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-pairentity">3.3. KeyEntityPair</a>
+    <li><a href="#ref-for-pairentity_1">3.3. KeyEntityPair</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-pairkey">
@@ -2536,12 +2530,12 @@ dfn > a.self-link::before      { content: "#"; }
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
-    <a data-link-type="biblio">[http://www.w3.org/1999/02/22-rdf-syntax-ns]</a> defines the following terms:
+    <a data-link-type="biblio">[HTTP://WWW.W3.ORG/1999/02/22-RDF-SYNTAX-NS]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-plainliteral">plainliteral</span>
     </ul>
    <li>
-    <a data-link-type="biblio">[http://www.w3.org/ns/prov]</a> defines the following terms:
+    <a data-link-type="biblio">[HTTP://WWW.W3.ORG/NS/PROV]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-collection">collection</span>
      <li><span class="dfn-paneled" id="term-for-derivation">derivation</span>
@@ -2549,16 +2543,18 @@ dfn > a.self-link::before      { content: "#"; }
      <li><span class="dfn-paneled" id="term-for-entity">entity</span>
     </ul>
    <li>
-    <a data-link-type="biblio">[http://www.w3.org/ns/prov-dictionary]</a> defines the following terms:
+    <a data-link-type="biblio">[HTTP://WWW.W3.ORG/NS/PROV-DICTIONARY]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-derivedbyinsertionfrom">derivedbyinsertionfrom</span>
+     <li><span class="dfn-paneled" id="term-for-derivedbyinsertionfrom_1">derivedbyinsertionfrom_1</span>
      <li><span class="dfn-paneled" id="term-for-derivedbyremovalfrom">derivedbyremovalfrom</span>
+     <li><span class="dfn-paneled" id="term-for-derivedbyremovalfrom_1">derivedbyremovalfrom_1</span>
      <li><span class="dfn-paneled" id="term-for-dictionary">dictionary</span>
      <li><span class="dfn-paneled" id="term-for-emptydictionary">emptydictionary</span>
-     <li><span class="dfn-paneled" id="term-for-haddictionarymember">haddictionarymember</span>
-     <li><span class="dfn-paneled" id="term-for-insertedkeyentitypair">insertedkeyentitypair</span>
+     <li><span class="dfn-paneled" id="term-for-haddictionarymember_1">haddictionarymember_1</span>
+     <li><span class="dfn-paneled" id="term-for-insertedkeyentitypair_1">insertedkeyentitypair_1</span>
      <li><span class="dfn-paneled" id="term-for-keyentitypair">keyentitypair</span>
-     <li><span class="dfn-paneled" id="term-for-pairentity">pairentity</span>
+     <li><span class="dfn-paneled" id="term-for-pairentity_1">pairentity_1</span>
      <li><span class="dfn-paneled" id="term-for-pairkey">pairkey</span>
      <li><span class="dfn-paneled" id="term-for-removedkey">removedkey</span>
     </ul>
