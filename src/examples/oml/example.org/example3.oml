@@ -9,15 +9,15 @@ description <http://example.org/example3#> as example3 {
 
 	extends <http://example.org/example2#> as example2
 
-	ci monica-bundle : prov:Bundle [
+	instance monica-bundle : prov:Bundle [
 		prov:generatedAtTime "2011-07-16T03:03:03Z"^^xsd:dateTime
 		prov:wasAttributedTo example2:postEditor
 		prov:wasDerivedFrom example2:derek-bundle
 	]
 
-	ci monica : prov:Person
+	instance monica : prov:Person
 
-	ci post9822 : prov:Entity [
+	instance post9822 : prov:Entity [
 		prov:wasAttributedTo monica
 		prov:wasAttributedTo example2:postEditor
 		prov:alternateOf example2:more-crime-happens-in-cities

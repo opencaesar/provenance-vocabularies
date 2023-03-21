@@ -9,14 +9,14 @@ description <http://example.org/example9#> as example9 {
 
 	extends <http://example.org/example8#> as example8
 
-	ri illustrationActivityAssociation : prov:Association [
+	relation instance illustrationActivityAssociation : prov:Association [
 		from example8:illustrationActivity
 		to example1:derek
 		prov:hadRole illustrationist
 		prov:hadPlan tutorial_blog
 	]
 
-	ci illustrationist : prov:Role
+	instance illustrationist : prov:Role
 
-	ci tutorial_blog : prov:Plan
+	instance tutorial_blog : prov:Plan
 }

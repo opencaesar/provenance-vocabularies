@@ -7,12 +7,12 @@ description <http://example.org/example5#> as example5 {
 
 	uses <http://www.w3.org/ns/prov#> as prov
 
-	ci post19201 : prov:Entity [
+	instance post19201 : prov:Entity [
 		prov:invalidatedAtTime "2012-09-02T01:31:00Z"^^xsd:dateTime
 		prov:wasInvalidatedBy hard_disk_failure
 	]
 
-	ci hard_disk_failure : prov:Activity [
+	instance hard_disk_failure : prov:Activity [
 		prov:endedAtTime "2012-09-02T01:31:00Z"^^xsd:dateTime
 	]
 }

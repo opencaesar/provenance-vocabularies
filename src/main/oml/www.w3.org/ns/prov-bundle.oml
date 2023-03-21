@@ -11,6 +11,6 @@ vocabulary bundle <http://www.w3.org/ns/prov-bundle#> as prov-bundle {
   
 	includes <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
-  includes <http://www.w3.org/ns/prov-dictionary#>
+  	includes <http://www.w3.org/ns/prov-dictionary#>
 
 }
