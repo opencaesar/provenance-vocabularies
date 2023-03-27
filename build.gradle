@@ -61,7 +61,7 @@ configurations {
 /*
  * Dependency versions
  */
-ext.coreVersion = '5.+'
+ext.coreVersion = '4.+'
 
 /*
  * The OML dependencies
