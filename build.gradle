@@ -19,15 +19,15 @@ buildscript {
 		classpath 'io.opencaesar.adapters:oml2owl-gradle:1.+'
 		
 		// https://github.com/opencaesar/oml-tools/tags
-        classpath 'io.opencaesar.oml:oml-merge-gradle:1.+'
+		classpath 'io.opencaesar.oml:oml-merge-gradle:1.+'
 		classpath 'io.opencaesar.oml:oml-bikeshed-gradle:1.+'
 		
 		// https://github.com/opencaesar/owl-tools/tags
-		classpath 'io.opencaesar.owl:owl-load-gradle:+'
-		classpath 'io.opencaesar.owl:owl-reason-gradle:+'
-		classpath 'io.opencaesar.owl:owl-fuseki:+'
-		classpath 'io.opencaesar.owl:owl-fuseki-gradle:+'
-		classpath 'io.opencaesar.owl:owl-query-gradle:+'
+		classpath 'io.opencaesar.owl:owl-load-gradle:1.+'
+		classpath 'io.opencaesar.owl:owl-reason-gradle:1.+'
+		classpath 'io.opencaesar.owl:owl-fuseki:1.+'
+		classpath 'io.opencaesar.owl:owl-fuseki-gradle:1.+'
+		classpath 'io.opencaesar.owl:owl-query-gradle:1.+'
 	}
 }
 
