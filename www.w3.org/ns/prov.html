@@ -1487,9 +1487,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 26e85e599, updated Thu Dec 8 15:29:31 2022 -0800" name="generator">
+  <meta content="Bikeshed version 3383f409d, updated Fri Apr 28 15:49:22 2023 -0700" name="generator">
   <link href="https://opencaesar.github.io/provenance-vocabularies/www.w3.org/ns/prov" rel="canonical">
-  <meta content="391abbc3e254bfc529dc04e3c0000a590b07e61c" name="document-revision">
+  <meta content="01322b33ce44d7d811c5a8b3c6b2947db7fe994a" name="document-revision">
 <style>
 a[data-link-type=biblio] {
     white-space: pre-wrap;
@@ -1506,7 +1506,6 @@ table.def dfn code {
 }
 </style>
 <style>/* style-autolinks */
-
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
     font-size: inherit;
@@ -1566,7 +1565,8 @@ pre .property::before, pre .property::after {
 
 [data-link-type=biblio] {
     white-space: pre;
-}</style>
+}
+</style>
 <style>/* style-colors */
 
 /* Any --*-text not paired with a --*-bg is assumed to have a transparent bg */
@@ -1675,9 +1675,9 @@ pre .property::before, pre .property::after {
     --outdated-shadow: red;
 
     --editedrec-bg: darkorange;
-}</style>
+}
+</style>
 <style>/* style-counters */
-
 body {
     counter-reset: example figure issue;
 }
@@ -1704,9 +1704,9 @@ figcaption {
 }
 figcaption:not(.no-marker)::before {
     content: "Figure " counter(figure) " ";
-}</style>
+}
+</style>
 <style>/* style-dfn-panel */
-
 :root {
     --dfnpanel-bg: #ddd;
     --dfnpanel-text: var(--text);
@@ -1714,10 +1714,9 @@ figcaption:not(.no-marker)::before {
 .dfn-panel {
     position: absolute;
     z-index: 35;
+    width: 20em;
+    width: 300px;
     height: auto;
-    width: -webkit-fit-content;
-    width: fit-content;
-    max-width: 300px;
     max-height: 500px;
     overflow: auto;
     padding: 0.5em 0.75em;
@@ -1725,6 +1724,7 @@ figcaption:not(.no-marker)::before {
     background: var(--dfnpanel-bg);
     color: var(--dfnpanel-text);
     border: outset 0.2em;
+    white-space: normal; /* in case it's moved into a pre */
 }
 .dfn-panel:not(.on) { display: none; }
 .dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
@@ -1732,8 +1732,15 @@ figcaption:not(.no-marker)::before {
 .dfn-panel a { color: var(--dfnpanel-text); }
 .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
 .dfn-panel > b + b { margin-top: 0.25em; }
-.dfn-panel ul { padding: 0; }
-.dfn-panel li { list-style: inside; }
+.dfn-panel ul { padding: 0 0 0 1em; list-style: none; }
+.dfn-panel li a {
+    white-space: pre;
+    display: inline-block;
+    max-width: calc(300px - 1.5em - 1em);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .dfn-panel.activated {
     display: inline-block;
     position: fixed;
@@ -1744,10 +1751,9 @@ figcaption:not(.no-marker)::before {
     max-height: 30vh;
 }
 
-.dfn-paneled { cursor: pointer; }
+.dfn-paneled[role="button"] { cursor: pointer; }
 </style>
 <style>/* style-issues */
-
 a[href].issue-return {
     float: right;
     float: inline-end;
@@ -1757,7 +1763,6 @@ a[href].issue-return {
 }
 </style>
 <style>/* style-md-lists */
-
 /* This is a weird hack for me not yet following the commonmark spec
    regarding paragraph and lists. */
 [data-md] > :first-child {
@@ -1765,7 +1770,8 @@ a[href].issue-return {
 }
 [data-md] > :last-child {
     margin-bottom: 0;
-}</style>
+}
+</style>
 <style>/* style-selflinks */
 
 :root {
@@ -1939,6 +1945,7 @@ dfn > a.self-link::before      { content: "#"; }
        which is quite common in practice... */
     img { background: white; }
 }
+
 @media (prefers-color-scheme: dark) {
     :root {
         --selflink-text: black;
@@ -1952,12 +1959,13 @@ dfn > a.self-link::before      { content: "#"; }
         --dfnpanel-bg: #222;
         --dfnpanel-text: var(--text);
     }
-}</style>
+}
+</style>
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.opencaesar.io/oml/"><img alt="OML Specification" height="48" src="https://opencaesar.github.io/oml/images/oml.svg"></a></p>
    <h1 class="p-name no-ref" id="title">Prov</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Commit Snapshot, <time class="dt-updated" datetime="2022-12-17">17 December 2022</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Commit Snapshot, <time class="dt-updated" datetime="2023-05-23">23 May 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -4215,1281 +4223,659 @@ dfn > a.self-link::before      { content: "#"; }
    <li><a href="#wasusedby">wasusedby</a><span>, in § 5.42</span>
    <li><a href="#wasusedinderivation">wasusedinderivation</a><span>, in § 5.17</span>
   </ul>
-  <aside class="dfn-panel" data-for="term-for-datetime">
-   <a href="../2001/XMLSchema.html#datetime">../2001/XMLSchema.html#datetime</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-datetime">3.5. InstantaneousEvent</a>
-    <li><a href="#ref-for-datetime①">4.1. Activity</a> <a href="#ref-for-datetime②">(2)</a>
-    <li><a href="#ref-for-datetime③">4.7. Entity</a> <a href="#ref-for-datetime④">(2)</a>
-    <li><a href="#ref-for-datetime⑤">6.1. atTime</a>
-    <li><a href="#ref-for-datetime⑥">6.2. endedAtTime</a>
-    <li><a href="#ref-for-datetime⑦">6.3. generatedAtTime</a>
-    <li><a href="#ref-for-datetime⑧">6.4. invalidatedAtTime</a>
-    <li><a href="#ref-for-datetime⑨">6.5. startedAtTime</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-actedonbehalfof">
-   <a href="prov.html#actedonbehalfof">prov.html#actedonbehalfof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-actedonbehalfof">4.3. Agent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-activity">
-   <a href="prov.html#activity">prov.html#activity</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-activity">3.1. ActivityOrAgentOrEntity</a> <a href="#ref-for-activity①">(2)</a>
-    <li><a href="#ref-for-activity②">3.4. InfluenceOrDelegationOrDerivationOrEndOrStart</a>
-    <li><a href="#ref-for-activity③">4.1. Activity</a> <a href="#ref-for-activity④">(2)</a>
-    <li><a href="#ref-for-activity⑤">4.2. ActivityAndAgent</a>
-    <li><a href="#ref-for-activity⑥">4.3. Agent</a>
-    <li><a href="#ref-for-activity⑦">4.7. Entity</a> <a href="#ref-for-activity⑧">(2)</a> <a href="#ref-for-activity⑨">(3)</a>
-    <li><a href="#ref-for-activity①⓪">5.1. ActivityInfluence</a> <a href="#ref-for-activity①①">(2)</a>
-    <li><a href="#ref-for-activity①②">5.4. Association</a> <a href="#ref-for-activity①③">(2)</a>
-    <li><a href="#ref-for-activity①④">5.7. Communication</a> <a href="#ref-for-activity①⑤">(2)</a> <a href="#ref-for-activity①⑥">(3)</a>
-    <li><a href="#ref-for-activity①⑦">5.10. End</a>
-    <li><a href="#ref-for-activity①⑧">5.12. Generation</a>
-    <li><a href="#ref-for-activity①⑨">5.13. HadActivity</a>
-    <li><a href="#ref-for-activity②⓪">5.20. InfluencerActivity</a>
-    <li><a href="#ref-for-activity②①">5.23. Invalidation</a> <a href="#ref-for-activity②②">(2)</a>
-    <li><a href="#ref-for-activity②③">5.26. QualifiedAssociation</a>
-    <li><a href="#ref-for-activity②④">5.28. QualifiedCommunication</a>
-    <li><a href="#ref-for-activity②⑤">5.34. QualifiedInvalidation</a>
-    <li><a href="#ref-for-activity②⑥">5.37. QualifiedUsage</a>
-    <li><a href="#ref-for-activity②⑦">5.41. Start</a>
-    <li><a href="#ref-for-activity②⑧">5.42. Usage</a> <a href="#ref-for-activity②⑨">(2)</a>
-    <li><a href="#ref-for-activity③⓪">6.2. endedAtTime</a>
-    <li><a href="#ref-for-activity③①">6.5. startedAtTime</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-activity_1">
-   <a href="prov.html#activity_1">prov.html#activity_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-activity_1">5.1. ActivityInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-activityandagent">
-   <a href="prov.html#activityandagent">prov.html#activityandagent</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-activityandagent">4.1. Activity</a>
-    <li><a href="#ref-for-activityandagent①">4.3. Agent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-activityinfluence">
-   <a href="prov.html#activityinfluence">prov.html#activityinfluence</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-activityinfluence">4.1. Activity</a>
-    <li><a href="#ref-for-activityinfluence①">5.7. Communication</a>
-    <li><a href="#ref-for-activityinfluence②">5.12. Generation</a>
-    <li><a href="#ref-for-activityinfluence③">5.18. Influence</a>
-    <li><a href="#ref-for-activityinfluence④">5.20. InfluencerActivity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-activityinfluenced">
-   <a href="prov.html#activityinfluenced">prov.html#activityinfluenced</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-activityinfluenced">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-activityofinfluence">
-   <a href="prov.html#activityofinfluence">prov.html#activityofinfluence</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-activityofinfluence">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-activityoragentorentity">
-   <a href="prov.html#activityoragentorentity">prov.html#activityoragentorentity</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-activityoragentorentity">3.1. ActivityOrAgentOrEntity</a> <a href="#ref-for-activityoragentorentity①">(2)</a>
-    <li><a href="#ref-for-activityoragentorentity②">3.2. ActivityOrAgentOrEntityOrInstantaneousEvent</a>
-    <li><a href="#ref-for-activityoragentorentity③">4.1. Activity</a> <a href="#ref-for-activityoragentorentity④">(2)</a>
-    <li><a href="#ref-for-activityoragentorentity⑤">4.3. Agent</a> <a href="#ref-for-activityoragentorentity⑥">(2)</a>
-    <li><a href="#ref-for-activityoragentorentity⑦">4.7. Entity</a> <a href="#ref-for-activityoragentorentity⑧">(2)</a>
-    <li><a href="#ref-for-activityoragentorentity⑨">5.1. ActivityInfluence</a>
-    <li><a href="#ref-for-activityoragentorentity①⓪">5.2. AgentInfluence</a>
-    <li><a href="#ref-for-activityoragentorentity①①">5.11. EntityInfluence</a>
-    <li><a href="#ref-for-activityoragentorentity①②">5.18. Influence</a> <a href="#ref-for-activityoragentorentity①③">(2)</a> <a href="#ref-for-activityoragentorentity①④">(3)</a> <a href="#ref-for-activityoragentorentity①⑤">(4)</a>
-    <li><a href="#ref-for-activityoragentorentity①⑥">5.19. Influencer</a>
-    <li><a href="#ref-for-activityoragentorentity①⑦">5.33. QualifiedInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-activityoragentorentityorinstantaneousevent">
-   <a href="prov.html#activityoragentorentityorinstantaneousevent">prov.html#activityoragentorentityorinstantaneousevent</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-activityoragentorentityorinstantaneousevent">3.1. ActivityOrAgentOrEntity</a>
-    <li><a href="#ref-for-activityoragentorentityorinstantaneousevent①">3.5. InstantaneousEvent</a>
-    <li><a href="#ref-for-activityoragentorentityorinstantaneousevent②">4.9. Location</a>
-    <li><a href="#ref-for-activityoragentorentityorinstantaneousevent③">5.5. AtLocation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-agent">
-   <a href="prov.html#agent">prov.html#agent</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-agent">3.1. ActivityOrAgentOrEntity</a> <a href="#ref-for-agent①">(2)</a>
-    <li><a href="#ref-for-agent②">4.1. Activity</a>
-    <li><a href="#ref-for-agent③">4.2. ActivityAndAgent</a>
-    <li><a href="#ref-for-agent④">4.3. Agent</a> <a href="#ref-for-agent⑤">(2)</a>
-    <li><a href="#ref-for-agent⑥">4.7. Entity</a>
-    <li><a href="#ref-for-agent⑦">4.8. EntityAndAgent</a>
-    <li><a href="#ref-for-agent⑧">4.10. Organization</a>
-    <li><a href="#ref-for-agent⑨">4.11. Person</a>
-    <li><a href="#ref-for-agent①⓪">4.14. SoftwareAgent</a>
-    <li><a href="#ref-for-agent①①">5.2. AgentInfluence</a> <a href="#ref-for-agent①②">(2)</a>
-    <li><a href="#ref-for-agent①③">5.4. Association</a>
-    <li><a href="#ref-for-agent①④">5.6. Attribution</a>
-    <li><a href="#ref-for-agent①⑤">5.8. Delegation</a> <a href="#ref-for-agent①⑥">(2)</a> <a href="#ref-for-agent①⑦">(3)</a>
-    <li><a href="#ref-for-agent①⑧">5.21. InfluencerAgent</a>
-    <li><a href="#ref-for-agent①⑨">5.29. QualifiedDelegation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-agent_1">
-   <a href="prov.html#agent_1">prov.html#agent_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-agent_1">5.2. AgentInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-agentinfluence">
-   <a href="prov.html#agentinfluence">prov.html#agentinfluence</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-agentinfluence">4.3. Agent</a>
-    <li><a href="#ref-for-agentinfluence①">5.4. Association</a>
-    <li><a href="#ref-for-agentinfluence②">5.6. Attribution</a>
-    <li><a href="#ref-for-agentinfluence③">5.8. Delegation</a>
-    <li><a href="#ref-for-agentinfluence④">5.18. Influence</a>
-    <li><a href="#ref-for-agentinfluence⑤">5.21. InfluencerAgent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-agentinfluenced">
-   <a href="prov.html#agentinfluenced">prov.html#agentinfluenced</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-agentinfluenced">4.3. Agent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-agentofinfluence">
-   <a href="prov.html#agentofinfluence">prov.html#agentofinfluence</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-agentofinfluence">4.3. Agent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-alternate">
-   <a href="prov.html#alternate">prov.html#alternate</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-alternate">5.40. Specialization</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-alternateof">
-   <a href="prov.html#alternateof">prov.html#alternateof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-alternateof">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-association">
-   <a href="prov.html#association">prov.html#association</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-association">3.3. AssociationOrInfluenceOrInstantaneousEvent</a>
-    <li><a href="#ref-for-association①">4.1. Activity</a>
-    <li><a href="#ref-for-association②">4.12. Plan</a>
-    <li><a href="#ref-for-association③">5.2. AgentInfluence</a>
-    <li><a href="#ref-for-association④">5.15. HadPlan</a>
-    <li><a href="#ref-for-association⑤">5.26. QualifiedAssociation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-associationorinfluenceorinstantaneousevent">
-   <a href="prov.html#associationorinfluenceorinstantaneousevent">prov.html#associationorinfluenceorinstantaneousevent</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-associationorinfluenceorinstantaneousevent">3.5. InstantaneousEvent</a>
-    <li><a href="#ref-for-associationorinfluenceorinstantaneousevent①">4.13. Role</a>
-    <li><a href="#ref-for-associationorinfluenceorinstantaneousevent②">5.4. Association</a>
-    <li><a href="#ref-for-associationorinfluenceorinstantaneousevent③">5.16. HadRole</a>
-    <li><a href="#ref-for-associationorinfluenceorinstantaneousevent④">5.18. Influence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-atlocation_1">
-   <a href="prov.html#atlocation_1">prov.html#atlocation_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-atlocation_1">3.2. ActivityOrAgentOrEntityOrInstantaneousEvent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-attime">
-   <a href="prov.html#attime">prov.html#attime</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-attime">3.5. InstantaneousEvent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-attribution">
-   <a href="prov.html#attribution">prov.html#attribution</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-attribution">4.7. Entity</a>
-    <li><a href="#ref-for-attribution①">5.2. AgentInfluence</a>
-    <li><a href="#ref-for-attribution②">5.27. QualifiedAttribution</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-bundle">
-   <a href="prov.html#bundle">prov.html#bundle</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-bundle">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-collection">
-   <a href="prov.html#collection">prov.html#collection</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-collection">4.6. EmptyCollection</a>
-    <li><a href="#ref-for-collection①">4.7. Entity</a> <a href="#ref-for-collection②">(2)</a>
-    <li><a href="#ref-for-collection③">5.24. Member</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-communication">
-   <a href="prov.html#communication">prov.html#communication</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-communication">4.1. Activity</a>
-    <li><a href="#ref-for-communication①">5.1. ActivityInfluence</a>
-    <li><a href="#ref-for-communication②">5.28. QualifiedCommunication</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-contributed">
-   <a href="prov.html#contributed">prov.html#contributed</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-contributed">4.3. Agent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-delegation">
-   <a href="prov.html#delegation">prov.html#delegation</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-delegation">3.4. InfluenceOrDelegationOrDerivationOrEndOrStart</a>
-    <li><a href="#ref-for-delegation①">4.3. Agent</a>
-    <li><a href="#ref-for-delegation②">5.2. AgentInfluence</a>
-    <li><a href="#ref-for-delegation③">5.29. QualifiedDelegation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-derivation">
-   <a href="prov.html#derivation">prov.html#derivation</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-derivation">3.4. InfluenceOrDelegationOrDerivationOrEndOrStart</a>
-    <li><a href="#ref-for-derivation①">3.5. InstantaneousEvent</a>
-    <li><a href="#ref-for-derivation②">4.7. Entity</a>
-    <li><a href="#ref-for-derivation③">5.11. EntityInfluence</a>
-    <li><a href="#ref-for-derivation④">5.12. Generation</a>
-    <li><a href="#ref-for-derivation⑤">5.14. HadGeneration</a>
-    <li><a href="#ref-for-derivation⑥">5.17. HadUsage</a>
-    <li><a href="#ref-for-derivation⑦">5.25. PrimarySource</a>
-    <li><a href="#ref-for-derivation⑧">5.30. QualifiedDerivation</a>
-    <li><a href="#ref-for-derivation⑨">5.38. Quotation</a>
-    <li><a href="#ref-for-derivation①⓪">5.39. Revision</a>
-    <li><a href="#ref-for-derivation①①">5.42. Usage</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-emptycollection">
-   <a href="prov.html#emptycollection">prov.html#emptycollection</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-emptycollection">4.5. Collection</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-end">
-   <a href="prov.html#end">prov.html#end</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-end">3.4. InfluenceOrDelegationOrDerivationOrEndOrStart</a>
-    <li><a href="#ref-for-end①">3.5. InstantaneousEvent</a>
-    <li><a href="#ref-for-end②">4.7. Entity</a>
-    <li><a href="#ref-for-end③">5.18. Influence</a>
-    <li><a href="#ref-for-end④">5.31. QualifiedEnd</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-endedattime">
-   <a href="prov.html#endedattime">prov.html#endedattime</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-endedattime">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-entity">
-   <a href="prov.html#entity">prov.html#entity</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-entity">3.1. ActivityOrAgentOrEntity</a> <a href="#ref-for-entity①">(2)</a>
-    <li><a href="#ref-for-entity②">4.1. Activity</a> <a href="#ref-for-entity③">(2)</a> <a href="#ref-for-entity④">(3)</a> <a href="#ref-for-entity⑤">(4)</a> <a href="#ref-for-entity⑥">(5)</a>
-    <li><a href="#ref-for-entity⑦">4.3. Agent</a>
-    <li><a href="#ref-for-entity⑧">4.4. Bundle</a>
-    <li><a href="#ref-for-entity⑨">4.5. Collection</a> <a href="#ref-for-entity①⓪">(2)</a>
-    <li><a href="#ref-for-entity①①">4.6. EmptyCollection</a>
-    <li><a href="#ref-for-entity①②">4.7. Entity</a> <a href="#ref-for-entity①③">(2)</a> <a href="#ref-for-entity①④">(3)</a> <a href="#ref-for-entity①⑤">(4)</a> <a href="#ref-for-entity①⑥">(5)</a> <a href="#ref-for-entity①⑦">(6)</a> <a href="#ref-for-entity①⑧">(7)</a> <a href="#ref-for-entity①⑨">(8)</a> <a href="#ref-for-entity②⓪">(9)</a> <a href="#ref-for-entity②①">(10)</a> <a href="#ref-for-entity②②">(11)</a>
-    <li><a href="#ref-for-entity②③">4.8. EntityAndAgent</a>
-    <li><a href="#ref-for-entity②④">4.12. Plan</a>
-    <li><a href="#ref-for-entity②⑤">5.3. Alternate</a> <a href="#ref-for-entity②⑥">(2)</a>
-    <li><a href="#ref-for-entity②⑦">5.6. Attribution</a> <a href="#ref-for-entity②⑧">(2)</a>
-    <li><a href="#ref-for-entity②⑨">5.9. Derivation</a> <a href="#ref-for-entity③⓪">(2)</a> <a href="#ref-for-entity③①">(3)</a>
-    <li><a href="#ref-for-entity③②">5.10. End</a> <a href="#ref-for-entity③③">(2)</a>
-    <li><a href="#ref-for-entity③④">5.11. EntityInfluence</a> <a href="#ref-for-entity③⑤">(2)</a>
-    <li><a href="#ref-for-entity③⑥">5.12. Generation</a> <a href="#ref-for-entity③⑦">(2)</a>
-    <li><a href="#ref-for-entity③⑧">5.22. InfluencerEntity</a>
-    <li><a href="#ref-for-entity③⑨">5.23. Invalidation</a>
-    <li><a href="#ref-for-entity④⓪">5.24. Member</a>
-    <li><a href="#ref-for-entity④①">5.25. PrimarySource</a> <a href="#ref-for-entity④②">(2)</a>
-    <li><a href="#ref-for-entity④③">5.27. QualifiedAttribution</a>
-    <li><a href="#ref-for-entity④④">5.30. QualifiedDerivation</a>
-    <li><a href="#ref-for-entity④⑤">5.31. QualifiedEnd</a>
-    <li><a href="#ref-for-entity④⑥">5.32. QualifiedGeneration</a>
-    <li><a href="#ref-for-entity④⑦">5.35. QualifiedRevision</a>
-    <li><a href="#ref-for-entity④⑧">5.36. QualifiedStart</a>
-    <li><a href="#ref-for-entity④⑨">5.38. Quotation</a> <a href="#ref-for-entity⑤⓪">(2)</a>
-    <li><a href="#ref-for-entity⑤①">5.39. Revision</a> <a href="#ref-for-entity⑤②">(2)</a> <a href="#ref-for-entity⑤③">(3)</a>
-    <li><a href="#ref-for-entity⑤④">5.40. Specialization</a> <a href="#ref-for-entity⑤⑤">(2)</a>
-    <li><a href="#ref-for-entity⑤⑥">5.41. Start</a> <a href="#ref-for-entity⑤⑦">(2)</a>
-    <li><a href="#ref-for-entity⑤⑧">5.42. Usage</a>
-    <li><a href="#ref-for-entity⑤⑨">6.3. generatedAtTime</a>
-    <li><a href="#ref-for-entity⑥⓪">6.4. invalidatedAtTime</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-entity_1">
-   <a href="prov.html#entity_1">prov.html#entity_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-entity_1">5.11. EntityInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-entityandagent">
-   <a href="prov.html#entityandagent">prov.html#entityandagent</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-entityandagent">4.3. Agent</a>
-    <li><a href="#ref-for-entityandagent①">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-entityinfluence">
-   <a href="prov.html#entityinfluence">prov.html#entityinfluence</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-entityinfluence">4.7. Entity</a>
-    <li><a href="#ref-for-entityinfluence①">5.9. Derivation</a>
-    <li><a href="#ref-for-entityinfluence②">5.18. Influence</a>
-    <li><a href="#ref-for-entityinfluence③">5.22. InfluencerEntity</a>
-    <li><a href="#ref-for-entityinfluence④">5.23. Invalidation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-entityinfluenced">
-   <a href="prov.html#entityinfluenced">prov.html#entityinfluenced</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-entityinfluenced">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-entityofinfluence">
-   <a href="prov.html#entityofinfluence">prov.html#entityofinfluence</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-entityofinfluence">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-generalizationof">
-   <a href="prov.html#generalizationof">prov.html#generalizationof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-generalizationof">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-generated">
-   <a href="prov.html#generated">prov.html#generated</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-generated">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-generatedasderivation">
-   <a href="prov.html#generatedasderivation">prov.html#generatedasderivation</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-generatedasderivation">5.12. Generation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-generatedattime">
-   <a href="prov.html#generatedattime">prov.html#generatedattime</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-generatedattime">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-generation">
-   <a href="prov.html#generation">prov.html#generation</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-generation">3.5. InstantaneousEvent</a>
-    <li><a href="#ref-for-generation①">4.7. Entity</a>
-    <li><a href="#ref-for-generation②">5.1. ActivityInfluence</a>
-    <li><a href="#ref-for-generation③">5.9. Derivation</a>
-    <li><a href="#ref-for-generation④">5.14. HadGeneration</a>
-    <li><a href="#ref-for-generation⑤">5.32. QualifiedGeneration</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-hadactivity_1">
-   <a href="prov.html#hadactivity_1">prov.html#hadactivity_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-hadactivity_1">3.4. InfluenceOrDelegationOrDerivationOrEndOrStart</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-haddelegate">
-   <a href="prov.html#haddelegate">prov.html#haddelegate</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-haddelegate">4.3. Agent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-hadderivation">
-   <a href="prov.html#hadderivation">prov.html#hadderivation</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-hadderivation">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-hadinfluence">
-   <a href="prov.html#hadinfluence">prov.html#hadinfluence</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-hadinfluence">3.1. ActivityOrAgentOrEntity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-hadmember">
-   <a href="prov.html#hadmember">prov.html#hadmember</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-hadmember">4.5. Collection</a>
-    <li><a href="#ref-for-hadmember①">4.6. EmptyCollection</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-hadplan_1">
-   <a href="prov.html#hadplan_1">prov.html#hadplan_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-hadplan_1">5.4. Association</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-hadprimarysource">
-   <a href="prov.html#hadprimarysource">prov.html#hadprimarysource</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-hadprimarysource">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-hadrevision">
-   <a href="prov.html#hadrevision">prov.html#hadrevision</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-hadrevision">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-hadrole_1">
-   <a href="prov.html#hadrole_1">prov.html#hadrole_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-hadrole_1">3.3. AssociationOrInfluenceOrInstantaneousEvent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-hadusage_1">
-   <a href="prov.html#hadusage_1">prov.html#hadusage_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-hadusage_1">5.9. Derivation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-hasgeneration">
-   <a href="prov.html#hasgeneration">prov.html#hasgeneration</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-hasgeneration">5.9. Derivation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-influence">
-   <a href="prov.html#influence">prov.html#influence</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-influence">3.1. ActivityOrAgentOrEntity</a> <a href="#ref-for-influence①">(2)</a>
-    <li><a href="#ref-for-influence②">3.3. AssociationOrInfluenceOrInstantaneousEvent</a>
-    <li><a href="#ref-for-influence③">3.4. InfluenceOrDelegationOrDerivationOrEndOrStart</a>
-    <li><a href="#ref-for-influence④">5.1. ActivityInfluence</a>
-    <li><a href="#ref-for-influence⑤">5.2. AgentInfluence</a>
-    <li><a href="#ref-for-influence⑥">5.10. End</a>
-    <li><a href="#ref-for-influence⑦">5.11. EntityInfluence</a>
-    <li><a href="#ref-for-influence⑧">5.19. Influencer</a>
-    <li><a href="#ref-for-influence⑨">5.33. QualifiedInfluence</a>
-    <li><a href="#ref-for-influence①⓪">5.41. Start</a>
-    <li><a href="#ref-for-influence①①">5.42. Usage</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-influenced">
-   <a href="prov.html#influenced">prov.html#influenced</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-influenced">3.1. ActivityOrAgentOrEntity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-influenceordelegationorderivationorendorstart">
-   <a href="prov.html#influenceordelegationorderivationorendorstart">prov.html#influenceordelegationorderivationorendorstart</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-influenceordelegationorderivationorendorstart">4.1. Activity</a>
-    <li><a href="#ref-for-influenceordelegationorderivationorendorstart①">5.8. Delegation</a>
-    <li><a href="#ref-for-influenceordelegationorderivationorendorstart②">5.9. Derivation</a>
-    <li><a href="#ref-for-influenceordelegationorderivationorendorstart③">5.10. End</a>
-    <li><a href="#ref-for-influenceordelegationorderivationorendorstart④">5.13. HadActivity</a>
-    <li><a href="#ref-for-influenceordelegationorderivationorendorstart⑤">5.18. Influence</a>
-    <li><a href="#ref-for-influenceordelegationorderivationorendorstart⑥">5.41. Start</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-influencer">
-   <a href="prov.html#influencer">prov.html#influencer</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-influencer">5.20. InfluencerActivity</a>
-    <li><a href="#ref-for-influencer①">5.21. InfluencerAgent</a>
-    <li><a href="#ref-for-influencer②">5.22. InfluencerEntity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-influencer_1">
-   <a href="prov.html#influencer_1">prov.html#influencer_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-influencer_1">5.18. Influence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-influenceractivity">
-   <a href="prov.html#influenceractivity">prov.html#influenceractivity</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-influenceractivity">5.19. Influencer</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-influenceragent">
-   <a href="prov.html#influenceragent">prov.html#influenceragent</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-influenceragent">5.19. Influencer</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-influencerentity">
-   <a href="prov.html#influencerentity">prov.html#influencerentity</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-influencerentity">5.19. Influencer</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-informed">
-   <a href="prov.html#informed">prov.html#informed</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-informed">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-instantaneousevent">
-   <a href="prov.html#instantaneousevent">prov.html#instantaneousevent</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-instantaneousevent">3.2. ActivityOrAgentOrEntityOrInstantaneousEvent</a>
-    <li><a href="#ref-for-instantaneousevent①">3.3. AssociationOrInfluenceOrInstantaneousEvent</a>
-    <li><a href="#ref-for-instantaneousevent②">5.9. Derivation</a>
-    <li><a href="#ref-for-instantaneousevent③">5.10. End</a>
-    <li><a href="#ref-for-instantaneousevent④">5.12. Generation</a>
-    <li><a href="#ref-for-instantaneousevent⑤">5.23. Invalidation</a>
-    <li><a href="#ref-for-instantaneousevent⑥">5.41. Start</a>
-    <li><a href="#ref-for-instantaneousevent⑦">6.1. atTime</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-invalidated">
-   <a href="prov.html#invalidated">prov.html#invalidated</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-invalidated">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-invalidatedattime">
-   <a href="prov.html#invalidatedattime">prov.html#invalidatedattime</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-invalidatedattime">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-invalidation">
-   <a href="prov.html#invalidation">prov.html#invalidation</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-invalidation">3.5. InstantaneousEvent</a>
-    <li><a href="#ref-for-invalidation①">4.1. Activity</a>
-    <li><a href="#ref-for-invalidation②">5.11. EntityInfluence</a>
-    <li><a href="#ref-for-invalidation③">5.34. QualifiedInvalidation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-location">
-   <a href="prov.html#location">prov.html#location</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-location">3.2. ActivityOrAgentOrEntityOrInstantaneousEvent</a>
-    <li><a href="#ref-for-location①">5.5. AtLocation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-locationof">
-   <a href="prov.html#locationof">prov.html#locationof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-locationof">4.9. Location</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-organization">
-   <a href="prov.html#organization">prov.html#organization</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-organization">4.3. Agent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-person">
-   <a href="prov.html#person">prov.html#person</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-person">4.3. Agent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-plan">
-   <a href="prov.html#plan">prov.html#plan</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-plan">4.7. Entity</a>
-    <li><a href="#ref-for-plan①">5.4. Association</a>
-    <li><a href="#ref-for-plan②">5.15. HadPlan</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-primarysource">
-   <a href="prov.html#primarysource">prov.html#primarysource</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-primarysource">5.9. Derivation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedassociation">
-   <a href="prov.html#qualifiedassociation">prov.html#qualifiedassociation</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedassociation">5.33. QualifiedInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedassociation_1">
-   <a href="prov.html#qualifiedassociation_1">prov.html#qualifiedassociation_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedassociation_1">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedassociationof">
-   <a href="prov.html#qualifiedassociationof">prov.html#qualifiedassociationof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedassociationof">5.4. Association</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedattribution">
-   <a href="prov.html#qualifiedattribution">prov.html#qualifiedattribution</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedattribution">5.33. QualifiedInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedattribution_1">
-   <a href="prov.html#qualifiedattribution_1">prov.html#qualifiedattribution_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedattribution_1">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedattributionof">
-   <a href="prov.html#qualifiedattributionof">prov.html#qualifiedattributionof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedattributionof">5.6. Attribution</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedcommunication">
-   <a href="prov.html#qualifiedcommunication">prov.html#qualifiedcommunication</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedcommunication">5.33. QualifiedInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedcommunication_1">
-   <a href="prov.html#qualifiedcommunication_1">prov.html#qualifiedcommunication_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedcommunication_1">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedcommunicationof">
-   <a href="prov.html#qualifiedcommunicationof">prov.html#qualifiedcommunicationof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedcommunicationof">5.7. Communication</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifieddelegation">
-   <a href="prov.html#qualifieddelegation">prov.html#qualifieddelegation</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifieddelegation">5.33. QualifiedInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifieddelegation_1">
-   <a href="prov.html#qualifieddelegation_1">prov.html#qualifieddelegation_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifieddelegation_1">4.3. Agent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifieddelegationof">
-   <a href="prov.html#qualifieddelegationof">prov.html#qualifieddelegationof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifieddelegationof">5.8. Delegation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedderivation">
-   <a href="prov.html#qualifiedderivation">prov.html#qualifiedderivation</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedderivation">5.33. QualifiedInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedderivation_1">
-   <a href="prov.html#qualifiedderivation_1">prov.html#qualifiedderivation_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedderivation_1">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedderivationof">
-   <a href="prov.html#qualifiedderivationof">prov.html#qualifiedderivationof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedderivationof">5.9. Derivation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedend">
-   <a href="prov.html#qualifiedend">prov.html#qualifiedend</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedend">5.33. QualifiedInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedend_1">
-   <a href="prov.html#qualifiedend_1">prov.html#qualifiedend_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedend_1">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedendof">
-   <a href="prov.html#qualifiedendof">prov.html#qualifiedendof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedendof">5.10. End</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedgeneration">
-   <a href="prov.html#qualifiedgeneration">prov.html#qualifiedgeneration</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedgeneration">5.33. QualifiedInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedgeneration_1">
-   <a href="prov.html#qualifiedgeneration_1">prov.html#qualifiedgeneration_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedgeneration_1">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedgenerationof">
-   <a href="prov.html#qualifiedgenerationof">prov.html#qualifiedgenerationof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedgenerationof">5.12. Generation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedinfluence">
-   <a href="prov.html#qualifiedinfluence">prov.html#qualifiedinfluence</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedinfluence">5.26. QualifiedAssociation</a>
-    <li><a href="#ref-for-qualifiedinfluence①">5.27. QualifiedAttribution</a>
-    <li><a href="#ref-for-qualifiedinfluence②">5.28. QualifiedCommunication</a>
-    <li><a href="#ref-for-qualifiedinfluence③">5.29. QualifiedDelegation</a>
-    <li><a href="#ref-for-qualifiedinfluence④">5.30. QualifiedDerivation</a>
-    <li><a href="#ref-for-qualifiedinfluence⑤">5.31. QualifiedEnd</a>
-    <li><a href="#ref-for-qualifiedinfluence⑥">5.32. QualifiedGeneration</a>
-    <li><a href="#ref-for-qualifiedinfluence⑦">5.34. QualifiedInvalidation</a>
-    <li><a href="#ref-for-qualifiedinfluence⑧">5.35. QualifiedRevision</a>
-    <li><a href="#ref-for-qualifiedinfluence⑨">5.36. QualifiedStart</a>
-    <li><a href="#ref-for-qualifiedinfluence①⓪">5.37. QualifiedUsage</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedinfluence_1">
-   <a href="prov.html#qualifiedinfluence_1">prov.html#qualifiedinfluence_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedinfluence_1">3.1. ActivityOrAgentOrEntity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedinfluenceof">
-   <a href="prov.html#qualifiedinfluenceof">prov.html#qualifiedinfluenceof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedinfluenceof">5.18. Influence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedinvalidation">
-   <a href="prov.html#qualifiedinvalidation">prov.html#qualifiedinvalidation</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedinvalidation">5.33. QualifiedInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedinvalidation_1">
-   <a href="prov.html#qualifiedinvalidation_1">prov.html#qualifiedinvalidation_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedinvalidation_1">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedinvalidationof">
-   <a href="prov.html#qualifiedinvalidationof">prov.html#qualifiedinvalidationof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedinvalidationof">5.23. Invalidation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedrevision">
-   <a href="prov.html#qualifiedrevision">prov.html#qualifiedrevision</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedrevision">5.33. QualifiedInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedrevision_1">
-   <a href="prov.html#qualifiedrevision_1">prov.html#qualifiedrevision_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedrevision_1">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedstart">
-   <a href="prov.html#qualifiedstart">prov.html#qualifiedstart</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedstart">5.33. QualifiedInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedstart_1">
-   <a href="prov.html#qualifiedstart_1">prov.html#qualifiedstart_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedstart_1">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedstartof">
-   <a href="prov.html#qualifiedstartof">prov.html#qualifiedstartof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedstartof">5.41. Start</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedusage">
-   <a href="prov.html#qualifiedusage">prov.html#qualifiedusage</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedusage">5.33. QualifiedInfluence</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedusage_1">
-   <a href="prov.html#qualifiedusage_1">prov.html#qualifiedusage_1</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedusage_1">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-qualifiedusingactivity">
-   <a href="prov.html#qualifiedusingactivity">prov.html#qualifiedusingactivity</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-qualifiedusingactivity">5.42. Usage</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-quotation">
-   <a href="prov.html#quotation">prov.html#quotation</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-quotation">5.9. Derivation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-quotedas">
-   <a href="prov.html#quotedas">prov.html#quotedas</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-quotedas">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-revisedentity">
-   <a href="prov.html#revisedentity">prov.html#revisedentity</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-revisedentity">5.39. Revision</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-revision">
-   <a href="prov.html#revision">prov.html#revision</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-revision">4.7. Entity</a>
-    <li><a href="#ref-for-revision①">5.9. Derivation</a>
-    <li><a href="#ref-for-revision②">5.35. QualifiedRevision</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-role">
-   <a href="prov.html#role">prov.html#role</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-role">3.3. AssociationOrInfluenceOrInstantaneousEvent</a>
-    <li><a href="#ref-for-role①">5.16. HadRole</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-softwareagent">
-   <a href="prov.html#softwareagent">prov.html#softwareagent</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-softwareagent">4.3. Agent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-specialization">
-   <a href="prov.html#specialization">prov.html#specialization</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-specialization">5.3. Alternate</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-specializationof">
-   <a href="prov.html#specializationof">prov.html#specializationof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-specializationof">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-start">
-   <a href="prov.html#start">prov.html#start</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-start">3.4. InfluenceOrDelegationOrDerivationOrEndOrStart</a>
-    <li><a href="#ref-for-start①">3.5. InstantaneousEvent</a>
-    <li><a href="#ref-for-start②">4.7. Entity</a>
-    <li><a href="#ref-for-start③">5.18. Influence</a>
-    <li><a href="#ref-for-start④">5.36. QualifiedStart</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-startedattime">
-   <a href="prov.html#startedattime">prov.html#startedattime</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-startedattime">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-usage">
-   <a href="prov.html#usage">prov.html#usage</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-usage">4.1. Activity</a>
-    <li><a href="#ref-for-usage①">5.9. Derivation</a>
-    <li><a href="#ref-for-usage②">5.17. HadUsage</a>
-    <li><a href="#ref-for-usage③">5.18. Influence</a>
-    <li><a href="#ref-for-usage④">5.37. QualifiedUsage</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-used">
-   <a href="prov.html#used">prov.html#used</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-used">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasactivityofinfluence">
-   <a href="prov.html#wasactivityofinfluence">prov.html#wasactivityofinfluence</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasactivityofinfluence">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasassociatedwith">
-   <a href="prov.html#wasassociatedwith">prov.html#wasassociatedwith</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasassociatedwith">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasassociatefor">
-   <a href="prov.html#wasassociatefor">prov.html#wasassociatefor</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasassociatefor">4.3. Agent</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasattributedto">
-   <a href="prov.html#wasattributedto">prov.html#wasattributedto</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasattributedto">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasderivedfrom">
-   <a href="prov.html#wasderivedfrom">prov.html#wasderivedfrom</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasderivedfrom">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasendedby">
-   <a href="prov.html#wasendedby">prov.html#wasendedby</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasendedby">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasgeneratedby">
-   <a href="prov.html#wasgeneratedby">prov.html#wasgeneratedby</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasgeneratedby">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasinfluencedby">
-   <a href="prov.html#wasinfluencedby">prov.html#wasinfluencedby</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasinfluencedby">3.1. ActivityOrAgentOrEntity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasinfluencedbyactivity">
-   <a href="prov.html#wasinfluencedbyactivity">prov.html#wasinfluencedbyactivity</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasinfluencedbyactivity">3.1. ActivityOrAgentOrEntity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasinfluencedbyagent">
-   <a href="prov.html#wasinfluencedbyagent">prov.html#wasinfluencedbyagent</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasinfluencedbyagent">3.1. ActivityOrAgentOrEntity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasinfluencedbyentity">
-   <a href="prov.html#wasinfluencedbyentity">prov.html#wasinfluencedbyentity</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasinfluencedbyentity">3.1. ActivityOrAgentOrEntity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasinformedby">
-   <a href="prov.html#wasinformedby">prov.html#wasinformedby</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasinformedby">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasinvalidatedby">
-   <a href="prov.html#wasinvalidatedby">prov.html#wasinvalidatedby</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasinvalidatedby">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasmemberof">
-   <a href="prov.html#wasmemberof">prov.html#wasmemberof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasmemberof">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasplanof">
-   <a href="prov.html#wasplanof">prov.html#wasplanof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasplanof">4.12. Plan</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasprimarysourceof">
-   <a href="prov.html#wasprimarysourceof">prov.html#wasprimarysourceof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasprimarysourceof">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasquotedfrom">
-   <a href="prov.html#wasquotedfrom">prov.html#wasquotedfrom</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasquotedfrom">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasrevisionof">
-   <a href="prov.html#wasrevisionof">prov.html#wasrevisionof</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasrevisionof">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasrolein">
-   <a href="prov.html#wasrolein">prov.html#wasrolein</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasrolein">4.13. Role</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasstartedby">
-   <a href="prov.html#wasstartedby">prov.html#wasstartedby</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasstartedby">4.1. Activity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasusedby">
-   <a href="prov.html#wasusedby">prov.html#wasusedby</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasusedby">4.7. Entity</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-wasusedinderivation">
-   <a href="prov.html#wasusedinderivation">prov.html#wasusedinderivation</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-wasusedinderivation">5.42. Usage</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-derivedbyinsertionfrom">
-   <a href="prov-dictionary.html#derivedbyinsertionfrom">prov-dictionary.html#derivedbyinsertionfrom</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-derivedbyinsertionfrom">5.9. Derivation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-derivedbyremovalfrom">
-   <a href="prov-dictionary.html#derivedbyremovalfrom">prov-dictionary.html#derivedbyremovalfrom</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-derivedbyremovalfrom">5.9. Derivation</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-dictionary">
-   <a href="prov-dictionary.html#dictionary">prov-dictionary.html#dictionary</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dictionary">4.5. Collection</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-emptydictionary">
-   <a href="prov-dictionary.html#emptydictionary">prov-dictionary.html#emptydictionary</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-emptydictionary">4.6. EmptyCollection</a>
-   </ul>
-  </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
     <a data-link-type="biblio">[HTTP://WWW.W3.ORG/2001/XMLSCHEMA]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-datetime">datetime</span>
+     <li><span class="dfn-paneled" id="110fb783">datetime</span>
     </ul>
    <li>
     <a data-link-type="biblio">[HTTP://WWW.W3.ORG/NS/PROV]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-actedonbehalfof">actedonbehalfof</span>
-     <li><span class="dfn-paneled" id="term-for-activity">activity</span>
-     <li><span class="dfn-paneled" id="term-for-activity_1">activity_1</span>
-     <li><span class="dfn-paneled" id="term-for-activityandagent">activityandagent</span>
-     <li><span class="dfn-paneled" id="term-for-activityinfluence">activityinfluence</span>
-     <li><span class="dfn-paneled" id="term-for-activityinfluenced">activityinfluenced</span>
-     <li><span class="dfn-paneled" id="term-for-activityofinfluence">activityofinfluence</span>
-     <li><span class="dfn-paneled" id="term-for-activityoragentorentity">activityoragentorentity</span>
-     <li><span class="dfn-paneled" id="term-for-activityoragentorentityorinstantaneousevent">activityoragentorentityorinstantaneousevent</span>
-     <li><span class="dfn-paneled" id="term-for-agent">agent</span>
-     <li><span class="dfn-paneled" id="term-for-agent_1">agent_1</span>
-     <li><span class="dfn-paneled" id="term-for-agentinfluence">agentinfluence</span>
-     <li><span class="dfn-paneled" id="term-for-agentinfluenced">agentinfluenced</span>
-     <li><span class="dfn-paneled" id="term-for-agentofinfluence">agentofinfluence</span>
-     <li><span class="dfn-paneled" id="term-for-alternate">alternate</span>
-     <li><span class="dfn-paneled" id="term-for-alternateof">alternateof</span>
-     <li><span class="dfn-paneled" id="term-for-association">association</span>
-     <li><span class="dfn-paneled" id="term-for-associationorinfluenceorinstantaneousevent">associationorinfluenceorinstantaneousevent</span>
-     <li><span class="dfn-paneled" id="term-for-atlocation_1">atlocation_1</span>
-     <li><span class="dfn-paneled" id="term-for-attime">attime</span>
-     <li><span class="dfn-paneled" id="term-for-attribution">attribution</span>
-     <li><span class="dfn-paneled" id="term-for-bundle">bundle</span>
-     <li><span class="dfn-paneled" id="term-for-collection">collection</span>
-     <li><span class="dfn-paneled" id="term-for-communication">communication</span>
-     <li><span class="dfn-paneled" id="term-for-contributed">contributed</span>
-     <li><span class="dfn-paneled" id="term-for-delegation">delegation</span>
-     <li><span class="dfn-paneled" id="term-for-derivation">derivation</span>
-     <li><span class="dfn-paneled" id="term-for-emptycollection">emptycollection</span>
-     <li><span class="dfn-paneled" id="term-for-end">end</span>
-     <li><span class="dfn-paneled" id="term-for-endedattime">endedattime</span>
-     <li><span class="dfn-paneled" id="term-for-entity">entity</span>
-     <li><span class="dfn-paneled" id="term-for-entity_1">entity_1</span>
-     <li><span class="dfn-paneled" id="term-for-entityandagent">entityandagent</span>
-     <li><span class="dfn-paneled" id="term-for-entityinfluence">entityinfluence</span>
-     <li><span class="dfn-paneled" id="term-for-entityinfluenced">entityinfluenced</span>
-     <li><span class="dfn-paneled" id="term-for-entityofinfluence">entityofinfluence</span>
-     <li><span class="dfn-paneled" id="term-for-generalizationof">generalizationof</span>
-     <li><span class="dfn-paneled" id="term-for-generated">generated</span>
-     <li><span class="dfn-paneled" id="term-for-generatedasderivation">generatedasderivation</span>
-     <li><span class="dfn-paneled" id="term-for-generatedattime">generatedattime</span>
-     <li><span class="dfn-paneled" id="term-for-generation">generation</span>
-     <li><span class="dfn-paneled" id="term-for-hadactivity_1">hadactivity_1</span>
-     <li><span class="dfn-paneled" id="term-for-haddelegate">haddelegate</span>
-     <li><span class="dfn-paneled" id="term-for-hadderivation">hadderivation</span>
-     <li><span class="dfn-paneled" id="term-for-hadinfluence">hadinfluence</span>
-     <li><span class="dfn-paneled" id="term-for-hadmember">hadmember</span>
-     <li><span class="dfn-paneled" id="term-for-hadplan_1">hadplan_1</span>
-     <li><span class="dfn-paneled" id="term-for-hadprimarysource">hadprimarysource</span>
-     <li><span class="dfn-paneled" id="term-for-hadrevision">hadrevision</span>
-     <li><span class="dfn-paneled" id="term-for-hadrole_1">hadrole_1</span>
-     <li><span class="dfn-paneled" id="term-for-hadusage_1">hadusage_1</span>
-     <li><span class="dfn-paneled" id="term-for-hasgeneration">hasgeneration</span>
-     <li><span class="dfn-paneled" id="term-for-influence">influence</span>
-     <li><span class="dfn-paneled" id="term-for-influenced">influenced</span>
-     <li><span class="dfn-paneled" id="term-for-influenceordelegationorderivationorendorstart">influenceordelegationorderivationorendorstart</span>
-     <li><span class="dfn-paneled" id="term-for-influencer">influencer</span>
-     <li><span class="dfn-paneled" id="term-for-influencer_1">influencer_1</span>
-     <li><span class="dfn-paneled" id="term-for-influenceractivity">influenceractivity</span>
-     <li><span class="dfn-paneled" id="term-for-influenceragent">influenceragent</span>
-     <li><span class="dfn-paneled" id="term-for-influencerentity">influencerentity</span>
-     <li><span class="dfn-paneled" id="term-for-informed">informed</span>
-     <li><span class="dfn-paneled" id="term-for-instantaneousevent">instantaneousevent</span>
-     <li><span class="dfn-paneled" id="term-for-invalidated">invalidated</span>
-     <li><span class="dfn-paneled" id="term-for-invalidatedattime">invalidatedattime</span>
-     <li><span class="dfn-paneled" id="term-for-invalidation">invalidation</span>
-     <li><span class="dfn-paneled" id="term-for-location">location</span>
-     <li><span class="dfn-paneled" id="term-for-locationof">locationof</span>
-     <li><span class="dfn-paneled" id="term-for-organization">organization</span>
-     <li><span class="dfn-paneled" id="term-for-person">person</span>
-     <li><span class="dfn-paneled" id="term-for-plan">plan</span>
-     <li><span class="dfn-paneled" id="term-for-primarysource">primarysource</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedassociation">qualifiedassociation</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedassociation_1">qualifiedassociation_1</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedassociationof">qualifiedassociationof</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedattribution">qualifiedattribution</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedattribution_1">qualifiedattribution_1</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedattributionof">qualifiedattributionof</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedcommunication">qualifiedcommunication</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedcommunication_1">qualifiedcommunication_1</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedcommunicationof">qualifiedcommunicationof</span>
-     <li><span class="dfn-paneled" id="term-for-qualifieddelegation">qualifieddelegation</span>
-     <li><span class="dfn-paneled" id="term-for-qualifieddelegation_1">qualifieddelegation_1</span>
-     <li><span class="dfn-paneled" id="term-for-qualifieddelegationof">qualifieddelegationof</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedderivation">qualifiedderivation</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedderivation_1">qualifiedderivation_1</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedderivationof">qualifiedderivationof</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedend">qualifiedend</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedend_1">qualifiedend_1</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedendof">qualifiedendof</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedgeneration">qualifiedgeneration</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedgeneration_1">qualifiedgeneration_1</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedgenerationof">qualifiedgenerationof</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedinfluence">qualifiedinfluence</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedinfluence_1">qualifiedinfluence_1</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedinfluenceof">qualifiedinfluenceof</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedinvalidation">qualifiedinvalidation</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedinvalidation_1">qualifiedinvalidation_1</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedinvalidationof">qualifiedinvalidationof</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedrevision">qualifiedrevision</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedrevision_1">qualifiedrevision_1</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedstart">qualifiedstart</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedstart_1">qualifiedstart_1</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedstartof">qualifiedstartof</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedusage">qualifiedusage</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedusage_1">qualifiedusage_1</span>
-     <li><span class="dfn-paneled" id="term-for-qualifiedusingactivity">qualifiedusingactivity</span>
-     <li><span class="dfn-paneled" id="term-for-quotation">quotation</span>
-     <li><span class="dfn-paneled" id="term-for-quotedas">quotedas</span>
-     <li><span class="dfn-paneled" id="term-for-revisedentity">revisedentity</span>
-     <li><span class="dfn-paneled" id="term-for-revision">revision</span>
-     <li><span class="dfn-paneled" id="term-for-role">role</span>
-     <li><span class="dfn-paneled" id="term-for-softwareagent">softwareagent</span>
-     <li><span class="dfn-paneled" id="term-for-specialization">specialization</span>
-     <li><span class="dfn-paneled" id="term-for-specializationof">specializationof</span>
-     <li><span class="dfn-paneled" id="term-for-start">start</span>
-     <li><span class="dfn-paneled" id="term-for-startedattime">startedattime</span>
-     <li><span class="dfn-paneled" id="term-for-usage">usage</span>
-     <li><span class="dfn-paneled" id="term-for-used">used</span>
-     <li><span class="dfn-paneled" id="term-for-wasactivityofinfluence">wasactivityofinfluence</span>
-     <li><span class="dfn-paneled" id="term-for-wasassociatedwith">wasassociatedwith</span>
-     <li><span class="dfn-paneled" id="term-for-wasassociatefor">wasassociatefor</span>
-     <li><span class="dfn-paneled" id="term-for-wasattributedto">wasattributedto</span>
-     <li><span class="dfn-paneled" id="term-for-wasderivedfrom">wasderivedfrom</span>
-     <li><span class="dfn-paneled" id="term-for-wasendedby">wasendedby</span>
-     <li><span class="dfn-paneled" id="term-for-wasgeneratedby">wasgeneratedby</span>
-     <li><span class="dfn-paneled" id="term-for-wasinfluencedby">wasinfluencedby</span>
-     <li><span class="dfn-paneled" id="term-for-wasinfluencedbyactivity">wasinfluencedbyactivity</span>
-     <li><span class="dfn-paneled" id="term-for-wasinfluencedbyagent">wasinfluencedbyagent</span>
-     <li><span class="dfn-paneled" id="term-for-wasinfluencedbyentity">wasinfluencedbyentity</span>
-     <li><span class="dfn-paneled" id="term-for-wasinformedby">wasinformedby</span>
-     <li><span class="dfn-paneled" id="term-for-wasinvalidatedby">wasinvalidatedby</span>
-     <li><span class="dfn-paneled" id="term-for-wasmemberof">wasmemberof</span>
-     <li><span class="dfn-paneled" id="term-for-wasplanof">wasplanof</span>
-     <li><span class="dfn-paneled" id="term-for-wasprimarysourceof">wasprimarysourceof</span>
-     <li><span class="dfn-paneled" id="term-for-wasquotedfrom">wasquotedfrom</span>
-     <li><span class="dfn-paneled" id="term-for-wasrevisionof">wasrevisionof</span>
-     <li><span class="dfn-paneled" id="term-for-wasrolein">wasrolein</span>
-     <li><span class="dfn-paneled" id="term-for-wasstartedby">wasstartedby</span>
-     <li><span class="dfn-paneled" id="term-for-wasusedby">wasusedby</span>
-     <li><span class="dfn-paneled" id="term-for-wasusedinderivation">wasusedinderivation</span>
+     <li><span class="dfn-paneled" id="a2ad012d">actedonbehalfof</span>
+     <li><span class="dfn-paneled" id="8b22a9f6">activity</span>
+     <li><span class="dfn-paneled" id="7ba56306">activity_1</span>
+     <li><span class="dfn-paneled" id="faa4bcf1">activityandagent</span>
+     <li><span class="dfn-paneled" id="242df1ed">activityinfluence</span>
+     <li><span class="dfn-paneled" id="ffc77f4f">activityinfluenced</span>
+     <li><span class="dfn-paneled" id="b8eda049">activityofinfluence</span>
+     <li><span class="dfn-paneled" id="d232e8c7">activityoragentorentity</span>
+     <li><span class="dfn-paneled" id="6a5fe307">activityoragentorentityorinstantaneousevent</span>
+     <li><span class="dfn-paneled" id="f2e5cc02">agent</span>
+     <li><span class="dfn-paneled" id="84c60d17">agent_1</span>
+     <li><span class="dfn-paneled" id="b2738042">agentinfluence</span>
+     <li><span class="dfn-paneled" id="35707f0a">agentinfluenced</span>
+     <li><span class="dfn-paneled" id="a0164d8d">agentofinfluence</span>
+     <li><span class="dfn-paneled" id="c2416e5b">alternate</span>
+     <li><span class="dfn-paneled" id="ff4adc87">alternateof</span>
+     <li><span class="dfn-paneled" id="489cb177">association</span>
+     <li><span class="dfn-paneled" id="b3857574">associationorinfluenceorinstantaneousevent</span>
+     <li><span class="dfn-paneled" id="26789673">atlocation_1</span>
+     <li><span class="dfn-paneled" id="a39d91fa">attime</span>
+     <li><span class="dfn-paneled" id="97f3f7e7">attribution</span>
+     <li><span class="dfn-paneled" id="e67b40a3">bundle</span>
+     <li><span class="dfn-paneled" id="29ba30a9">collection</span>
+     <li><span class="dfn-paneled" id="19523b64">communication</span>
+     <li><span class="dfn-paneled" id="4ef29cd9">contributed</span>
+     <li><span class="dfn-paneled" id="b0c57777">delegation</span>
+     <li><span class="dfn-paneled" id="60be2035">derivation</span>
+     <li><span class="dfn-paneled" id="6ef1cab3">emptycollection</span>
+     <li><span class="dfn-paneled" id="f5916119">end</span>
+     <li><span class="dfn-paneled" id="20065d62">endedattime</span>
+     <li><span class="dfn-paneled" id="78205d90">entity</span>
+     <li><span class="dfn-paneled" id="0516b12b">entity_1</span>
+     <li><span class="dfn-paneled" id="ee731181">entityandagent</span>
+     <li><span class="dfn-paneled" id="ed785cdc">entityinfluence</span>
+     <li><span class="dfn-paneled" id="7e1dbda6">entityinfluenced</span>
+     <li><span class="dfn-paneled" id="3f00b257">entityofinfluence</span>
+     <li><span class="dfn-paneled" id="eb1ee7ed">generalizationof</span>
+     <li><span class="dfn-paneled" id="38552744">generated</span>
+     <li><span class="dfn-paneled" id="1e1a46eb">generatedasderivation</span>
+     <li><span class="dfn-paneled" id="ed2d1230">generatedattime</span>
+     <li><span class="dfn-paneled" id="db0a5ff8">generation</span>
+     <li><span class="dfn-paneled" id="2b683e98">hadactivity_1</span>
+     <li><span class="dfn-paneled" id="f411b57f">haddelegate</span>
+     <li><span class="dfn-paneled" id="c40c970c">hadderivation</span>
+     <li><span class="dfn-paneled" id="5ca36a63">hadinfluence</span>
+     <li><span class="dfn-paneled" id="2ff4f11b">hadmember</span>
+     <li><span class="dfn-paneled" id="228a0c5c">hadplan_1</span>
+     <li><span class="dfn-paneled" id="089ee24a">hadprimarysource</span>
+     <li><span class="dfn-paneled" id="2170be59">hadrevision</span>
+     <li><span class="dfn-paneled" id="a58cde52">hadrole_1</span>
+     <li><span class="dfn-paneled" id="b9dab668">hadusage_1</span>
+     <li><span class="dfn-paneled" id="eefe25db">hasgeneration</span>
+     <li><span class="dfn-paneled" id="fe4b5403">influence</span>
+     <li><span class="dfn-paneled" id="edf87004">influenced</span>
+     <li><span class="dfn-paneled" id="768116b5">influenceordelegationorderivationorendorstart</span>
+     <li><span class="dfn-paneled" id="30d1e195">influencer</span>
+     <li><span class="dfn-paneled" id="66aaa78d">influencer_1</span>
+     <li><span class="dfn-paneled" id="c25ea82f">influenceractivity</span>
+     <li><span class="dfn-paneled" id="776395ef">influenceragent</span>
+     <li><span class="dfn-paneled" id="e6f36114">influencerentity</span>
+     <li><span class="dfn-paneled" id="c35c3b0c">informed</span>
+     <li><span class="dfn-paneled" id="caae4851">instantaneousevent</span>
+     <li><span class="dfn-paneled" id="a678b37c">invalidated</span>
+     <li><span class="dfn-paneled" id="c4612b38">invalidatedattime</span>
+     <li><span class="dfn-paneled" id="f6a6e723">invalidation</span>
+     <li><span class="dfn-paneled" id="0bd02bbe">location</span>
+     <li><span class="dfn-paneled" id="796868fc">locationof</span>
+     <li><span class="dfn-paneled" id="16961944">organization</span>
+     <li><span class="dfn-paneled" id="8592f42a">person</span>
+     <li><span class="dfn-paneled" id="a32a114c">plan</span>
+     <li><span class="dfn-paneled" id="fe9eb17d">primarysource</span>
+     <li><span class="dfn-paneled" id="bb8f6087">qualifiedassociation</span>
+     <li><span class="dfn-paneled" id="89f0807b">qualifiedassociation_1</span>
+     <li><span class="dfn-paneled" id="01364675">qualifiedassociationof</span>
+     <li><span class="dfn-paneled" id="28592f18">qualifiedattribution</span>
+     <li><span class="dfn-paneled" id="68d8467d">qualifiedattribution_1</span>
+     <li><span class="dfn-paneled" id="7decd229">qualifiedattributionof</span>
+     <li><span class="dfn-paneled" id="c1b109a3">qualifiedcommunication</span>
+     <li><span class="dfn-paneled" id="d7fc4c21">qualifiedcommunication_1</span>
+     <li><span class="dfn-paneled" id="0f3b6f1b">qualifiedcommunicationof</span>
+     <li><span class="dfn-paneled" id="ab2cb2b3">qualifieddelegation</span>
+     <li><span class="dfn-paneled" id="23ea5189">qualifieddelegation_1</span>
+     <li><span class="dfn-paneled" id="ba10317c">qualifieddelegationof</span>
+     <li><span class="dfn-paneled" id="4aae3864">qualifiedderivation</span>
+     <li><span class="dfn-paneled" id="516b7721">qualifiedderivation_1</span>
+     <li><span class="dfn-paneled" id="6e850841">qualifiedderivationof</span>
+     <li><span class="dfn-paneled" id="2d09cea9">qualifiedend</span>
+     <li><span class="dfn-paneled" id="ba90d281">qualifiedend_1</span>
+     <li><span class="dfn-paneled" id="4cfdfb71">qualifiedendof</span>
+     <li><span class="dfn-paneled" id="70ec8f76">qualifiedgeneration</span>
+     <li><span class="dfn-paneled" id="ff8e1f2d">qualifiedgeneration_1</span>
+     <li><span class="dfn-paneled" id="55b50760">qualifiedgenerationof</span>
+     <li><span class="dfn-paneled" id="b27544f2">qualifiedinfluence</span>
+     <li><span class="dfn-paneled" id="0c580345">qualifiedinfluence_1</span>
+     <li><span class="dfn-paneled" id="4d80ebcd">qualifiedinfluenceof</span>
+     <li><span class="dfn-paneled" id="f9fb911f">qualifiedinvalidation</span>
+     <li><span class="dfn-paneled" id="6f07809c">qualifiedinvalidation_1</span>
+     <li><span class="dfn-paneled" id="b5fd6bba">qualifiedinvalidationof</span>
+     <li><span class="dfn-paneled" id="875ed540">qualifiedrevision</span>
+     <li><span class="dfn-paneled" id="f2ef4c55">qualifiedrevision_1</span>
+     <li><span class="dfn-paneled" id="461f20b9">qualifiedstart</span>
+     <li><span class="dfn-paneled" id="6466733c">qualifiedstart_1</span>
+     <li><span class="dfn-paneled" id="41390ec4">qualifiedstartof</span>
+     <li><span class="dfn-paneled" id="60e11b42">qualifiedusage</span>
+     <li><span class="dfn-paneled" id="931c5dd7">qualifiedusage_1</span>
+     <li><span class="dfn-paneled" id="f06eafb5">qualifiedusingactivity</span>
+     <li><span class="dfn-paneled" id="3a3aa393">quotation</span>
+     <li><span class="dfn-paneled" id="6fd98d38">quotedas</span>
+     <li><span class="dfn-paneled" id="13108bf7">revisedentity</span>
+     <li><span class="dfn-paneled" id="85b0f6ca">revision</span>
+     <li><span class="dfn-paneled" id="400117e7">role</span>
+     <li><span class="dfn-paneled" id="3500cada">softwareagent</span>
+     <li><span class="dfn-paneled" id="8de1416c">specialization</span>
+     <li><span class="dfn-paneled" id="9c231291">specializationof</span>
+     <li><span class="dfn-paneled" id="085f2a94">start</span>
+     <li><span class="dfn-paneled" id="a4521742">startedattime</span>
+     <li><span class="dfn-paneled" id="64ced6f7">usage</span>
+     <li><span class="dfn-paneled" id="6669fd75">used</span>
+     <li><span class="dfn-paneled" id="19c5b883">wasactivityofinfluence</span>
+     <li><span class="dfn-paneled" id="fcde917c">wasassociatedwith</span>
+     <li><span class="dfn-paneled" id="04ab7528">wasassociatefor</span>
+     <li><span class="dfn-paneled" id="bf4f9965">wasattributedto</span>
+     <li><span class="dfn-paneled" id="b75f0137">wasderivedfrom</span>
+     <li><span class="dfn-paneled" id="26aac9ba">wasendedby</span>
+     <li><span class="dfn-paneled" id="0bc9a91a">wasgeneratedby</span>
+     <li><span class="dfn-paneled" id="9ff55d9f">wasinfluencedby</span>
+     <li><span class="dfn-paneled" id="a0a4ad8f">wasinfluencedbyactivity</span>
+     <li><span class="dfn-paneled" id="848b4efc">wasinfluencedbyagent</span>
+     <li><span class="dfn-paneled" id="4cc86417">wasinfluencedbyentity</span>
+     <li><span class="dfn-paneled" id="81717534">wasinformedby</span>
+     <li><span class="dfn-paneled" id="828bfbb4">wasinvalidatedby</span>
+     <li><span class="dfn-paneled" id="bc0a9f17">wasmemberof</span>
+     <li><span class="dfn-paneled" id="73172c76">wasplanof</span>
+     <li><span class="dfn-paneled" id="b2716776">wasprimarysourceof</span>
+     <li><span class="dfn-paneled" id="356079f4">wasquotedfrom</span>
+     <li><span class="dfn-paneled" id="42372c39">wasrevisionof</span>
+     <li><span class="dfn-paneled" id="ef2197f9">wasrolein</span>
+     <li><span class="dfn-paneled" id="4b2fa28f">wasstartedby</span>
+     <li><span class="dfn-paneled" id="825463bd">wasusedby</span>
+     <li><span class="dfn-paneled" id="c4b2c5d1">wasusedinderivation</span>
     </ul>
    <li>
     <a data-link-type="biblio">[HTTP://WWW.W3.ORG/NS/PROV-DICTIONARY]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-derivedbyinsertionfrom">derivedbyinsertionfrom</span>
-     <li><span class="dfn-paneled" id="term-for-derivedbyremovalfrom">derivedbyremovalfrom</span>
-     <li><span class="dfn-paneled" id="term-for-dictionary">dictionary</span>
-     <li><span class="dfn-paneled" id="term-for-emptydictionary">emptydictionary</span>
+     <li><span class="dfn-paneled" id="e67c452f">derivedbyinsertionfrom</span>
+     <li><span class="dfn-paneled" id="33bd22fb">derivedbyremovalfrom</span>
+     <li><span class="dfn-paneled" id="bf0a2ca6">dictionary</span>
+     <li><span class="dfn-paneled" id="d36dd95c">emptydictionary</span>
     </ul>
   </ul>
 <script>/* script-dfn-panel */
+"use strict";
+{
+    const dfnsJson = window.dfnsJson || {};
 
-document.body.addEventListener("click", function(e) {
-    var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
-    // Find the dfn element or panel, if any, that was clicked on.
-    var el = e.target;
-    var target;
-    var hitALink = false;
-    while(el.parentElement) {
-        if(el.tagName == "A") {
-            // Clicking on a link in a <dfn> shouldn't summon the panel
-            hitALink = true;
-        }
-        if(el.classList.contains("dfn-paneled")) {
-            target = "dfn";
-            break;
-        }
-        if(el.classList.contains("dfn-panel")) {
-            target = "dfn-panel";
-            break;
-        }
-        el = el.parentElement;
+    function genDfnPanel({dfnID, url, dfnText, refSections, external}) {
+        return mk.aside({
+            class: "dfn-panel",
+            id: `infopanel-for-${dfnID}`,
+            "data-for": dfnID,
+            "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
+            },
+            mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
+                `Info about the '${dfnText}' ${external?"external":""} reference.`),
+            mk.a({href:url}, url),
+            mk.b({}, "Referenced in:"),
+            mk.ul({},
+                ...refSections.map(section=>
+                    mk.li({},
+                        ...section.refs.map((ref, refI)=>
+                            [
+                                mk.a({
+                                    href: `#${ref.id}`
+                                    },
+                                    (refI == 0) ? section.title : `(${refI + 1})`
+                                ),
+                                " ",
+                            ]
+                        ),
+                    ),
+                ),
+            ),
+        );
     }
-    if(target != "dfn-panel") {
-        // Turn off any currently "on" or "activated" panels.
-        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
-            el.classList.remove("on");
-            el.classList.remove("activated");
-        });
-    }
-    if(target == "dfn" && !hitALink) {
-        // open the panel
-        var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
-        if(dfnPanel) {
-            dfnPanel.classList.add("on");
-            var rect = el.getBoundingClientRect();
-            dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";
-            dfnPanel.style.top = window.scrollY + rect.top + "px";
-            var panelRect = dfnPanel.getBoundingClientRect();
-            var panelWidth = panelRect.right - panelRect.left;
-            if(panelRect.right > document.body.scrollWidth && (rect.left - (panelWidth + 5)) > 0) {
-                // Reposition, because the panel is overflowing
-                dfnPanel.style.left = window.scrollX + rect.left - (panelWidth + 5) + "px";
+
+    function genAllDfnPanels() {
+        for(const panelData of Object.values(window.dfnpanelData)) {
+            const dfnID = panelData.dfnID;
+            const dfn = document.getElementById(dfnID);
+            if(!dfn) {
+                console.log(`Can't find dfn#${dfnID}.`, panelData);
+            } else {
+                const panel = genDfnPanel(panelData);
+                append(document.body, panel);
+                insertDfnPopupAction(dfn, panel)
             }
-        } else {
-            console.log("Couldn't find .dfn-panel[data-for='" + el.id + "']");
         }
-    } else if(target == "dfn-panel") {
-        // Switch it to "activated" state, which pins it.
-        el.classList.add("activated");
-        el.style.left = null;
-        el.style.top = null;
     }
 
-});
+    document.addEventListener("DOMContentLoaded", ()=>{
+        genAllDfnPanels();
+
+        // Add popup behavior to all dfns to show the corresponding dfn-panel.
+        var dfns = queryAll('.dfn-paneled');
+        for(let dfn of dfns) { ; }
+
+        document.body.addEventListener("click", (e) => {
+            // If not handled already, just hide all dfn panels.
+            hideAllDfnPanels();
+        });
+    })
+
+
+    function hideAllDfnPanels() {
+        // Turn off any currently "on" or "activated" panels.
+        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>hideDfnPanel(el));
+    }
+
+    function showDfnPanel(dfnPanel, dfn) {
+        hideAllDfnPanels(); // Only display one at this time.
+        dfn.setAttribute("aria-expanded", "true");
+        dfnPanel.classList.add("on");
+        dfnPanel.style.left = "5px";
+        dfnPanel.style.top = "0px";
+        const panelRect = dfnPanel.getBoundingClientRect();
+        const panelWidth = panelRect.right - panelRect.left;
+        if (panelRect.right > document.body.scrollWidth) {
+            // Panel's overflowing the screen.
+            // Just drop it below the dfn and flip it rightward instead.
+            // This still wont' fix things if the screen is *really* wide,
+            // but fixing that's a lot harder without 'anchor()'.
+            dfnPanel.style.top = "1.5em";
+            dfnPanel.style.left = "auto";
+            dfnPanel.style.right = "0px";
+        }
+    }
+
+    function pinDfnPanel(dfnPanel) {
+        // Switch it to "activated" state, which pins it.
+        dfnPanel.classList.add("activated");
+        dfnPanel.style.left = null;
+        dfnPanel.style.top = null;
+    }
+
+    function hideDfnPanel(dfnPanel, dfn) {
+        if(!dfn) {
+            dfn = document.getElementById(dfnPanel.getAttribute("data-for"));
+        }
+        dfn.setAttribute("aria-expanded", "false")
+        dfnPanel.classList.remove("on");
+        dfnPanel.classList.remove("activated");
+    }
+
+    function toggleDfnPanel(dfnPanel, dfn) {
+        if(dfnPanel.classList.contains("on")) {
+            hideDfnPanel(dfnPanel, dfn);
+        } else {
+            showDfnPanel(dfnPanel, dfn);
+        }
+    }
+
+    function insertDfnPopupAction(dfn, dfnPanel) {
+        // Find dfn panel
+        const panelWrapper = document.createElement('span');
+        panelWrapper.appendChild(dfnPanel);
+        panelWrapper.style.position = "relative";
+        panelWrapper.style.height = "0px";
+        dfn.insertAdjacentElement("afterend", panelWrapper);
+        dfn.setAttribute('role', 'button');
+        dfn.setAttribute('aria-expanded', 'false')
+        dfn.tabIndex = 0;
+        dfn.classList.add('has-dfn-panel');
+        dfn.addEventListener('click', (event) => {
+            showDfnPanel(dfnPanel, dfn);
+            event.stopPropagation();
+        });
+        dfn.addEventListener('keypress', (event) => {
+            const kc = event.keyCode;
+            // 32->Space, 13->Enter
+            if(kc == 32 || kc == 13) {
+                toggleDfnPanel(dfnPanel, dfn);
+                event.stopPropagation();
+                event.preventDefault();
+            }
+        });
+
+        dfnPanel.addEventListener('click', (event) => {
+            if (event.target.nodeName == 'A') {
+                pinDfnPanel(dfnPanel);
+            }
+            event.stopPropagation();
+        });
+
+        dfnPanel.addEventListener('keydown', (event) => {
+            if(event.keyCode == 27) { // Escape key
+                hideDfnPanel(dfnPanel, dfn);
+                event.stopPropagation();
+                event.preventDefault();
+            }
+        })
+    }
+}
 </script>
+<script>/* script-dfn-panel-json */
+window.dfnpanelData = {};
+window.dfnpanelData['110fb783'] = {"dfnID": "110fb783", "url": "../2001/XMLSchema.html#datetime", "dfnText": "datetime", "refSections": [{"refs": [{"id": "ref-for-datetime"}], "title": "3.5. InstantaneousEvent"}, {"refs": [{"id": "ref-for-datetime\u2460"}, {"id": "ref-for-datetime\u2461"}], "title": "4.1. Activity"}, {"refs": [{"id": "ref-for-datetime\u2462"}, {"id": "ref-for-datetime\u2463"}], "title": "4.7. Entity"}, {"refs": [{"id": "ref-for-datetime\u2464"}], "title": "6.1. atTime"}, {"refs": [{"id": "ref-for-datetime\u2465"}], "title": "6.2. endedAtTime"}, {"refs": [{"id": "ref-for-datetime\u2466"}], "title": "6.3. generatedAtTime"}, {"refs": [{"id": "ref-for-datetime\u2467"}], "title": "6.4. invalidatedAtTime"}, {"refs": [{"id": "ref-for-datetime\u2468"}], "title": "6.5. startedAtTime"}], "external": true};
+window.dfnpanelData['a2ad012d'] = {"dfnID": "a2ad012d", "url": "prov.html#actedonbehalfof", "dfnText": "actedonbehalfof", "refSections": [{"refs": [{"id": "ref-for-actedonbehalfof"}], "title": "4.3. Agent"}], "external": true};
+window.dfnpanelData['8b22a9f6'] = {"dfnID": "8b22a9f6", "url": "prov.html#activity", "dfnText": "activity", "refSections": [{"refs": [{"id": "ref-for-activity"}, {"id": "ref-for-activity\u2460"}], "title": "3.1. ActivityOrAgentOrEntity"}, {"refs": [{"id": "ref-for-activity\u2461"}], "title": "3.4. InfluenceOrDelegationOrDerivationOrEndOrStart"}, {"refs": [{"id": "ref-for-activity\u2462"}, {"id": "ref-for-activity\u2463"}], "title": "4.1. Activity"}, {"refs": [{"id": "ref-for-activity\u2464"}], "title": "4.2. ActivityAndAgent"}, {"refs": [{"id": "ref-for-activity\u2465"}], "title": "4.3. Agent"}, {"refs": [{"id": "ref-for-activity\u2466"}, {"id": "ref-for-activity\u2467"}, {"id": "ref-for-activity\u2468"}], "title": "4.7. Entity"}, {"refs": [{"id": "ref-for-activity\u2460\u24ea"}, {"id": "ref-for-activity\u2460\u2460"}], "title": "5.1. ActivityInfluence"}, {"refs": [{"id": "ref-for-activity\u2460\u2461"}, {"id": "ref-for-activity\u2460\u2462"}], "title": "5.4. Association"}, {"refs": [{"id": "ref-for-activity\u2460\u2463"}, {"id": "ref-for-activity\u2460\u2464"}, {"id": "ref-for-activity\u2460\u2465"}], "title": "5.7. Communication"}, {"refs": [{"id": "ref-for-activity\u2460\u2466"}], "title": "5.10. End"}, {"refs": [{"id": "ref-for-activity\u2460\u2467"}], "title": "5.12. Generation"}, {"refs": [{"id": "ref-for-activity\u2460\u2468"}], "title": "5.13. HadActivity"}, {"refs": [{"id": "ref-for-activity\u2461\u24ea"}], "title": "5.20. InfluencerActivity"}, {"refs": [{"id": "ref-for-activity\u2461\u2460"}, {"id": "ref-for-activity\u2461\u2461"}], "title": "5.23. Invalidation"}, {"refs": [{"id": "ref-for-activity\u2461\u2462"}], "title": "5.26. QualifiedAssociation"}, {"refs": [{"id": "ref-for-activity\u2461\u2463"}], "title": "5.28. QualifiedCommunication"}, {"refs": [{"id": "ref-for-activity\u2461\u2464"}], "title": "5.34. QualifiedInvalidation"}, {"refs": [{"id": "ref-for-activity\u2461\u2465"}], "title": "5.37. QualifiedUsage"}, {"refs": [{"id": "ref-for-activity\u2461\u2466"}], "title": "5.41. Start"}, {"refs": [{"id": "ref-for-activity\u2461\u2467"}, {"id": "ref-for-activity\u2461\u2468"}], "title": "5.42. Usage"}, {"refs": [{"id": "ref-for-activity\u2462\u24ea"}], "title": "6.2. endedAtTime"}, {"refs": [{"id": "ref-for-activity\u2462\u2460"}], "title": "6.5. startedAtTime"}], "external": true};
+window.dfnpanelData['7ba56306'] = {"dfnID": "7ba56306", "url": "prov.html#activity_1", "dfnText": "activity_1", "refSections": [{"refs": [{"id": "ref-for-activity_1"}], "title": "5.1. ActivityInfluence"}], "external": true};
+window.dfnpanelData['faa4bcf1'] = {"dfnID": "faa4bcf1", "url": "prov.html#activityandagent", "dfnText": "activityandagent", "refSections": [{"refs": [{"id": "ref-for-activityandagent"}], "title": "4.1. Activity"}, {"refs": [{"id": "ref-for-activityandagent\u2460"}], "title": "4.3. Agent"}], "external": true};
+window.dfnpanelData['242df1ed'] = {"dfnID": "242df1ed", "url": "prov.html#activityinfluence", "dfnText": "activityinfluence", "refSections": [{"refs": [{"id": "ref-for-activityinfluence"}], "title": "4.1. Activity"}, {"refs": [{"id": "ref-for-activityinfluence\u2460"}], "title": "5.7. Communication"}, {"refs": [{"id": "ref-for-activityinfluence\u2461"}], "title": "5.12. Generation"}, {"refs": [{"id": "ref-for-activityinfluence\u2462"}], "title": "5.18. Influence"}, {"refs": [{"id": "ref-for-activityinfluence\u2463"}], "title": "5.20. InfluencerActivity"}], "external": true};
+window.dfnpanelData['ffc77f4f'] = {"dfnID": "ffc77f4f", "url": "prov.html#activityinfluenced", "dfnText": "activityinfluenced", "refSections": [{"refs": [{"id": "ref-for-activityinfluenced"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['b8eda049'] = {"dfnID": "b8eda049", "url": "prov.html#activityofinfluence", "dfnText": "activityofinfluence", "refSections": [{"refs": [{"id": "ref-for-activityofinfluence"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['d232e8c7'] = {"dfnID": "d232e8c7", "url": "prov.html#activityoragentorentity", "dfnText": "activityoragentorentity", "refSections": [{"refs": [{"id": "ref-for-activityoragentorentity"}, {"id": "ref-for-activityoragentorentity\u2460"}], "title": "3.1. ActivityOrAgentOrEntity"}, {"refs": [{"id": "ref-for-activityoragentorentity\u2461"}], "title": "3.2. ActivityOrAgentOrEntityOrInstantaneousEvent"}, {"refs": [{"id": "ref-for-activityoragentorentity\u2462"}, {"id": "ref-for-activityoragentorentity\u2463"}], "title": "4.1. Activity"}, {"refs": [{"id": "ref-for-activityoragentorentity\u2464"}, {"id": "ref-for-activityoragentorentity\u2465"}], "title": "4.3. Agent"}, {"refs": [{"id": "ref-for-activityoragentorentity\u2466"}, {"id": "ref-for-activityoragentorentity\u2467"}], "title": "4.7. Entity"}, {"refs": [{"id": "ref-for-activityoragentorentity\u2468"}], "title": "5.1. ActivityInfluence"}, {"refs": [{"id": "ref-for-activityoragentorentity\u2460\u24ea"}], "title": "5.2. AgentInfluence"}, {"refs": [{"id": "ref-for-activityoragentorentity\u2460\u2460"}], "title": "5.11. EntityInfluence"}, {"refs": [{"id": "ref-for-activityoragentorentity\u2460\u2461"}, {"id": "ref-for-activityoragentorentity\u2460\u2462"}, {"id": "ref-for-activityoragentorentity\u2460\u2463"}, {"id": "ref-for-activityoragentorentity\u2460\u2464"}], "title": "5.18. Influence"}, {"refs": [{"id": "ref-for-activityoragentorentity\u2460\u2465"}], "title": "5.19. Influencer"}, {"refs": [{"id": "ref-for-activityoragentorentity\u2460\u2466"}], "title": "5.33. QualifiedInfluence"}], "external": true};
+window.dfnpanelData['6a5fe307'] = {"dfnID": "6a5fe307", "url": "prov.html#activityoragentorentityorinstantaneousevent", "dfnText": "activityoragentorentityorinstantaneousevent", "refSections": [{"refs": [{"id": "ref-for-activityoragentorentityorinstantaneousevent"}], "title": "3.1. ActivityOrAgentOrEntity"}, {"refs": [{"id": "ref-for-activityoragentorentityorinstantaneousevent\u2460"}], "title": "3.5. InstantaneousEvent"}, {"refs": [{"id": "ref-for-activityoragentorentityorinstantaneousevent\u2461"}], "title": "4.9. Location"}, {"refs": [{"id": "ref-for-activityoragentorentityorinstantaneousevent\u2462"}], "title": "5.5. AtLocation"}], "external": true};
+window.dfnpanelData['f2e5cc02'] = {"dfnID": "f2e5cc02", "url": "prov.html#agent", "dfnText": "agent", "refSections": [{"refs": [{"id": "ref-for-agent"}, {"id": "ref-for-agent\u2460"}], "title": "3.1. ActivityOrAgentOrEntity"}, {"refs": [{"id": "ref-for-agent\u2461"}], "title": "4.1. Activity"}, {"refs": [{"id": "ref-for-agent\u2462"}], "title": "4.2. ActivityAndAgent"}, {"refs": [{"id": "ref-for-agent\u2463"}, {"id": "ref-for-agent\u2464"}], "title": "4.3. Agent"}, {"refs": [{"id": "ref-for-agent\u2465"}], "title": "4.7. Entity"}, {"refs": [{"id": "ref-for-agent\u2466"}], "title": "4.8. EntityAndAgent"}, {"refs": [{"id": "ref-for-agent\u2467"}], "title": "4.10. Organization"}, {"refs": [{"id": "ref-for-agent\u2468"}], "title": "4.11. Person"}, {"refs": [{"id": "ref-for-agent\u2460\u24ea"}], "title": "4.14. SoftwareAgent"}, {"refs": [{"id": "ref-for-agent\u2460\u2460"}, {"id": "ref-for-agent\u2460\u2461"}], "title": "5.2. AgentInfluence"}, {"refs": [{"id": "ref-for-agent\u2460\u2462"}], "title": "5.4. Association"}, {"refs": [{"id": "ref-for-agent\u2460\u2463"}], "title": "5.6. Attribution"}, {"refs": [{"id": "ref-for-agent\u2460\u2464"}, {"id": "ref-for-agent\u2460\u2465"}, {"id": "ref-for-agent\u2460\u2466"}], "title": "5.8. Delegation"}, {"refs": [{"id": "ref-for-agent\u2460\u2467"}], "title": "5.21. InfluencerAgent"}, {"refs": [{"id": "ref-for-agent\u2460\u2468"}], "title": "5.29. QualifiedDelegation"}], "external": true};
+window.dfnpanelData['84c60d17'] = {"dfnID": "84c60d17", "url": "prov.html#agent_1", "dfnText": "agent_1", "refSections": [{"refs": [{"id": "ref-for-agent_1"}], "title": "5.2. AgentInfluence"}], "external": true};
+window.dfnpanelData['b2738042'] = {"dfnID": "b2738042", "url": "prov.html#agentinfluence", "dfnText": "agentinfluence", "refSections": [{"refs": [{"id": "ref-for-agentinfluence"}], "title": "4.3. Agent"}, {"refs": [{"id": "ref-for-agentinfluence\u2460"}], "title": "5.4. Association"}, {"refs": [{"id": "ref-for-agentinfluence\u2461"}], "title": "5.6. Attribution"}, {"refs": [{"id": "ref-for-agentinfluence\u2462"}], "title": "5.8. Delegation"}, {"refs": [{"id": "ref-for-agentinfluence\u2463"}], "title": "5.18. Influence"}, {"refs": [{"id": "ref-for-agentinfluence\u2464"}], "title": "5.21. InfluencerAgent"}], "external": true};
+window.dfnpanelData['35707f0a'] = {"dfnID": "35707f0a", "url": "prov.html#agentinfluenced", "dfnText": "agentinfluenced", "refSections": [{"refs": [{"id": "ref-for-agentinfluenced"}], "title": "4.3. Agent"}], "external": true};
+window.dfnpanelData['a0164d8d'] = {"dfnID": "a0164d8d", "url": "prov.html#agentofinfluence", "dfnText": "agentofinfluence", "refSections": [{"refs": [{"id": "ref-for-agentofinfluence"}], "title": "4.3. Agent"}], "external": true};
+window.dfnpanelData['c2416e5b'] = {"dfnID": "c2416e5b", "url": "prov.html#alternate", "dfnText": "alternate", "refSections": [{"refs": [{"id": "ref-for-alternate"}], "title": "5.40. Specialization"}], "external": true};
+window.dfnpanelData['ff4adc87'] = {"dfnID": "ff4adc87", "url": "prov.html#alternateof", "dfnText": "alternateof", "refSections": [{"refs": [{"id": "ref-for-alternateof"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['489cb177'] = {"dfnID": "489cb177", "url": "prov.html#association", "dfnText": "association", "refSections": [{"refs": [{"id": "ref-for-association"}], "title": "3.3. AssociationOrInfluenceOrInstantaneousEvent"}, {"refs": [{"id": "ref-for-association\u2460"}], "title": "4.1. Activity"}, {"refs": [{"id": "ref-for-association\u2461"}], "title": "4.12. Plan"}, {"refs": [{"id": "ref-for-association\u2462"}], "title": "5.2. AgentInfluence"}, {"refs": [{"id": "ref-for-association\u2463"}], "title": "5.15. HadPlan"}, {"refs": [{"id": "ref-for-association\u2464"}], "title": "5.26. QualifiedAssociation"}], "external": true};
+window.dfnpanelData['b3857574'] = {"dfnID": "b3857574", "url": "prov.html#associationorinfluenceorinstantaneousevent", "dfnText": "associationorinfluenceorinstantaneousevent", "refSections": [{"refs": [{"id": "ref-for-associationorinfluenceorinstantaneousevent"}], "title": "3.5. InstantaneousEvent"}, {"refs": [{"id": "ref-for-associationorinfluenceorinstantaneousevent\u2460"}], "title": "4.13. Role"}, {"refs": [{"id": "ref-for-associationorinfluenceorinstantaneousevent\u2461"}], "title": "5.4. Association"}, {"refs": [{"id": "ref-for-associationorinfluenceorinstantaneousevent\u2462"}], "title": "5.16. HadRole"}, {"refs": [{"id": "ref-for-associationorinfluenceorinstantaneousevent\u2463"}], "title": "5.18. Influence"}], "external": true};
+window.dfnpanelData['26789673'] = {"dfnID": "26789673", "url": "prov.html#atlocation_1", "dfnText": "atlocation_1", "refSections": [{"refs": [{"id": "ref-for-atlocation_1"}], "title": "3.2. ActivityOrAgentOrEntityOrInstantaneousEvent"}], "external": true};
+window.dfnpanelData['a39d91fa'] = {"dfnID": "a39d91fa", "url": "prov.html#attime", "dfnText": "attime", "refSections": [{"refs": [{"id": "ref-for-attime"}], "title": "3.5. InstantaneousEvent"}], "external": true};
+window.dfnpanelData['97f3f7e7'] = {"dfnID": "97f3f7e7", "url": "prov.html#attribution", "dfnText": "attribution", "refSections": [{"refs": [{"id": "ref-for-attribution"}], "title": "4.7. Entity"}, {"refs": [{"id": "ref-for-attribution\u2460"}], "title": "5.2. AgentInfluence"}, {"refs": [{"id": "ref-for-attribution\u2461"}], "title": "5.27. QualifiedAttribution"}], "external": true};
+window.dfnpanelData['e67b40a3'] = {"dfnID": "e67b40a3", "url": "prov.html#bundle", "dfnText": "bundle", "refSections": [{"refs": [{"id": "ref-for-bundle"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['29ba30a9'] = {"dfnID": "29ba30a9", "url": "prov.html#collection", "dfnText": "collection", "refSections": [{"refs": [{"id": "ref-for-collection"}], "title": "4.6. EmptyCollection"}, {"refs": [{"id": "ref-for-collection\u2460"}, {"id": "ref-for-collection\u2461"}], "title": "4.7. Entity"}, {"refs": [{"id": "ref-for-collection\u2462"}], "title": "5.24. Member"}], "external": true};
+window.dfnpanelData['19523b64'] = {"dfnID": "19523b64", "url": "prov.html#communication", "dfnText": "communication", "refSections": [{"refs": [{"id": "ref-for-communication"}], "title": "4.1. Activity"}, {"refs": [{"id": "ref-for-communication\u2460"}], "title": "5.1. ActivityInfluence"}, {"refs": [{"id": "ref-for-communication\u2461"}], "title": "5.28. QualifiedCommunication"}], "external": true};
+window.dfnpanelData['4ef29cd9'] = {"dfnID": "4ef29cd9", "url": "prov.html#contributed", "dfnText": "contributed", "refSections": [{"refs": [{"id": "ref-for-contributed"}], "title": "4.3. Agent"}], "external": true};
+window.dfnpanelData['b0c57777'] = {"dfnID": "b0c57777", "url": "prov.html#delegation", "dfnText": "delegation", "refSections": [{"refs": [{"id": "ref-for-delegation"}], "title": "3.4. InfluenceOrDelegationOrDerivationOrEndOrStart"}, {"refs": [{"id": "ref-for-delegation\u2460"}], "title": "4.3. Agent"}, {"refs": [{"id": "ref-for-delegation\u2461"}], "title": "5.2. AgentInfluence"}, {"refs": [{"id": "ref-for-delegation\u2462"}], "title": "5.29. QualifiedDelegation"}], "external": true};
+window.dfnpanelData['60be2035'] = {"dfnID": "60be2035", "url": "prov.html#derivation", "dfnText": "derivation", "refSections": [{"refs": [{"id": "ref-for-derivation"}], "title": "3.4. InfluenceOrDelegationOrDerivationOrEndOrStart"}, {"refs": [{"id": "ref-for-derivation\u2460"}], "title": "3.5. InstantaneousEvent"}, {"refs": [{"id": "ref-for-derivation\u2461"}], "title": "4.7. Entity"}, {"refs": [{"id": "ref-for-derivation\u2462"}], "title": "5.11. EntityInfluence"}, {"refs": [{"id": "ref-for-derivation\u2463"}], "title": "5.12. Generation"}, {"refs": [{"id": "ref-for-derivation\u2464"}], "title": "5.14. HadGeneration"}, {"refs": [{"id": "ref-for-derivation\u2465"}], "title": "5.17. HadUsage"}, {"refs": [{"id": "ref-for-derivation\u2466"}], "title": "5.25. PrimarySource"}, {"refs": [{"id": "ref-for-derivation\u2467"}], "title": "5.30. QualifiedDerivation"}, {"refs": [{"id": "ref-for-derivation\u2468"}], "title": "5.38. Quotation"}, {"refs": [{"id": "ref-for-derivation\u2460\u24ea"}], "title": "5.39. Revision"}, {"refs": [{"id": "ref-for-derivation\u2460\u2460"}], "title": "5.42. Usage"}], "external": true};
+window.dfnpanelData['6ef1cab3'] = {"dfnID": "6ef1cab3", "url": "prov.html#emptycollection", "dfnText": "emptycollection", "refSections": [{"refs": [{"id": "ref-for-emptycollection"}], "title": "4.5. Collection"}], "external": true};
+window.dfnpanelData['f5916119'] = {"dfnID": "f5916119", "url": "prov.html#end", "dfnText": "end", "refSections": [{"refs": [{"id": "ref-for-end"}], "title": "3.4. InfluenceOrDelegationOrDerivationOrEndOrStart"}, {"refs": [{"id": "ref-for-end\u2460"}], "title": "3.5. InstantaneousEvent"}, {"refs": [{"id": "ref-for-end\u2461"}], "title": "4.7. Entity"}, {"refs": [{"id": "ref-for-end\u2462"}], "title": "5.18. Influence"}, {"refs": [{"id": "ref-for-end\u2463"}], "title": "5.31. QualifiedEnd"}], "external": true};
+window.dfnpanelData['20065d62'] = {"dfnID": "20065d62", "url": "prov.html#endedattime", "dfnText": "endedattime", "refSections": [{"refs": [{"id": "ref-for-endedattime"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['78205d90'] = {"dfnID": "78205d90", "url": "prov.html#entity", "dfnText": "entity", "refSections": [{"refs": [{"id": "ref-for-entity"}, {"id": "ref-for-entity\u2460"}], "title": "3.1. ActivityOrAgentOrEntity"}, {"refs": [{"id": "ref-for-entity\u2461"}, {"id": "ref-for-entity\u2462"}, {"id": "ref-for-entity\u2463"}, {"id": "ref-for-entity\u2464"}, {"id": "ref-for-entity\u2465"}], "title": "4.1. Activity"}, {"refs": [{"id": "ref-for-entity\u2466"}], "title": "4.3. Agent"}, {"refs": [{"id": "ref-for-entity\u2467"}], "title": "4.4. Bundle"}, {"refs": [{"id": "ref-for-entity\u2468"}, {"id": "ref-for-entity\u2460\u24ea"}], "title": "4.5. Collection"}, {"refs": [{"id": "ref-for-entity\u2460\u2460"}], "title": "4.6. EmptyCollection"}, {"refs": [{"id": "ref-for-entity\u2460\u2461"}, {"id": "ref-for-entity\u2460\u2462"}, {"id": "ref-for-entity\u2460\u2463"}, {"id": "ref-for-entity\u2460\u2464"}, {"id": "ref-for-entity\u2460\u2465"}, {"id": "ref-for-entity\u2460\u2466"}, {"id": "ref-for-entity\u2460\u2467"}, {"id": "ref-for-entity\u2460\u2468"}, {"id": "ref-for-entity\u2461\u24ea"}, {"id": "ref-for-entity\u2461\u2460"}, {"id": "ref-for-entity\u2461\u2461"}], "title": "4.7. Entity"}, {"refs": [{"id": "ref-for-entity\u2461\u2462"}], "title": "4.8. EntityAndAgent"}, {"refs": [{"id": "ref-for-entity\u2461\u2463"}], "title": "4.12. Plan"}, {"refs": [{"id": "ref-for-entity\u2461\u2464"}, {"id": "ref-for-entity\u2461\u2465"}], "title": "5.3. Alternate"}, {"refs": [{"id": "ref-for-entity\u2461\u2466"}, {"id": "ref-for-entity\u2461\u2467"}], "title": "5.6. Attribution"}, {"refs": [{"id": "ref-for-entity\u2461\u2468"}, {"id": "ref-for-entity\u2462\u24ea"}, {"id": "ref-for-entity\u2462\u2460"}], "title": "5.9. Derivation"}, {"refs": [{"id": "ref-for-entity\u2462\u2461"}, {"id": "ref-for-entity\u2462\u2462"}], "title": "5.10. End"}, {"refs": [{"id": "ref-for-entity\u2462\u2463"}, {"id": "ref-for-entity\u2462\u2464"}], "title": "5.11. EntityInfluence"}, {"refs": [{"id": "ref-for-entity\u2462\u2465"}, {"id": "ref-for-entity\u2462\u2466"}], "title": "5.12. Generation"}, {"refs": [{"id": "ref-for-entity\u2462\u2467"}], "title": "5.22. InfluencerEntity"}, {"refs": [{"id": "ref-for-entity\u2462\u2468"}], "title": "5.23. Invalidation"}, {"refs": [{"id": "ref-for-entity\u2463\u24ea"}], "title": "5.24. Member"}, {"refs": [{"id": "ref-for-entity\u2463\u2460"}, {"id": "ref-for-entity\u2463\u2461"}], "title": "5.25. PrimarySource"}, {"refs": [{"id": "ref-for-entity\u2463\u2462"}], "title": "5.27. QualifiedAttribution"}, {"refs": [{"id": "ref-for-entity\u2463\u2463"}], "title": "5.30. QualifiedDerivation"}, {"refs": [{"id": "ref-for-entity\u2463\u2464"}], "title": "5.31. QualifiedEnd"}, {"refs": [{"id": "ref-for-entity\u2463\u2465"}], "title": "5.32. QualifiedGeneration"}, {"refs": [{"id": "ref-for-entity\u2463\u2466"}], "title": "5.35. QualifiedRevision"}, {"refs": [{"id": "ref-for-entity\u2463\u2467"}], "title": "5.36. QualifiedStart"}, {"refs": [{"id": "ref-for-entity\u2463\u2468"}, {"id": "ref-for-entity\u2464\u24ea"}], "title": "5.38. Quotation"}, {"refs": [{"id": "ref-for-entity\u2464\u2460"}, {"id": "ref-for-entity\u2464\u2461"}, {"id": "ref-for-entity\u2464\u2462"}], "title": "5.39. Revision"}, {"refs": [{"id": "ref-for-entity\u2464\u2463"}, {"id": "ref-for-entity\u2464\u2464"}], "title": "5.40. Specialization"}, {"refs": [{"id": "ref-for-entity\u2464\u2465"}, {"id": "ref-for-entity\u2464\u2466"}], "title": "5.41. Start"}, {"refs": [{"id": "ref-for-entity\u2464\u2467"}], "title": "5.42. Usage"}, {"refs": [{"id": "ref-for-entity\u2464\u2468"}], "title": "6.3. generatedAtTime"}, {"refs": [{"id": "ref-for-entity\u2465\u24ea"}], "title": "6.4. invalidatedAtTime"}], "external": true};
+window.dfnpanelData['0516b12b'] = {"dfnID": "0516b12b", "url": "prov.html#entity_1", "dfnText": "entity_1", "refSections": [{"refs": [{"id": "ref-for-entity_1"}], "title": "5.11. EntityInfluence"}], "external": true};
+window.dfnpanelData['ee731181'] = {"dfnID": "ee731181", "url": "prov.html#entityandagent", "dfnText": "entityandagent", "refSections": [{"refs": [{"id": "ref-for-entityandagent"}], "title": "4.3. Agent"}, {"refs": [{"id": "ref-for-entityandagent\u2460"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['ed785cdc'] = {"dfnID": "ed785cdc", "url": "prov.html#entityinfluence", "dfnText": "entityinfluence", "refSections": [{"refs": [{"id": "ref-for-entityinfluence"}], "title": "4.7. Entity"}, {"refs": [{"id": "ref-for-entityinfluence\u2460"}], "title": "5.9. Derivation"}, {"refs": [{"id": "ref-for-entityinfluence\u2461"}], "title": "5.18. Influence"}, {"refs": [{"id": "ref-for-entityinfluence\u2462"}], "title": "5.22. InfluencerEntity"}, {"refs": [{"id": "ref-for-entityinfluence\u2463"}], "title": "5.23. Invalidation"}], "external": true};
+window.dfnpanelData['7e1dbda6'] = {"dfnID": "7e1dbda6", "url": "prov.html#entityinfluenced", "dfnText": "entityinfluenced", "refSections": [{"refs": [{"id": "ref-for-entityinfluenced"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['3f00b257'] = {"dfnID": "3f00b257", "url": "prov.html#entityofinfluence", "dfnText": "entityofinfluence", "refSections": [{"refs": [{"id": "ref-for-entityofinfluence"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['eb1ee7ed'] = {"dfnID": "eb1ee7ed", "url": "prov.html#generalizationof", "dfnText": "generalizationof", "refSections": [{"refs": [{"id": "ref-for-generalizationof"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['38552744'] = {"dfnID": "38552744", "url": "prov.html#generated", "dfnText": "generated", "refSections": [{"refs": [{"id": "ref-for-generated"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['1e1a46eb'] = {"dfnID": "1e1a46eb", "url": "prov.html#generatedasderivation", "dfnText": "generatedasderivation", "refSections": [{"refs": [{"id": "ref-for-generatedasderivation"}], "title": "5.12. Generation"}], "external": true};
+window.dfnpanelData['ed2d1230'] = {"dfnID": "ed2d1230", "url": "prov.html#generatedattime", "dfnText": "generatedattime", "refSections": [{"refs": [{"id": "ref-for-generatedattime"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['db0a5ff8'] = {"dfnID": "db0a5ff8", "url": "prov.html#generation", "dfnText": "generation", "refSections": [{"refs": [{"id": "ref-for-generation"}], "title": "3.5. InstantaneousEvent"}, {"refs": [{"id": "ref-for-generation\u2460"}], "title": "4.7. Entity"}, {"refs": [{"id": "ref-for-generation\u2461"}], "title": "5.1. ActivityInfluence"}, {"refs": [{"id": "ref-for-generation\u2462"}], "title": "5.9. Derivation"}, {"refs": [{"id": "ref-for-generation\u2463"}], "title": "5.14. HadGeneration"}, {"refs": [{"id": "ref-for-generation\u2464"}], "title": "5.32. QualifiedGeneration"}], "external": true};
+window.dfnpanelData['2b683e98'] = {"dfnID": "2b683e98", "url": "prov.html#hadactivity_1", "dfnText": "hadactivity_1", "refSections": [{"refs": [{"id": "ref-for-hadactivity_1"}], "title": "3.4. InfluenceOrDelegationOrDerivationOrEndOrStart"}], "external": true};
+window.dfnpanelData['f411b57f'] = {"dfnID": "f411b57f", "url": "prov.html#haddelegate", "dfnText": "haddelegate", "refSections": [{"refs": [{"id": "ref-for-haddelegate"}], "title": "4.3. Agent"}], "external": true};
+window.dfnpanelData['c40c970c'] = {"dfnID": "c40c970c", "url": "prov.html#hadderivation", "dfnText": "hadderivation", "refSections": [{"refs": [{"id": "ref-for-hadderivation"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['5ca36a63'] = {"dfnID": "5ca36a63", "url": "prov.html#hadinfluence", "dfnText": "hadinfluence", "refSections": [{"refs": [{"id": "ref-for-hadinfluence"}], "title": "3.1. ActivityOrAgentOrEntity"}], "external": true};
+window.dfnpanelData['2ff4f11b'] = {"dfnID": "2ff4f11b", "url": "prov.html#hadmember", "dfnText": "hadmember", "refSections": [{"refs": [{"id": "ref-for-hadmember"}], "title": "4.5. Collection"}, {"refs": [{"id": "ref-for-hadmember\u2460"}], "title": "4.6. EmptyCollection"}], "external": true};
+window.dfnpanelData['228a0c5c'] = {"dfnID": "228a0c5c", "url": "prov.html#hadplan_1", "dfnText": "hadplan_1", "refSections": [{"refs": [{"id": "ref-for-hadplan_1"}], "title": "5.4. Association"}], "external": true};
+window.dfnpanelData['089ee24a'] = {"dfnID": "089ee24a", "url": "prov.html#hadprimarysource", "dfnText": "hadprimarysource", "refSections": [{"refs": [{"id": "ref-for-hadprimarysource"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['2170be59'] = {"dfnID": "2170be59", "url": "prov.html#hadrevision", "dfnText": "hadrevision", "refSections": [{"refs": [{"id": "ref-for-hadrevision"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['a58cde52'] = {"dfnID": "a58cde52", "url": "prov.html#hadrole_1", "dfnText": "hadrole_1", "refSections": [{"refs": [{"id": "ref-for-hadrole_1"}], "title": "3.3. AssociationOrInfluenceOrInstantaneousEvent"}], "external": true};
+window.dfnpanelData['b9dab668'] = {"dfnID": "b9dab668", "url": "prov.html#hadusage_1", "dfnText": "hadusage_1", "refSections": [{"refs": [{"id": "ref-for-hadusage_1"}], "title": "5.9. Derivation"}], "external": true};
+window.dfnpanelData['eefe25db'] = {"dfnID": "eefe25db", "url": "prov.html#hasgeneration", "dfnText": "hasgeneration", "refSections": [{"refs": [{"id": "ref-for-hasgeneration"}], "title": "5.9. Derivation"}], "external": true};
+window.dfnpanelData['fe4b5403'] = {"dfnID": "fe4b5403", "url": "prov.html#influence", "dfnText": "influence", "refSections": [{"refs": [{"id": "ref-for-influence"}, {"id": "ref-for-influence\u2460"}], "title": "3.1. ActivityOrAgentOrEntity"}, {"refs": [{"id": "ref-for-influence\u2461"}], "title": "3.3. AssociationOrInfluenceOrInstantaneousEvent"}, {"refs": [{"id": "ref-for-influence\u2462"}], "title": "3.4. InfluenceOrDelegationOrDerivationOrEndOrStart"}, {"refs": [{"id": "ref-for-influence\u2463"}], "title": "5.1. ActivityInfluence"}, {"refs": [{"id": "ref-for-influence\u2464"}], "title": "5.2. AgentInfluence"}, {"refs": [{"id": "ref-for-influence\u2465"}], "title": "5.10. End"}, {"refs": [{"id": "ref-for-influence\u2466"}], "title": "5.11. EntityInfluence"}, {"refs": [{"id": "ref-for-influence\u2467"}], "title": "5.19. Influencer"}, {"refs": [{"id": "ref-for-influence\u2468"}], "title": "5.33. QualifiedInfluence"}, {"refs": [{"id": "ref-for-influence\u2460\u24ea"}], "title": "5.41. Start"}, {"refs": [{"id": "ref-for-influence\u2460\u2460"}], "title": "5.42. Usage"}], "external": true};
+window.dfnpanelData['edf87004'] = {"dfnID": "edf87004", "url": "prov.html#influenced", "dfnText": "influenced", "refSections": [{"refs": [{"id": "ref-for-influenced"}], "title": "3.1. ActivityOrAgentOrEntity"}], "external": true};
+window.dfnpanelData['768116b5'] = {"dfnID": "768116b5", "url": "prov.html#influenceordelegationorderivationorendorstart", "dfnText": "influenceordelegationorderivationorendorstart", "refSections": [{"refs": [{"id": "ref-for-influenceordelegationorderivationorendorstart"}], "title": "4.1. Activity"}, {"refs": [{"id": "ref-for-influenceordelegationorderivationorendorstart\u2460"}], "title": "5.8. Delegation"}, {"refs": [{"id": "ref-for-influenceordelegationorderivationorendorstart\u2461"}], "title": "5.9. Derivation"}, {"refs": [{"id": "ref-for-influenceordelegationorderivationorendorstart\u2462"}], "title": "5.10. End"}, {"refs": [{"id": "ref-for-influenceordelegationorderivationorendorstart\u2463"}], "title": "5.13. HadActivity"}, {"refs": [{"id": "ref-for-influenceordelegationorderivationorendorstart\u2464"}], "title": "5.18. Influence"}, {"refs": [{"id": "ref-for-influenceordelegationorderivationorendorstart\u2465"}], "title": "5.41. Start"}], "external": true};
+window.dfnpanelData['30d1e195'] = {"dfnID": "30d1e195", "url": "prov.html#influencer", "dfnText": "influencer", "refSections": [{"refs": [{"id": "ref-for-influencer"}], "title": "5.20. InfluencerActivity"}, {"refs": [{"id": "ref-for-influencer\u2460"}], "title": "5.21. InfluencerAgent"}, {"refs": [{"id": "ref-for-influencer\u2461"}], "title": "5.22. InfluencerEntity"}], "external": true};
+window.dfnpanelData['66aaa78d'] = {"dfnID": "66aaa78d", "url": "prov.html#influencer_1", "dfnText": "influencer_1", "refSections": [{"refs": [{"id": "ref-for-influencer_1"}], "title": "5.18. Influence"}], "external": true};
+window.dfnpanelData['c25ea82f'] = {"dfnID": "c25ea82f", "url": "prov.html#influenceractivity", "dfnText": "influenceractivity", "refSections": [{"refs": [{"id": "ref-for-influenceractivity"}], "title": "5.19. Influencer"}], "external": true};
+window.dfnpanelData['776395ef'] = {"dfnID": "776395ef", "url": "prov.html#influenceragent", "dfnText": "influenceragent", "refSections": [{"refs": [{"id": "ref-for-influenceragent"}], "title": "5.19. Influencer"}], "external": true};
+window.dfnpanelData['e6f36114'] = {"dfnID": "e6f36114", "url": "prov.html#influencerentity", "dfnText": "influencerentity", "refSections": [{"refs": [{"id": "ref-for-influencerentity"}], "title": "5.19. Influencer"}], "external": true};
+window.dfnpanelData['c35c3b0c'] = {"dfnID": "c35c3b0c", "url": "prov.html#informed", "dfnText": "informed", "refSections": [{"refs": [{"id": "ref-for-informed"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['caae4851'] = {"dfnID": "caae4851", "url": "prov.html#instantaneousevent", "dfnText": "instantaneousevent", "refSections": [{"refs": [{"id": "ref-for-instantaneousevent"}], "title": "3.2. ActivityOrAgentOrEntityOrInstantaneousEvent"}, {"refs": [{"id": "ref-for-instantaneousevent\u2460"}], "title": "3.3. AssociationOrInfluenceOrInstantaneousEvent"}, {"refs": [{"id": "ref-for-instantaneousevent\u2461"}], "title": "5.9. Derivation"}, {"refs": [{"id": "ref-for-instantaneousevent\u2462"}], "title": "5.10. End"}, {"refs": [{"id": "ref-for-instantaneousevent\u2463"}], "title": "5.12. Generation"}, {"refs": [{"id": "ref-for-instantaneousevent\u2464"}], "title": "5.23. Invalidation"}, {"refs": [{"id": "ref-for-instantaneousevent\u2465"}], "title": "5.41. Start"}, {"refs": [{"id": "ref-for-instantaneousevent\u2466"}], "title": "6.1. atTime"}], "external": true};
+window.dfnpanelData['a678b37c'] = {"dfnID": "a678b37c", "url": "prov.html#invalidated", "dfnText": "invalidated", "refSections": [{"refs": [{"id": "ref-for-invalidated"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['c4612b38'] = {"dfnID": "c4612b38", "url": "prov.html#invalidatedattime", "dfnText": "invalidatedattime", "refSections": [{"refs": [{"id": "ref-for-invalidatedattime"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['f6a6e723'] = {"dfnID": "f6a6e723", "url": "prov.html#invalidation", "dfnText": "invalidation", "refSections": [{"refs": [{"id": "ref-for-invalidation"}], "title": "3.5. InstantaneousEvent"}, {"refs": [{"id": "ref-for-invalidation\u2460"}], "title": "4.1. Activity"}, {"refs": [{"id": "ref-for-invalidation\u2461"}], "title": "5.11. EntityInfluence"}, {"refs": [{"id": "ref-for-invalidation\u2462"}], "title": "5.34. QualifiedInvalidation"}], "external": true};
+window.dfnpanelData['0bd02bbe'] = {"dfnID": "0bd02bbe", "url": "prov.html#location", "dfnText": "location", "refSections": [{"refs": [{"id": "ref-for-location"}], "title": "3.2. ActivityOrAgentOrEntityOrInstantaneousEvent"}, {"refs": [{"id": "ref-for-location\u2460"}], "title": "5.5. AtLocation"}], "external": true};
+window.dfnpanelData['796868fc'] = {"dfnID": "796868fc", "url": "prov.html#locationof", "dfnText": "locationof", "refSections": [{"refs": [{"id": "ref-for-locationof"}], "title": "4.9. Location"}], "external": true};
+window.dfnpanelData['16961944'] = {"dfnID": "16961944", "url": "prov.html#organization", "dfnText": "organization", "refSections": [{"refs": [{"id": "ref-for-organization"}], "title": "4.3. Agent"}], "external": true};
+window.dfnpanelData['8592f42a'] = {"dfnID": "8592f42a", "url": "prov.html#person", "dfnText": "person", "refSections": [{"refs": [{"id": "ref-for-person"}], "title": "4.3. Agent"}], "external": true};
+window.dfnpanelData['a32a114c'] = {"dfnID": "a32a114c", "url": "prov.html#plan", "dfnText": "plan", "refSections": [{"refs": [{"id": "ref-for-plan"}], "title": "4.7. Entity"}, {"refs": [{"id": "ref-for-plan\u2460"}], "title": "5.4. Association"}, {"refs": [{"id": "ref-for-plan\u2461"}], "title": "5.15. HadPlan"}], "external": true};
+window.dfnpanelData['fe9eb17d'] = {"dfnID": "fe9eb17d", "url": "prov.html#primarysource", "dfnText": "primarysource", "refSections": [{"refs": [{"id": "ref-for-primarysource"}], "title": "5.9. Derivation"}], "external": true};
+window.dfnpanelData['bb8f6087'] = {"dfnID": "bb8f6087", "url": "prov.html#qualifiedassociation", "dfnText": "qualifiedassociation", "refSections": [{"refs": [{"id": "ref-for-qualifiedassociation"}], "title": "5.33. QualifiedInfluence"}], "external": true};
+window.dfnpanelData['89f0807b'] = {"dfnID": "89f0807b", "url": "prov.html#qualifiedassociation_1", "dfnText": "qualifiedassociation_1", "refSections": [{"refs": [{"id": "ref-for-qualifiedassociation_1"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['01364675'] = {"dfnID": "01364675", "url": "prov.html#qualifiedassociationof", "dfnText": "qualifiedassociationof", "refSections": [{"refs": [{"id": "ref-for-qualifiedassociationof"}], "title": "5.4. Association"}], "external": true};
+window.dfnpanelData['28592f18'] = {"dfnID": "28592f18", "url": "prov.html#qualifiedattribution", "dfnText": "qualifiedattribution", "refSections": [{"refs": [{"id": "ref-for-qualifiedattribution"}], "title": "5.33. QualifiedInfluence"}], "external": true};
+window.dfnpanelData['68d8467d'] = {"dfnID": "68d8467d", "url": "prov.html#qualifiedattribution_1", "dfnText": "qualifiedattribution_1", "refSections": [{"refs": [{"id": "ref-for-qualifiedattribution_1"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['7decd229'] = {"dfnID": "7decd229", "url": "prov.html#qualifiedattributionof", "dfnText": "qualifiedattributionof", "refSections": [{"refs": [{"id": "ref-for-qualifiedattributionof"}], "title": "5.6. Attribution"}], "external": true};
+window.dfnpanelData['c1b109a3'] = {"dfnID": "c1b109a3", "url": "prov.html#qualifiedcommunication", "dfnText": "qualifiedcommunication", "refSections": [{"refs": [{"id": "ref-for-qualifiedcommunication"}], "title": "5.33. QualifiedInfluence"}], "external": true};
+window.dfnpanelData['d7fc4c21'] = {"dfnID": "d7fc4c21", "url": "prov.html#qualifiedcommunication_1", "dfnText": "qualifiedcommunication_1", "refSections": [{"refs": [{"id": "ref-for-qualifiedcommunication_1"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['0f3b6f1b'] = {"dfnID": "0f3b6f1b", "url": "prov.html#qualifiedcommunicationof", "dfnText": "qualifiedcommunicationof", "refSections": [{"refs": [{"id": "ref-for-qualifiedcommunicationof"}], "title": "5.7. Communication"}], "external": true};
+window.dfnpanelData['ab2cb2b3'] = {"dfnID": "ab2cb2b3", "url": "prov.html#qualifieddelegation", "dfnText": "qualifieddelegation", "refSections": [{"refs": [{"id": "ref-for-qualifieddelegation"}], "title": "5.33. QualifiedInfluence"}], "external": true};
+window.dfnpanelData['23ea5189'] = {"dfnID": "23ea5189", "url": "prov.html#qualifieddelegation_1", "dfnText": "qualifieddelegation_1", "refSections": [{"refs": [{"id": "ref-for-qualifieddelegation_1"}], "title": "4.3. Agent"}], "external": true};
+window.dfnpanelData['ba10317c'] = {"dfnID": "ba10317c", "url": "prov.html#qualifieddelegationof", "dfnText": "qualifieddelegationof", "refSections": [{"refs": [{"id": "ref-for-qualifieddelegationof"}], "title": "5.8. Delegation"}], "external": true};
+window.dfnpanelData['4aae3864'] = {"dfnID": "4aae3864", "url": "prov.html#qualifiedderivation", "dfnText": "qualifiedderivation", "refSections": [{"refs": [{"id": "ref-for-qualifiedderivation"}], "title": "5.33. QualifiedInfluence"}], "external": true};
+window.dfnpanelData['516b7721'] = {"dfnID": "516b7721", "url": "prov.html#qualifiedderivation_1", "dfnText": "qualifiedderivation_1", "refSections": [{"refs": [{"id": "ref-for-qualifiedderivation_1"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['6e850841'] = {"dfnID": "6e850841", "url": "prov.html#qualifiedderivationof", "dfnText": "qualifiedderivationof", "refSections": [{"refs": [{"id": "ref-for-qualifiedderivationof"}], "title": "5.9. Derivation"}], "external": true};
+window.dfnpanelData['2d09cea9'] = {"dfnID": "2d09cea9", "url": "prov.html#qualifiedend", "dfnText": "qualifiedend", "refSections": [{"refs": [{"id": "ref-for-qualifiedend"}], "title": "5.33. QualifiedInfluence"}], "external": true};
+window.dfnpanelData['ba90d281'] = {"dfnID": "ba90d281", "url": "prov.html#qualifiedend_1", "dfnText": "qualifiedend_1", "refSections": [{"refs": [{"id": "ref-for-qualifiedend_1"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['4cfdfb71'] = {"dfnID": "4cfdfb71", "url": "prov.html#qualifiedendof", "dfnText": "qualifiedendof", "refSections": [{"refs": [{"id": "ref-for-qualifiedendof"}], "title": "5.10. End"}], "external": true};
+window.dfnpanelData['70ec8f76'] = {"dfnID": "70ec8f76", "url": "prov.html#qualifiedgeneration", "dfnText": "qualifiedgeneration", "refSections": [{"refs": [{"id": "ref-for-qualifiedgeneration"}], "title": "5.33. QualifiedInfluence"}], "external": true};
+window.dfnpanelData['ff8e1f2d'] = {"dfnID": "ff8e1f2d", "url": "prov.html#qualifiedgeneration_1", "dfnText": "qualifiedgeneration_1", "refSections": [{"refs": [{"id": "ref-for-qualifiedgeneration_1"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['55b50760'] = {"dfnID": "55b50760", "url": "prov.html#qualifiedgenerationof", "dfnText": "qualifiedgenerationof", "refSections": [{"refs": [{"id": "ref-for-qualifiedgenerationof"}], "title": "5.12. Generation"}], "external": true};
+window.dfnpanelData['b27544f2'] = {"dfnID": "b27544f2", "url": "prov.html#qualifiedinfluence", "dfnText": "qualifiedinfluence", "refSections": [{"refs": [{"id": "ref-for-qualifiedinfluence"}], "title": "5.26. QualifiedAssociation"}, {"refs": [{"id": "ref-for-qualifiedinfluence\u2460"}], "title": "5.27. QualifiedAttribution"}, {"refs": [{"id": "ref-for-qualifiedinfluence\u2461"}], "title": "5.28. QualifiedCommunication"}, {"refs": [{"id": "ref-for-qualifiedinfluence\u2462"}], "title": "5.29. QualifiedDelegation"}, {"refs": [{"id": "ref-for-qualifiedinfluence\u2463"}], "title": "5.30. QualifiedDerivation"}, {"refs": [{"id": "ref-for-qualifiedinfluence\u2464"}], "title": "5.31. QualifiedEnd"}, {"refs": [{"id": "ref-for-qualifiedinfluence\u2465"}], "title": "5.32. QualifiedGeneration"}, {"refs": [{"id": "ref-for-qualifiedinfluence\u2466"}], "title": "5.34. QualifiedInvalidation"}, {"refs": [{"id": "ref-for-qualifiedinfluence\u2467"}], "title": "5.35. QualifiedRevision"}, {"refs": [{"id": "ref-for-qualifiedinfluence\u2468"}], "title": "5.36. QualifiedStart"}, {"refs": [{"id": "ref-for-qualifiedinfluence\u2460\u24ea"}], "title": "5.37. QualifiedUsage"}], "external": true};
+window.dfnpanelData['0c580345'] = {"dfnID": "0c580345", "url": "prov.html#qualifiedinfluence_1", "dfnText": "qualifiedinfluence_1", "refSections": [{"refs": [{"id": "ref-for-qualifiedinfluence_1"}], "title": "3.1. ActivityOrAgentOrEntity"}], "external": true};
+window.dfnpanelData['4d80ebcd'] = {"dfnID": "4d80ebcd", "url": "prov.html#qualifiedinfluenceof", "dfnText": "qualifiedinfluenceof", "refSections": [{"refs": [{"id": "ref-for-qualifiedinfluenceof"}], "title": "5.18. Influence"}], "external": true};
+window.dfnpanelData['f9fb911f'] = {"dfnID": "f9fb911f", "url": "prov.html#qualifiedinvalidation", "dfnText": "qualifiedinvalidation", "refSections": [{"refs": [{"id": "ref-for-qualifiedinvalidation"}], "title": "5.33. QualifiedInfluence"}], "external": true};
+window.dfnpanelData['6f07809c'] = {"dfnID": "6f07809c", "url": "prov.html#qualifiedinvalidation_1", "dfnText": "qualifiedinvalidation_1", "refSections": [{"refs": [{"id": "ref-for-qualifiedinvalidation_1"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['b5fd6bba'] = {"dfnID": "b5fd6bba", "url": "prov.html#qualifiedinvalidationof", "dfnText": "qualifiedinvalidationof", "refSections": [{"refs": [{"id": "ref-for-qualifiedinvalidationof"}], "title": "5.23. Invalidation"}], "external": true};
+window.dfnpanelData['875ed540'] = {"dfnID": "875ed540", "url": "prov.html#qualifiedrevision", "dfnText": "qualifiedrevision", "refSections": [{"refs": [{"id": "ref-for-qualifiedrevision"}], "title": "5.33. QualifiedInfluence"}], "external": true};
+window.dfnpanelData['f2ef4c55'] = {"dfnID": "f2ef4c55", "url": "prov.html#qualifiedrevision_1", "dfnText": "qualifiedrevision_1", "refSections": [{"refs": [{"id": "ref-for-qualifiedrevision_1"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['461f20b9'] = {"dfnID": "461f20b9", "url": "prov.html#qualifiedstart", "dfnText": "qualifiedstart", "refSections": [{"refs": [{"id": "ref-for-qualifiedstart"}], "title": "5.33. QualifiedInfluence"}], "external": true};
+window.dfnpanelData['6466733c'] = {"dfnID": "6466733c", "url": "prov.html#qualifiedstart_1", "dfnText": "qualifiedstart_1", "refSections": [{"refs": [{"id": "ref-for-qualifiedstart_1"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['41390ec4'] = {"dfnID": "41390ec4", "url": "prov.html#qualifiedstartof", "dfnText": "qualifiedstartof", "refSections": [{"refs": [{"id": "ref-for-qualifiedstartof"}], "title": "5.41. Start"}], "external": true};
+window.dfnpanelData['60e11b42'] = {"dfnID": "60e11b42", "url": "prov.html#qualifiedusage", "dfnText": "qualifiedusage", "refSections": [{"refs": [{"id": "ref-for-qualifiedusage"}], "title": "5.33. QualifiedInfluence"}], "external": true};
+window.dfnpanelData['931c5dd7'] = {"dfnID": "931c5dd7", "url": "prov.html#qualifiedusage_1", "dfnText": "qualifiedusage_1", "refSections": [{"refs": [{"id": "ref-for-qualifiedusage_1"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['f06eafb5'] = {"dfnID": "f06eafb5", "url": "prov.html#qualifiedusingactivity", "dfnText": "qualifiedusingactivity", "refSections": [{"refs": [{"id": "ref-for-qualifiedusingactivity"}], "title": "5.42. Usage"}], "external": true};
+window.dfnpanelData['3a3aa393'] = {"dfnID": "3a3aa393", "url": "prov.html#quotation", "dfnText": "quotation", "refSections": [{"refs": [{"id": "ref-for-quotation"}], "title": "5.9. Derivation"}], "external": true};
+window.dfnpanelData['6fd98d38'] = {"dfnID": "6fd98d38", "url": "prov.html#quotedas", "dfnText": "quotedas", "refSections": [{"refs": [{"id": "ref-for-quotedas"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['13108bf7'] = {"dfnID": "13108bf7", "url": "prov.html#revisedentity", "dfnText": "revisedentity", "refSections": [{"refs": [{"id": "ref-for-revisedentity"}], "title": "5.39. Revision"}], "external": true};
+window.dfnpanelData['85b0f6ca'] = {"dfnID": "85b0f6ca", "url": "prov.html#revision", "dfnText": "revision", "refSections": [{"refs": [{"id": "ref-for-revision"}], "title": "4.7. Entity"}, {"refs": [{"id": "ref-for-revision\u2460"}], "title": "5.9. Derivation"}, {"refs": [{"id": "ref-for-revision\u2461"}], "title": "5.35. QualifiedRevision"}], "external": true};
+window.dfnpanelData['400117e7'] = {"dfnID": "400117e7", "url": "prov.html#role", "dfnText": "role", "refSections": [{"refs": [{"id": "ref-for-role"}], "title": "3.3. AssociationOrInfluenceOrInstantaneousEvent"}, {"refs": [{"id": "ref-for-role\u2460"}], "title": "5.16. HadRole"}], "external": true};
+window.dfnpanelData['3500cada'] = {"dfnID": "3500cada", "url": "prov.html#softwareagent", "dfnText": "softwareagent", "refSections": [{"refs": [{"id": "ref-for-softwareagent"}], "title": "4.3. Agent"}], "external": true};
+window.dfnpanelData['8de1416c'] = {"dfnID": "8de1416c", "url": "prov.html#specialization", "dfnText": "specialization", "refSections": [{"refs": [{"id": "ref-for-specialization"}], "title": "5.3. Alternate"}], "external": true};
+window.dfnpanelData['9c231291'] = {"dfnID": "9c231291", "url": "prov.html#specializationof", "dfnText": "specializationof", "refSections": [{"refs": [{"id": "ref-for-specializationof"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['085f2a94'] = {"dfnID": "085f2a94", "url": "prov.html#start", "dfnText": "start", "refSections": [{"refs": [{"id": "ref-for-start"}], "title": "3.4. InfluenceOrDelegationOrDerivationOrEndOrStart"}, {"refs": [{"id": "ref-for-start\u2460"}], "title": "3.5. InstantaneousEvent"}, {"refs": [{"id": "ref-for-start\u2461"}], "title": "4.7. Entity"}, {"refs": [{"id": "ref-for-start\u2462"}], "title": "5.18. Influence"}, {"refs": [{"id": "ref-for-start\u2463"}], "title": "5.36. QualifiedStart"}], "external": true};
+window.dfnpanelData['a4521742'] = {"dfnID": "a4521742", "url": "prov.html#startedattime", "dfnText": "startedattime", "refSections": [{"refs": [{"id": "ref-for-startedattime"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['64ced6f7'] = {"dfnID": "64ced6f7", "url": "prov.html#usage", "dfnText": "usage", "refSections": [{"refs": [{"id": "ref-for-usage"}], "title": "4.1. Activity"}, {"refs": [{"id": "ref-for-usage\u2460"}], "title": "5.9. Derivation"}, {"refs": [{"id": "ref-for-usage\u2461"}], "title": "5.17. HadUsage"}, {"refs": [{"id": "ref-for-usage\u2462"}], "title": "5.18. Influence"}, {"refs": [{"id": "ref-for-usage\u2463"}], "title": "5.37. QualifiedUsage"}], "external": true};
+window.dfnpanelData['6669fd75'] = {"dfnID": "6669fd75", "url": "prov.html#used", "dfnText": "used", "refSections": [{"refs": [{"id": "ref-for-used"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['19c5b883'] = {"dfnID": "19c5b883", "url": "prov.html#wasactivityofinfluence", "dfnText": "wasactivityofinfluence", "refSections": [{"refs": [{"id": "ref-for-wasactivityofinfluence"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['fcde917c'] = {"dfnID": "fcde917c", "url": "prov.html#wasassociatedwith", "dfnText": "wasassociatedwith", "refSections": [{"refs": [{"id": "ref-for-wasassociatedwith"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['04ab7528'] = {"dfnID": "04ab7528", "url": "prov.html#wasassociatefor", "dfnText": "wasassociatefor", "refSections": [{"refs": [{"id": "ref-for-wasassociatefor"}], "title": "4.3. Agent"}], "external": true};
+window.dfnpanelData['bf4f9965'] = {"dfnID": "bf4f9965", "url": "prov.html#wasattributedto", "dfnText": "wasattributedto", "refSections": [{"refs": [{"id": "ref-for-wasattributedto"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['b75f0137'] = {"dfnID": "b75f0137", "url": "prov.html#wasderivedfrom", "dfnText": "wasderivedfrom", "refSections": [{"refs": [{"id": "ref-for-wasderivedfrom"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['26aac9ba'] = {"dfnID": "26aac9ba", "url": "prov.html#wasendedby", "dfnText": "wasendedby", "refSections": [{"refs": [{"id": "ref-for-wasendedby"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['0bc9a91a'] = {"dfnID": "0bc9a91a", "url": "prov.html#wasgeneratedby", "dfnText": "wasgeneratedby", "refSections": [{"refs": [{"id": "ref-for-wasgeneratedby"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['9ff55d9f'] = {"dfnID": "9ff55d9f", "url": "prov.html#wasinfluencedby", "dfnText": "wasinfluencedby", "refSections": [{"refs": [{"id": "ref-for-wasinfluencedby"}], "title": "3.1. ActivityOrAgentOrEntity"}], "external": true};
+window.dfnpanelData['a0a4ad8f'] = {"dfnID": "a0a4ad8f", "url": "prov.html#wasinfluencedbyactivity", "dfnText": "wasinfluencedbyactivity", "refSections": [{"refs": [{"id": "ref-for-wasinfluencedbyactivity"}], "title": "3.1. ActivityOrAgentOrEntity"}], "external": true};
+window.dfnpanelData['848b4efc'] = {"dfnID": "848b4efc", "url": "prov.html#wasinfluencedbyagent", "dfnText": "wasinfluencedbyagent", "refSections": [{"refs": [{"id": "ref-for-wasinfluencedbyagent"}], "title": "3.1. ActivityOrAgentOrEntity"}], "external": true};
+window.dfnpanelData['4cc86417'] = {"dfnID": "4cc86417", "url": "prov.html#wasinfluencedbyentity", "dfnText": "wasinfluencedbyentity", "refSections": [{"refs": [{"id": "ref-for-wasinfluencedbyentity"}], "title": "3.1. ActivityOrAgentOrEntity"}], "external": true};
+window.dfnpanelData['81717534'] = {"dfnID": "81717534", "url": "prov.html#wasinformedby", "dfnText": "wasinformedby", "refSections": [{"refs": [{"id": "ref-for-wasinformedby"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['828bfbb4'] = {"dfnID": "828bfbb4", "url": "prov.html#wasinvalidatedby", "dfnText": "wasinvalidatedby", "refSections": [{"refs": [{"id": "ref-for-wasinvalidatedby"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['bc0a9f17'] = {"dfnID": "bc0a9f17", "url": "prov.html#wasmemberof", "dfnText": "wasmemberof", "refSections": [{"refs": [{"id": "ref-for-wasmemberof"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['73172c76'] = {"dfnID": "73172c76", "url": "prov.html#wasplanof", "dfnText": "wasplanof", "refSections": [{"refs": [{"id": "ref-for-wasplanof"}], "title": "4.12. Plan"}], "external": true};
+window.dfnpanelData['b2716776'] = {"dfnID": "b2716776", "url": "prov.html#wasprimarysourceof", "dfnText": "wasprimarysourceof", "refSections": [{"refs": [{"id": "ref-for-wasprimarysourceof"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['356079f4'] = {"dfnID": "356079f4", "url": "prov.html#wasquotedfrom", "dfnText": "wasquotedfrom", "refSections": [{"refs": [{"id": "ref-for-wasquotedfrom"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['42372c39'] = {"dfnID": "42372c39", "url": "prov.html#wasrevisionof", "dfnText": "wasrevisionof", "refSections": [{"refs": [{"id": "ref-for-wasrevisionof"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['ef2197f9'] = {"dfnID": "ef2197f9", "url": "prov.html#wasrolein", "dfnText": "wasrolein", "refSections": [{"refs": [{"id": "ref-for-wasrolein"}], "title": "4.13. Role"}], "external": true};
+window.dfnpanelData['4b2fa28f'] = {"dfnID": "4b2fa28f", "url": "prov.html#wasstartedby", "dfnText": "wasstartedby", "refSections": [{"refs": [{"id": "ref-for-wasstartedby"}], "title": "4.1. Activity"}], "external": true};
+window.dfnpanelData['825463bd'] = {"dfnID": "825463bd", "url": "prov.html#wasusedby", "dfnText": "wasusedby", "refSections": [{"refs": [{"id": "ref-for-wasusedby"}], "title": "4.7. Entity"}], "external": true};
+window.dfnpanelData['c4b2c5d1'] = {"dfnID": "c4b2c5d1", "url": "prov.html#wasusedinderivation", "dfnText": "wasusedinderivation", "refSections": [{"refs": [{"id": "ref-for-wasusedinderivation"}], "title": "5.42. Usage"}], "external": true};
+window.dfnpanelData['e67c452f'] = {"dfnID": "e67c452f", "url": "prov-dictionary.html#derivedbyinsertionfrom", "dfnText": "derivedbyinsertionfrom", "refSections": [{"refs": [{"id": "ref-for-derivedbyinsertionfrom"}], "title": "5.9. Derivation"}], "external": true};
+window.dfnpanelData['33bd22fb'] = {"dfnID": "33bd22fb", "url": "prov-dictionary.html#derivedbyremovalfrom", "dfnText": "derivedbyremovalfrom", "refSections": [{"refs": [{"id": "ref-for-derivedbyremovalfrom"}], "title": "5.9. Derivation"}], "external": true};
+window.dfnpanelData['bf0a2ca6'] = {"dfnID": "bf0a2ca6", "url": "prov-dictionary.html#dictionary", "dfnText": "dictionary", "refSections": [{"refs": [{"id": "ref-for-dictionary"}], "title": "4.5. Collection"}], "external": true};
+window.dfnpanelData['d36dd95c'] = {"dfnID": "d36dd95c", "url": "prov-dictionary.html#emptydictionary", "dfnText": "emptydictionary", "refSections": [{"refs": [{"id": "ref-for-emptydictionary"}], "title": "4.6. EmptyCollection"}], "external": true};
+</script>
+<script>/* script-dom-helper */
+function query(sel) { return document.querySelector(sel); }
+
+function queryAll(sel) { return [...document.querySelectorAll(sel)]; }
+
+function iter(obj) {
+	if(!obj) return [];
+	var it = obj[Symbol.iterator];
+	if(it) return it;
+	return Object.entries(obj);
+}
+
+function mk(tagname, attrs, ...children) {
+	const el = document.createElement(tagname);
+	for(const [k,v] of iter(attrs)) {
+		if(k.slice(0,3) == "_on") {
+			const eventName = k.slice(3);
+			el.addEventListener(eventName, v);
+		} else if(k[0] == "_") {
+			// property, not attribute
+			el[k.slice(1)] = v;
+		} else {
+			if(v === false || v == null) {
+        continue;
+      } else if(v === true) {
+        el.setAttribute(k, "");
+        continue;
+      } else {
+  			el.setAttribute(k, v);
+      }
+		}
+	}
+	append(el, children);
+	return el;
+}
+
+/* Create shortcuts for every known HTML element */
+[
+  "a",
+  "abbr",
+  "acronym",
+  "address",
+  "applet",
+  "area",
+  "article",
+  "aside",
+  "audio",
+  "b",
+  "base",
+  "basefont",
+  "bdo",
+  "big",
+  "blockquote",
+  "body",
+  "br",
+  "button",
+  "canvas",
+  "caption",
+  "center",
+  "cite",
+  "code",
+  "col",
+  "colgroup",
+  "datalist",
+  "dd",
+  "del",
+  "details",
+  "dfn",
+  "dialog",
+  "div",
+  "dl",
+  "dt",
+  "em",
+  "embed",
+  "fieldset",
+  "figcaption",
+  "figure",
+  "font",
+  "footer",
+  "form",
+  "frame",
+  "frameset",
+  "head",
+  "header",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "hr",
+  "html",
+  "i",
+  "iframe",
+  "img",
+  "input",
+  "ins",
+  "kbd",
+  "label",
+  "legend",
+  "li",
+  "link",
+  "main",
+  "map",
+  "mark",
+  "meta",
+  "meter",
+  "nav",
+  "nobr",
+  "noscript",
+  "object",
+  "ol",
+  "optgroup",
+  "option",
+  "output",
+  "p",
+  "param",
+  "pre",
+  "progress",
+  "q",
+  "s",
+  "samp",
+  "script",
+  "section",
+  "select",
+  "small",
+  "source",
+  "span",
+  "strike",
+  "strong",
+  "style",
+  "sub",
+  "summary",
+  "sup",
+  "table",
+  "tbody",
+  "td",
+  "template",
+  "textarea",
+  "tfoot",
+  "th",
+  "thead",
+  "time",
+  "title",
+  "tr",
+  "u",
+  "ul",
+  "var",
+  "video",
+  "wbr",
+  "xmp",
+].forEach(tagname=>{
+	mk[tagname] = (...args) => mk(tagname, ...args);
+});
+
+function* nodesFromChildList(children) {
+	for(const child of children.flat(Infinity)) {
+		if(child instanceof Node) {
+			yield child;
+		} else {
+			yield new Text(child);
+		}
+	}
+}
+function append(el, ...children) {
+	for(const child of nodesFromChildList(children)) {
+		if(el instanceof Node) el.appendChild(child);
+		else el.push(child);
+	}
+	return el;
+}
+
+function insertAfter(el, ...children) {
+	for(const child of nodesFromChildList(children)) {
+		el.parentNode.insertBefore(child, el.nextSibling);
+	}
+	return el;
+}
+
+function clearContents(el) {
+	el.innerHTML = "";
+	return el;
+}
+
+function parseHTML(markup) {
+	if(markup.toLowerCase().trim().indexOf('<!doctype') === 0) {
+		const doc = document.implementation.createHTMLDocument("");
+		doc.documentElement.innerHTML = markup;
+		return doc;
+	} else {
+		const el = mk.template({});
+		el.innerHTML = markup;
+		return el.content;
+	}
+}</script>
