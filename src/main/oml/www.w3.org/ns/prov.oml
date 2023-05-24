@@ -98,7 +98,7 @@ vocabulary <http://www.w3.org/ns/prov#> as prov {
 	] < EntityInfluence, InstantaneousEvent, InfluenceOrDelegationOrDerivationOrEndOrStart
 
 	rule wasDerivedFromIndirectly [
-		wasDerivedFrom(x,y) ^ wasDerivedFrom(y,z) -> wasDerivedFrom(x,z)
+		wasDerivedFrom(x,y) & wasDerivedFrom(y,z) -> wasDerivedFrom(x,z)
 	]
 
 	// 4.1 (6) https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasAttributedTo

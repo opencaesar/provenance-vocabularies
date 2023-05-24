@@ -122,14 +122,14 @@ vocabulary <http://www.w3.org/ns/prov-dictionary#> as prov-dictionary {
   @rdfs:label "D1"
   @rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#dmembership-cmembership-inference"
   rule directory-membership-collection-membership [
-    hadDictionaryMember(d, kp) ^ pairEntity(kp,e) -> prov:hadMember(d, e)
+    hadDictionaryMember(d, kp) & pairEntity(kp,e) -> prov:hadMember(d, e)
   ]
 
   @rdfs:comment "IF prov:hadDictionaryMember(d1, e1, k1) and prov:hadDictionaryMember(d1, e2, k1) THEN e1 = e2"
   @rdfs:label "D3"
   @rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#key-single-entity-inference"
   rule key-single-entity [
-    hadDictionaryMember(d, kp1) ^ pairKey(kp1, k) ^ pairEntity(kp1, e1) ^ hadDictionaryMember(d, kp2) ^ pairKey(kp2, k) ^ pairEntity(kp2, e2) ->
+    hadDictionaryMember(d, kp1) & pairKey(kp1, k) & pairEntity(kp1, e1) & hadDictionaryMember(d, kp2) & pairKey(kp2, k) & pairEntity(kp2, e2) ->
     sameAs(e1, e2)
   ]
 }
