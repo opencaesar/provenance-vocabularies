@@ -4,7 +4,7 @@
 ext.title = 'Provenance Vocabularies'
 description = 'Provenance vocabularies from http://www.w3.org/ns/prov'
 group ='io.opencaesar.ontologies'
-version = '2.0.4'
+version = '3.0.0'
 
 /* 
  * The Gradle task dependencies 
@@ -15,33 +15,26 @@ buildscript {
     mavenCentral()
 	}
 	dependencies {
-		// https://github.com/opencaesar/owl-adapter/tags
-		classpath 'io.opencaesar.adapters:oml2owl-gradle:1.+'
-		
-		// https://github.com/opencaesar/oml-tools/tags
-		classpath 'io.opencaesar.oml:oml-merge-gradle:1.+'
-		classpath 'io.opencaesar.oml:oml-bikeshed-gradle:1.+'
-		
-		// https://github.com/opencaesar/owl-tools/tags
-		classpath 'io.opencaesar.owl:owl-load-gradle:1.+'
-		classpath 'io.opencaesar.owl:owl-reason-gradle:1.+'
-		classpath 'io.opencaesar.owl:owl-fuseki:1.+'
-		classpath 'io.opencaesar.owl:owl-fuseki-gradle:1.+'
-		classpath 'io.opencaesar.owl:owl-query-gradle:1.+'
+		classpath 'io.opencaesar.owl:owl-load-gradle:2.+'
+		classpath 'io.opencaesar.owl:owl-reason-gradle:2.+'
+		classpath 'io.opencaesar.owl:owl-fuseki:2.+'
+		classpath 'io.opencaesar.owl:owl-fuseki-gradle:2.+'
+		classpath 'io.opencaesar.owl:owl-query-gradle:2.+'
+		classpath 'io.opencaesar.owl:owl-doc-gradle:2.+'
+    classpath 'io.opencaesar.oml:oml-merge-gradle:2.+'
+		classpath 'io.opencaesar.adapters:oml2owl-gradle:2.+'
 	}
 }
 
 apply from: "${rootDir}/gradle/maven-deployment.gradle"
 
 // Dataset-specific variables
-ext.dataset = [
+ext {
     // Name of dataset (matches one used in .fuseki.ttl file)
-    name: 'provenance-vocabularies',
-    // URL for publishing dataset documentation
-    publishUrl: 'https://opencaesar.github.io/provenance-vocabularies',
-    // Bikeshed build folder
-    bikeshed: 'build/bikeshed'
-]
+    dataset = 'provenance-vocabularies'
+	// Root Ontology Iri
+	rootIri = 'http://www.w3.org/ns/prov-bundle'
+}
 
 /*
  * The repositories to look up OML dependencies in
@@ -59,15 +52,10 @@ configurations {
 }
 
 /*
- * Dependency versions
- */
-ext.coreVersion = '3.+'
-
-/*
  * The OML dependencies
  */
 dependencies {
-    oml "io.opencaesar.ontologies:core-vocabularies:$coreVersion"
+    oml "io.opencaesar.ontologies:core-vocabularies:4.+"
 }
 
 /*
@@ -76,37 +64,6 @@ dependencies {
 task downloadDependencies(type:io.opencaesar.oml.merge.OmlMergeTask) {
     inputZipPaths = configurations.oml.files
     outputCatalogFolder = file('build/oml')
-}
-
-/*
- * A task to generate Bikeshed specification for the OML catalog
- */
-task omlToBikeshed(type: io.opencaesar.oml.bikeshed.Oml2BikeshedTask, group:"oml", dependsOn: downloadDependencies) {
-    // OML catalog
-    inputCatalogPath = file('catalog.xml')
-    // OML catalog title
-    inputCatalogTitle = project.title
-    // OML catalog version
-    inputCatalogVersion = project.version
-     // Input Ontology Iri
-    rootOntologyIri = 'http://www.w3.org/ns/prov-bundle'
-   // OWL folder
-    outputFolderPath = file("$dataset.bikeshed")
-    // Publish URL
-    publishUrl = "$dataset.publishUrl".toString()
-}
-
-/*
- * A task to generate the model documentation in HTML
- */
-task generateDocs(type: Exec, dependsOn: omlToBikeshed) {
-	inputs.files(fileTree("$dataset.bikeshed").include('**/*.bs'))
-	outputs.files(fileTree("$dataset.bikeshed").include('**/*.html'))
-	if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
-		commandLine "$dataset.bikeshed/publish.bat"
-	} else {
-		commandLine "$dataset.bikeshed/publish.sh"
-	}
 }
 
 /*
@@ -126,12 +83,12 @@ task owlReasonProvenance(type:io.opencaesar.owl.reason.OwlReasonTask, dependsOn:
 	// OWL catalog
 	catalogPath = file('build/owl/catalog.xml')
 	// Input ontology IRI to reason on
-	inputOntologyIri = 'http://www.w3.org/ns/prov-bundle'
+    inputOntologyIri = "$rootIri".toString()
 	// Entailment statements to generate and the ontologies to persist them in
 	specs = [
-		'http://www.w3.org/ns/prov-bundle/classes = ALL_SUBCLASS',
-		'http://www.w3.org/ns/prov-bundle/properties = INVERSE_PROPERTY | ALL_SUBPROPERTY',
-		'http://www.w3.org/ns/prov-bundle/individuals = ALL_INSTANCE | DATA_PROPERTY_VALUE | OBJECT_PROPERTY_VALUE | SAME_AS'
+        "$rootIri/classes = ALL_SUBCLASS".toString(),
+        "$rootIri/properties = INVERSE_PROPERTY | ALL_SUBPROPERTY".toString(),
+        "$rootIri/individuals = ALL_INSTANCE | DATA_PROPERTY_VALUE | OBJECT_PROPERTY_VALUE | SAME_AS".toString()
 	]
 	// Junit error report
 	reportPath = file('build/reports/provenance-bundle/reasoning.xml')
@@ -150,6 +107,24 @@ task owlReasonExamples(type:io.opencaesar.owl.reason.OwlReasonTask, dependsOn: o
 	]
 	// Junit error report
 	reportPath = file('build/reports/examples-bundle/reasoning.xml')
+}
+
+/*
+ * A task to generate documentation for the OWL catalog
+ */
+task generateDocs (type: io.opencaesar.owl.doc.OwlDocTask, dependsOn: owlReasonProvenance) {
+    // OWL catalog
+    inputCatalogPath = file('build/owl/catalog.xml')
+    // OWL catalog title
+    inputCatalogTitle = project.title
+    // OWL catalog version
+    inputCatalogVersion = project.version
+    // OWL Ontology Iris
+    inputOntologyIris = [ "$rootIri/classes", "$rootIri/properties",  "$rootIri/individuals" ]
+    // Output folder
+    outputFolderPath = file('build/doc')
+    // Output case sensitivie path
+    outputCaseSensitive = org.gradle.internal.os.OperatingSystem.current().isLinux()
 }
 
 /*

@@ -5,9 +5,9 @@ description <http://example.org/example6#> as example6 {
 
 	uses <http://www.w3.org/ns/prov#> as prov
 
-	ci e1 : prov:Entity [
+	instance e1 : prov:Entity [
 		prov:wasGeneratedBy a1
 	]
 
-	ci a1 : prov:Activity
+	instance a1 : prov:Activity
 }

@@ -11,9 +11,9 @@ vocabulary <http://www.w3.org/ns/prov-dictionary#> as prov-dictionary {
 
 	extends <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
-  extends <http://www.w3.org/1999/02/22-rdf-syntax-ns#> as rdf
+  	extends <http://www.w3.org/1999/02/22-rdf-syntax-ns#> as rdf
 
-  extends <http://www.w3.org/ns/prov#> as prov
+  	extends <http://www.w3.org/ns/prov#> as prov
 
   @rdfs:label 'Dictionary'
   @rdfs:comment """
@@ -22,7 +22,7 @@ vocabulary <http://www.w3.org/ns/prov-dictionary#> as prov-dictionary {
   A given dictionary forms a given structure for its members. A different structure (obtained either by insertion or removal of members) constitutes a different dictionary.
   """
   @rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#Dictionary"
-  concept Dictionary :> prov:Collection
+  concept Dictionary < prov:Collection
 
   @rdfs:label "HadDictionaryMember"
   @rdfs:comment """Describes the key-entity pair that was member of a prov:Dictionary. A dictionary can have multiple members."""
@@ -36,14 +36,14 @@ vocabulary <http://www.w3.org/ns/prov-dictionary#> as prov-dictionary {
   @rdfs:label "Empty Dictionary"
   @rdfs:comment "An empty dictionary is a dictionary that has no members."
   @rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#EmptyDictionary"
-  concept EmptyDictionary :> Dictionary, prov:EmptyCollection [
+  concept EmptyDictionary < Dictionary, prov:EmptyCollection [
     restricts relation hadDictionaryMember to exactly 0
   ]
 
   @rdfs:label "Key-Entity Pair"
   @rdfs:comment """A key-entity pair. Part of a prov:Dictionary through prov:hadDictionaryMember. The key is any RDF Literal, the value is a prov:Entity."""
   @rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#KeyEntityPair"
-  concept KeyEntityPair [
+  concept KeyEntityPair < [
     restricts scalar property pairKey to exactly 1
     restricts relation pairEntity to exactly 1
   ]
@@ -71,7 +71,7 @@ vocabulary <http://www.w3.org/ns/prov-dictionary#> as prov-dictionary {
   @rdfs:label "DerivedByInsertionFrom"
   @rdfs:comment """The source dictionary that was derived from the target dictionary by insertion of one or more key-entity pairs."""
   @rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#derivedByInsertionFrom"
-  relation entity DerivedByInsertionFrom :> prov:Derivation [
+  relation entity DerivedByInsertionFrom [
     from Dictionary
     to Dictionary
     @rdfs:label "derivedByInsertionFrom"
@@ -79,6 +79,7 @@ vocabulary <http://www.w3.org/ns/prov-dictionary#> as prov-dictionary {
     inverse functional
     asymmetric
     irreflexive
+  ] < prov:Derivation [
     restricts relation insertedKeyEntityPair to min 1
   ]
 
@@ -96,7 +97,7 @@ vocabulary <http://www.w3.org/ns/prov-dictionary#> as prov-dictionary {
   @rdfs:label "DerivedByRemovalFrom"
   @rdfs:comment """The source dictionary that was derived from the target dictionary by removal of one or more keys."""
   @rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#derivedByRemovalFrom"
-  relation entity DerivedByRemovalFrom :> prov:Derivation [
+  relation entity DerivedByRemovalFrom [
     from Dictionary
     to Dictionary
     @rdfs:label "derivedByRemovalFrom"
@@ -104,8 +105,9 @@ vocabulary <http://www.w3.org/ns/prov-dictionary#> as prov-dictionary {
     inverse functional
     asymmetric
     irreflexive
+  ] < prov:Derivation [
     restricts scalar property removedKey to min 1
-  ]
+  ] 
 
   @rdfs:label "removedKey"
   @rdfs:comment """The key removed in a Removal."""
@@ -120,14 +122,14 @@ vocabulary <http://www.w3.org/ns/prov-dictionary#> as prov-dictionary {
   @rdfs:label "D1"
   @rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#dmembership-cmembership-inference"
   rule directory-membership-collection-membership [
-    hadDictionaryMember(d, kp) ^ pairEntity(kp,e) -> prov:hadMember(d, e)
+    hadDictionaryMember(d, kp) & pairEntity(kp,e) -> prov:hadMember(d, e)
   ]
 
   @rdfs:comment "IF prov:hadDictionaryMember(d1, e1, k1) and prov:hadDictionaryMember(d1, e2, k1) THEN e1 = e2"
   @rdfs:label "D3"
   @rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#key-single-entity-inference"
   rule key-single-entity [
-    hadDictionaryMember(d, kp1) ^ pairKey(kp1, k) ^ pairEntity(kp1, e1) ^ hadDictionaryMember(d, kp2) ^ pairKey(kp2, k) ^ pairEntity(kp2, e2) ->
+    hadDictionaryMember(d, kp1) & pairKey(kp1, k) & pairEntity(kp1, e1) & hadDictionaryMember(d, kp2) & pairKey(kp2, k) & pairEntity(kp2, e2) ->
     sameAs(e1, e2)
   ]
 }

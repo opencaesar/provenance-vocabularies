@@ -7,30 +7,30 @@ description <http://example.org/example1#> as example1 {
 
 	uses <http://www.w3.org/ns/prov#> as prov
 
-	ci bar_chart : prov:Entity [
+	instance bar_chart : prov:Entity [
 		prov:wasGeneratedBy illustrationActivity
 		prov:wasDerivedFrom aggregatedByRegions
 		prov:wasAttributedTo derek
 	]
 
-	ci derek : prov:Agent [
+	instance derek : prov:Agent [
 		prov:actedOnBehalfOf national_newspaper_inc
 	]
 
-	ci national_newspaper_inc : prov:Agent
+	instance national_newspaper_inc : prov:Agent
 
-	ci illustrationActivity : prov:Activity [
+	instance illustrationActivity : prov:Activity [
 		prov:used aggregatedByRegions
 		prov:wasAssociatedWith derek
 		prov:wasInformedBy aggregationActivity
 	]
 
-	ci aggregatedByRegions : prov:Entity [
+	instance aggregatedByRegions : prov:Entity [
 		prov:wasGeneratedBy aggregationActivity
 		prov:wasAttributedTo derek
 	]
 
-	ci aggregationActivity : prov:Activity [
+	instance aggregationActivity : prov:Activity [
 		prov:startedAtTime "2011-07-14T01:01:01Z"^^xsd:dateTime
 		prov:startedAtTime "2011-07-14T01:01:01Z"^^xsd:dateTime
 		prov:endedAtTime "2011-07-14T02:02:02Z"^^xsd:dateTime
@@ -39,15 +39,15 @@ description <http://example.org/example1#> as example1 {
 		prov:used nationalRegionsList
 	]
 
-	ci crimeData : prov:Entity [
+	instance crimeData : prov:Entity [
 		prov:wasAttributedTo government
 	]
 
-	ci government : prov:Agent
+	instance government : prov:Agent
 
-	ci nationalRegionsList : prov:Entity [
+	instance nationalRegionsList : prov:Entity [
 		prov:wasAttributedTo civil_action_group
 	]
 
-	ci civil_action_group : prov:Agent
+	instance civil_action_group : prov:Agent
 }

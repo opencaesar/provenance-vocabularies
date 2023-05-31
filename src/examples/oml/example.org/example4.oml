@@ -13,14 +13,14 @@ description <http://example.org/example4#> as example4 {
 
 	extends <http://example.org/example3#> as example3
 
-	ci john-bundle : prov:Bundle [
+	instance john-bundle : prov:Bundle [
 		prov:generatedAtTime "2012-08-08T08:08:08Z"^^xsd:dateTime
 		prov:wasAttributedTo example2:postEditor
 		prov:wasDerivedFrom example2:derek-bundle
 		prov:wasDerivedFrom example3:monica-bundle
 	]
 
-	ci publicationActivity1124 : prov:Activity [
+	instance publicationActivity1124 : prov:Activity [
 		// The example in the spec seems incorrect because the domain of
 		// prov:wasAttributedTo is prov:Entity, not prov:Activity
 		// Since prov:Entity and prov:Activity are disjoint, these statements would lead to an inconsistency.
@@ -32,7 +32,7 @@ description <http://example.org/example4#> as example4 {
 		prov:generated post19201
 	]
 
-	ci post19201 : prov:Entity [
+	instance post19201 : prov:Entity [
 		prov:wasAttributedTo john
 		prov:wasDerivedFrom quote_from_derek
 		prov:wasDerivedFrom quote_from_monica
@@ -40,14 +40,14 @@ description <http://example.org/example4#> as example4 {
 		prov:wasGeneratedBy publicationActivity1124
 	]
 
-	ci john : prov:Agent
+	instance john : prov:Agent
 
-	ci quote_from_derek : prov:Entity [
+	instance quote_from_derek : prov:Entity [
 		prov:generatedAtTime "2012-08-08T01:01:01Z"^^xsd:dateTime
 		prov:wasQuotedFrom example2:more-crime-happens-in-cities
 	]
 
-	ci quote_from_monica : prov:Entity [
+	instance quote_from_monica : prov:Entity [
 		prov:generatedAtTime "2012-08-08T02:02:02Z"^^xsd:dateTime
 		prov:wasQuotedFrom example3:post9822
 	]

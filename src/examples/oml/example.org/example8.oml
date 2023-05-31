@@ -9,14 +9,14 @@ description <http://example.org/example8#> as example8 {
 
 	extends <http://example.org/example1#> as example1
 
-	ci illustrationActivity : prov:Activity
+	instance illustrationActivity : prov:Activity
 
 	// redundant because it is inferred, may be omitted.
-	ref ci illustrationActivity [
+	ref instance illustrationActivity [
 		prov:qualifiedUsage illustrationActivityUsage
 	]
 
-	ri illustrationActivityUsage : prov:Usage [
+	relation instance illustrationActivityUsage : prov:Usage [
 		from illustrationActivity
 		to example1:aggregatedByRegions
 		prov:atTime "2011-07-14T03:03:03Z"^^xsd:dateTime

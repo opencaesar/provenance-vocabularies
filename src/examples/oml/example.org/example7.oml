@@ -5,14 +5,14 @@ description <http://example.org/example7#> as example7 {
 
 	uses <http://www.w3.org/ns/prov#> as prov
 
-	ci e1 : prov:Entity [
+	instance e1 : prov:Entity [
 		prov:qualifiedGeneration e1Gen // inferred from e1Gen; could be omitted.
 	]
 
-	ri e1Gen : prov:Generation [
+	relation instance e1Gen : prov:Generation [
 		from e1
 		to a1
 	]
 
-	ci a1 : prov:Activity
+	instance a1 : prov:Activity
 }

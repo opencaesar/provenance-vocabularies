@@ -9,16 +9,16 @@ description <http://example.org/example2#> as example2 {
 
 	extends <http://example.org/example1#> as example1
 
-	ci derek-bundle : prov:Bundle [
+	instance derek-bundle : prov:Bundle [
 		prov:generatedAtTime "2011-07-16T02:52:02Z"^^xsd:dateTime
 		prov:wasAttributedTo postEditor
 	]
 
-	ci postEditor : prov:SoftwareAgent
+	instance postEditor : prov:SoftwareAgent
 
-	ci more-crime-happens-in-cities : prov:Entity
+	instance more-crime-happens-in-cities : prov:Entity
 
-	ci post9821v1 : prov:Entity [
+	instance post9821v1 : prov:Entity [
 		prov:generatedAtTime "2011-07-16T01:52:02Z"^^xsd:dateTime
 		prov:invalidatedAtTime "2011-07-16T02:02:02Z"^^xsd:dateTime
 		prov:specializationOf more-crime-happens-in-cities
@@ -27,7 +27,7 @@ description <http://example.org/example2#> as example2 {
 		prov:hadPrimarySource example1:crimeData
 	]
 
-	ci publicationActivity1123 : prov:Activity [
+	instance publicationActivity1123 : prov:Activity [
 		prov:startedAtTime "2011-07-16T01:01:01Z"^^xsd:dateTime
 		prov:endedAtTime "2011-07-16T01:52:02Z"^^xsd:dateTime
 		prov:wasAssociatedWith postEditor
@@ -36,13 +36,13 @@ description <http://example.org/example2#> as example2 {
 		prov:wasEndedBy example1:derek
 	]
 
-	ref ci example1:aggregatedByRegions [
+	ref instance example1:aggregatedByRegions [
 		prov:atLocation aggr.txt
 	]
 
-	ci aggr.txt : prov:Location
+	instance aggr.txt : prov:Location
 
-	ci post9821v2 : prov:Entity [
+	instance post9821v2 : prov:Entity [
 		prov:generatedAtTime "2011-07-16T02:02:02Z"^^xsd:dateTime
 		prov:specializationOf more-crime-happens-in-cities
 		prov:wasRevisionOf post9821v1
