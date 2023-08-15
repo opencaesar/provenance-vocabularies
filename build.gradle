@@ -4,7 +4,7 @@
 ext.title = 'Provenance Vocabularies'
 description = 'Provenance vocabularies from http://www.w3.org/ns/prov'
 group ='io.opencaesar.ontologies'
-version = '3.0.0'
+version = '3.1.0'
 
 /* 
  * The Gradle task dependencies 
@@ -55,7 +55,7 @@ configurations {
  * The OML dependencies
  */
 dependencies {
-    oml "io.opencaesar.ontologies:core-vocabularies:4.+"
+    oml "io.opencaesar.ontologies:core-vocabularies:5.+"
 }
 
 /*
