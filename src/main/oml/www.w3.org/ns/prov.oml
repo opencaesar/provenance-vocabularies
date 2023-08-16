@@ -215,7 +215,7 @@ vocabulary <http://www.w3.org/ns/prov#> as prov {
 	@rdfs:comment "An empty collection is a collection without members."
 	@rdfs:seeAlso "https://www.w3.org/TR/2013/REC-prov-o-20130430/#EmptyCollection"
 	concept EmptyCollection < Collection [
-		restricts relation hadMember to max 0
+		restricts hadMember to max 0
 	]
  
 	// 4.2 (15) https://www.w3.org/TR/2013/REC-prov-o-20130430/#Bundle

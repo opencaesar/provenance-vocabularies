@@ -37,15 +37,15 @@ vocabulary <http://www.w3.org/ns/prov-dictionary#> as prov-dictionary {
   @rdfs:comment "An empty dictionary is a dictionary that has no members."
   @rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#EmptyDictionary"
   concept EmptyDictionary < Dictionary, prov:EmptyCollection [
-    restricts relation hadDictionaryMember to exactly 0
+    restricts hadDictionaryMember to exactly 0
   ]
 
   @rdfs:label "Key-Entity Pair"
   @rdfs:comment """A key-entity pair. Part of a prov:Dictionary through prov:hadDictionaryMember. The key is any RDF Literal, the value is a prov:Entity."""
   @rdfs:seeAlso "https://www.w3.org/TR/2013/NOTE-prov-dictionary-20130430/#KeyEntityPair"
   concept KeyEntityPair < [
-    restricts scalar property pairKey to exactly 1
-    restricts relation pairEntity to exactly 1
+    restricts pairKey to exactly 1
+    restricts pairEntity to exactly 1
   ]
 
   @rdfs:label "pairKey"
@@ -80,7 +80,7 @@ vocabulary <http://www.w3.org/ns/prov-dictionary#> as prov-dictionary {
     asymmetric
     irreflexive
   ] < prov:Derivation [
-    restricts relation insertedKeyEntityPair to min 1
+    restricts insertedKeyEntityPair to min 1
   ]
 
   @rdfs:label "InsertedKeyEntityPair"
@@ -106,7 +106,7 @@ vocabulary <http://www.w3.org/ns/prov-dictionary#> as prov-dictionary {
     asymmetric
     irreflexive
   ] < prov:Derivation [
-    restricts scalar property removedKey to min 1
+    restricts removedKey to min 1
   ] 
 
   @rdfs:label "removedKey"
