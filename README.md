@@ -1,8 +1,8 @@
 # provenance-vocabularies
 
-[![Build Status](https://app.travis-ci.com/opencaesar/provenance-vocabularies.svg?branch=master)](https://app.travis-ci.com/github/opencaesar/provenance-vocabularies)
-[![Release](https://img.shields.io/github/v/tag/opencaesar/provenance-vocabularies?label=release)](https://github.com/opencaesar/provenance-vocabularies/releases/latest)
-[![Documentation](https://img.shields.io/badge/Documentation-HTML-orange)](https://opencaesar.github.io/provenance-vocabularies/) 
+[![Build Status](https://github.com/opencaesar/provenance-vocabularies/actions/workflows/ci.yml/badge.svg)](https://github.com/opencaesar/provenance-vocabularies/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/opencaesar/provenance-vocabularies?label=Release)](https://github.com/opencaesar/provenance-vocabularies/releases/latest)
+[![Documentation](https://img.shields.io/badge/Documentation-HTML-orange)](https://www.opencaesar.io/provenance-vocabularies/) 
 
 ## [PROV-O](https://www.w3.org/TR/2013/REC-prov-o-20130430/)
 
