@@ -11,9 +11,9 @@ def pomConfig = {
     }
     developers {
         developer {
-            id "NicolasRouquette"
-            name "Nicolas Rouquette"
-            email "nicolas.rouquette@me.com"
+            id "melaasar"
+            name "Maged Elaasar"
+            email "melaasar@gmail.com"
         }
     }
     scm {
@@ -57,8 +57,8 @@ publishing {
     }
     repositories {
         maven {
-            name = "sonatype"
-            url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            name = 'ossrh-staging-api'
+            url = "https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/"          
             credentials {
                 username = project.findProperty('ossrhUsername')
                 password = project.findProperty('ossrhPassword')
@@ -73,8 +73,4 @@ signing {
     def pgpSigningPassword = project.findProperty('pgpSigningPassword')
     useInMemoryPgpKeys(pgpSigningKey, pgpSigningPassword)
     sign publishing.publications.maven
-}
-
-gradle.taskGraph.whenReady { taskGraph ->
-    signMavenPublication.onlyIf { taskGraph.allTasks.any{it.name == 'publishMavenPublicationToSonatypeRepository'} }
 }
